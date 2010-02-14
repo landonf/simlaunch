@@ -38,6 +38,8 @@
  */
 @implementation PLSimulatorPlatform
 
+@synthesize sdks = _sdks;
+
 /**
  * Initialize with the provided simulator platform SDK path.
  *
@@ -53,21 +55,38 @@
         plsimulator_populate_nserror(outError, PLSimulatorErrorUnknown, @"Unexpected error", nil);
         return nil;
     }
-
-    NSFileManager *fm = [NSFileManager new];
+    
+    _path = path;
 
     /* Verify that the path exists */
+    NSFileManager *fm = [NSFileManager new];
     BOOL isDir;
-    if (![fm fileExistsAtPath: path isDirectory: &isDir] || isDir == NO) {
-        plsimulator_populate_nserror(outError,
-                                     PLSimulatorErrorInvalidSDK,
-                                     NSLocalizedString(@"The provided SDK path does exist or is not a directory.",
-                                                       @"Missing/non-directory SDK path"), 
-                                     nil);
+    if (![fm fileExistsAtPath: _path isDirectory: &isDir] || isDir == NO) {
+        NSString *desc = NSLocalizedString(@"The provided Platform SDK path does exist or is not a directory.",
+                                           @"Missing/non-directory SDK path");
+        plsimulator_populate_nserror(outError, PLSimulatorErrorInvalidSDK, desc, nil);
         return nil;
+    }
+
+
+    /* Load all SDKs */
+    NSError *error;
+    NSString *sdkDir = [_path stringByAppendingPathComponent: @"Developer/SDKs/"];
+    NSArray *sdkPaths = [fm contentsOfDirectoryAtPath: sdkDir error: &error];
+    
+    if (sdkPaths == nil) {
+        NSString *desc = NSLocalizedString(@"The provided Platform SDK does not contain any SDKs",
+                                           @"Missing/non-directory SDK sub-path");
+        plsimulator_populate_nserror(outError, PLSimulatorErrorInvalidSDK, desc, error);
+        return nil;
+    }
+    
+    for (NSString *sdkPath in sdkPaths) {
+        NSLog(@"PATH: %@", sdkPath);
     }
 
     return self;
 }
+
 
 @end

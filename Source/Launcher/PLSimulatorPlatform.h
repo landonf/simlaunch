@@ -31,8 +31,16 @@
 
 @interface PLSimulatorPlatform : NSObject {
 @private
+    /** Platform SDK path. */
+    NSString *_path;
+
+    /** The list of PLSimulatorSDKs included with the platform SDK. */
+    NSArray *_sdks;
 }
 
 - (id) initWithPath: (NSString *) path error: (NSError **) outError;
+
+/** The list of PLSimulatorSDKs included with the platform SDK. */
+@property(nonatomic, readonly) NSArray *sdks;
 
 @end
