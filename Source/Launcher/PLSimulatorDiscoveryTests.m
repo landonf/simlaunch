@@ -27,20 +27,32 @@
  */
 
 #import "PLTestCase.h"
+
+#import "PLSimulator.h"
 #import "PLSimulatorDiscovery.h"
 
-@interface PLSimulatorDiscoveryTests : PLTestCase
+@interface PLSimulatorDiscoveryTests : PLTestCase <PLSimulatorDiscoveryDelegate> {
+@private
+    NSArray *_foundSDKs;
+}
 @end
 
 @implementation PLSimulatorDiscoveryTests
 
 - (void) testQuery {
-    PLSimulatorDiscovery *query = [[PLSimulatorDiscovery alloc] initWithVersion: @"3.0"];
+    NSSet *families = [NSSet setWithObject: PLSimulatorDeviceFamilyiPhone];
+    PLSimulatorDiscovery *query = [[PLSimulatorDiscovery alloc] initWithMinimumVersion: @"3.0" deviceFamilies: families];
+    query.delegate = self;
     [query startQuery];
 
-    // TODO
-    // BOOL pred = NO;
-    // [self spinRunloopWithTimeout: 60.0 predicate: &pred];
+    /* Spin until the SDK results are available */
+    [self spinRunloopWithTimeout: 60.0 predicate: ^{ return (BOOL) (_foundSDKs != nil); }];
+    STAssertNotNil(_foundSDKs, @"Timed out waiting for query results");
+}
+
+// from PLSimulatorDiscoveryDelegate protocol
+- (void) simulatorDiscovery: (PLSimulatorDiscovery *) discovery didFindMatchingSimulatorPlatforms: (NSArray *) sdks {
+    _foundSDKs = sdks;
 }
 
 @end

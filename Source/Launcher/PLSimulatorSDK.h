@@ -43,9 +43,9 @@
 - (id) initWithPath: (NSString *) path error: (NSError **) outError;
 
 /** SDK version. */
-@property(nonatomic, readonly) NSString *version;
+@property(readonly) NSString *version;
 
 /** Supported device families. See \ref plsimulator_device_family Device Family Constants. */
-@property(nonatomic, readonly) NSSet *deviceFamilies;
+@property(readonly) NSSet *deviceFamilies;
 
 @end

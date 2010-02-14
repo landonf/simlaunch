@@ -28,6 +28,7 @@
 
 #import <Cocoa/Cocoa.h>
 
+#import "PLSimulatorSDK.h"
 
 @interface PLSimulatorPlatform : NSObject {
 @private
@@ -40,7 +41,10 @@
 
 - (id) initWithPath: (NSString *) path error: (NSError **) outError;
 
+/** The full path to the platform SDK. */
+@property(readonly) NSString *path;
+
 /** The list of PLSimulatorSDKs included with the platform SDK. */
-@property(nonatomic, readonly) NSArray *sdks;
+@property(readonly) NSArray *sdks;
 
 @end

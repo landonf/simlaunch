@@ -40,16 +40,20 @@
  */
 @implementation PLSimulatorDiscovery
 
+@synthesize delegate = _delegate;
+
 /**
  * Initialize a new query with the requested minumum simulator SDK version.
  *
- * @param version The required simulator SDK version (3.0, 3.1.2, 3.2, etc).
+ * @param version The required minumum simulator SDK version (3.0, 3.1.2, 3.2, etc).
+ * @param deviceFamilies The set of required device families. See \ref plsimulator_device_family Device Family Constants.
  */
-- (id) initWithVersion: (NSString *) version {
+- (id) initWithMinimumVersion: (NSString *) version deviceFamilies: (NSSet *) deviceFamilies {
     if ((self = [super init]) == nil)
         return nil;
     
     _version = [version copy];
+    _deviceFamilies = deviceFamilies;
     _query = [NSMetadataQuery new];
 
     /* Set up a query for all iPhoneSimulator platform directories. We use kMDItemDisplayName rather than
@@ -98,17 +102,44 @@
     /* Received the full spotlight query result set. No longer running */
     _running = NO;
 
-    /* Convert the items into NSString paths. */
+    /* Convert the items into PLSimulatorPlatform instances, filtering out results that don't match the minimum version
+     * and supported device families. */
     NSArray *results = [_query results];
-    NSMutableArray *paths = [NSMutableArray arrayWithCapacity: [results count]];
+    NSMutableArray *platformSDKs = [NSMutableArray arrayWithCapacity: [results count]];
 
     for (NSMetadataItem *item in results) {
-        NSString *path = [[item valueForAttribute: (NSString *) kMDItemPath] stringByResolvingSymlinksInPath];
-        [paths addObject: path];
+        PLSimulatorPlatform *platform;
+        NSString *path;
+        NSError *error;
+
+        path = [[item valueForAttribute: (NSString *) kMDItemPath] stringByResolvingSymlinksInPath];
+        platform = [[PLSimulatorPlatform alloc] initWithPath: path error: &error];
+        if (platform == nil) {
+            NSLog(@"Skipping platform discovery result '%@', failed to load platform SDK meta-data: %@", path, error);
+            continue;
+        }
+
+        /* Check the minimum version and device families */
+        BOOL hasMinVersion = NO;
+        BOOL hasDeviceFamilies = NO;
+        for (PLSimulatorSDK *sdk in platform.sdks) {
+            /* If greater than or equal to the minimum version, this platform SDK meets the requirements */
+            if (rpm_vercomp([sdk.version UTF8String], [_version UTF8String]) >= 0)
+                hasMinVersion = YES;
+
+            /* If all our requested families are included, this platform SDK meets the requirements. */
+            if ([_deviceFamilies isSubsetOfSet: sdk.deviceFamilies])
+                hasDeviceFamilies = YES;
+        }
+
+        if (!hasMinVersion || !hasDeviceFamilies)
+            continue;
+
+        [platformSDKs addObject: platform];
     }
     
-    NSLog(@"Got paths");
-
+    /* Inform the delegate */
+    [_delegate simulatorDiscovery: self didFindMatchingSimulatorPlatforms: platformSDKs];
 }
 
 @end

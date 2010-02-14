@@ -41,6 +41,7 @@
  */
 @implementation PLSimulatorPlatform
 
+@synthesize path = _path;
 @synthesize sdks = _sdks;
 
 /**

@@ -27,6 +27,8 @@
 		05CC8F731128B62F001912D5 /* PLBlocks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05CC8F711128B62F001912D5 /* PLBlocks.framework */; };
 		05CC8F791128B64C001912D5 /* PLBlocks.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 05CC8F711128B62F001912D5 /* PLBlocks.framework */; };
 		05CC8F7F1128B65E001912D5 /* PLBlocks.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 05CC8F711128B62F001912D5 /* PLBlocks.framework */; };
+		05CC90801128C321001912D5 /* rpm-vercomp.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CC907F1128C321001912D5 /* rpm-vercomp.m */; };
+		05CC90811128C321001912D5 /* rpm-vercomp.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CC907F1128C321001912D5 /* rpm-vercomp.m */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
 
@@ -81,6 +83,8 @@
 		0523F67B112699D0004FB4EB /* PLTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTestCase.h; sourceTree = "<group>"; };
 		0523F67C112699D0004FB4EB /* PLTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTestCase.m; sourceTree = "<group>"; };
 		05CC8F711128B62F001912D5 /* PLBlocks.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PLBlocks.framework; sourceTree = "<group>"; };
+		05CC907E1128C321001912D5 /* rpm-vercomp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "rpm-vercomp.h"; sourceTree = "<group>"; };
+		05CC907F1128C321001912D5 /* rpm-vercomp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "rpm-vercomp.m"; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
@@ -164,6 +168,8 @@
 				0523F66111269860004FB4EB /* PLSimulatorDiscovery.h */,
 				0523F66211269860004FB4EB /* PLSimulatorDiscovery.m */,
 				0523F67211269977004FB4EB /* PLSimulatorDiscoveryTests.m */,
+				05CC907E1128C321001912D5 /* rpm-vercomp.h */,
+				05CC907F1128C321001912D5 /* rpm-vercomp.m */,
 			);
 			name = "SDK Interface";
 			sourceTree = "<group>";
@@ -350,6 +356,7 @@
 				0523621C1128ACA2001C9661 /* PLSimulatorSDK.m in Sources */,
 				0523618C11287A2D001C9661 /* PLSimulatorPlatformTests.m in Sources */,
 				052362471128B3EF001C9661 /* PLSimulatorSDKTests.m in Sources */,
+				05CC90801128C321001912D5 /* rpm-vercomp.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -363,6 +370,7 @@
 				0523F66311269860004FB4EB /* PLSimulatorDiscovery.m in Sources */,
 				052360C9112874B3001C9661 /* PLSimulatorPlatform.m in Sources */,
 				052360CD1128762C001C9661 /* PLSimulator.m in Sources */,
+				05CC90811128C321001912D5 /* rpm-vercomp.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -484,7 +492,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_ENABLE_OBJC_GC = supported;
+				GCC_ENABLE_OBJC_GC = required;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_VERSION = coop.plausible.blocks.compilers.gcc.4_2;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
@@ -508,7 +516,7 @@
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
-				GCC_ENABLE_OBJC_GC = supported;
+				GCC_ENABLE_OBJC_GC = required;
 				GCC_VERSION = coop.plausible.blocks.compilers.gcc.4_2;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;

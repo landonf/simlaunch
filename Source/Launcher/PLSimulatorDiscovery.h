@@ -28,27 +28,50 @@
 
 #import <Cocoa/Cocoa.h>
 
+#import "PLSimulatorPlatform.h"
+#import "rpm-vercomp.h"
+
+@class PLSimulatorDiscovery;
+
 /**
  * The PLSimulatorDiscoveryDelegate defines the methods used to receive provides simulator discovery
  * results from a PLSimulatorDiscoveryDelegate object. 
  */
 @protocol PLSimulatorDiscoveryDelegate <NSObject>
+
+/**
+ * Called by the PLSimulatorDiscovery instance upon query completion.
+ *
+ * @param discovery The sender.
+ * @param platforms PLSimulatorPlatform instances that matched the query, or an empty array of no matches were found.
+ */
+- (void) simulatorDiscovery: (PLSimulatorDiscovery *) discovery didFindMatchingSimulatorPlatforms: (NSArray *) platforms;
+
 @end
 
 @interface PLSimulatorDiscovery : NSObject {
 @private
-    /** Requested version */
+    /** Requested minimum version. */
     NSString *_version;
+
+    /** Requested device families. See \ref plsimulator_device_family Device Family Constants */
+    NSSet *_deviceFamilies;
 
     /** Spotlight query used to find the SDK(s) */
     NSMetadataQuery *_query;
 
     /** Set to YES if the query is running */
     BOOL _running;
+
+    /** Delegate */
+    id<PLSimulatorDiscoveryDelegate> _delegate;
 }
 
-- (id) initWithVersion: (NSString *) version;
+- (id) initWithMinimumVersion: (NSString *) version deviceFamilies: (NSSet *) deviceFamilies;
 
 - (void) startQuery;
+
+/** Search delegate. */
+@property(assign) id<PLSimulatorDiscoveryDelegate> delegate;
 
 @end

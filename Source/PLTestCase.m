@@ -49,17 +49,17 @@
 }
 
 /**
- * Spin the runloop until timeout is reached or the provided predicate is set to YES.
+ * Spin the runloop until timeout is reached or the provided predicate returns YES.
  *
- * @param timeout Maximum amount of time to wait for the predicate to be set to YES.
+ * @param timeout Maximum amount of time to wait for the predicate returns YES.
  * @param predicate Predicate to test.
  */
-- (void) spinRunloopWithTimeout: (NSTimeInterval) timeout predicate: (BOOL *) predicate {
+- (void) spinRunloopWithTimeout: (NSTimeInterval) timeout predicate: (BOOL (^)()) predicate {
     /* Determine the date at which timeout will occur */
     NSDate *future = [NSDate dateWithTimeIntervalSinceNow: timeout];
     
     /* Run until the predicate is YES or the timout is reached */
-    while (*predicate == NO && [[NSDate date] earlierDate: future] != future)
+    while (predicate() == NO && [[NSDate date] earlierDate: future] != future)
         CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0, YES);
 }
 

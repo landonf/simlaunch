@@ -31,6 +31,20 @@
 @implementation LauncherAppDelegate
 
 - (void) applicationDidFinishLaunching: (NSNotification *) aNotification {
+    /* Find the matching platform SDKs */
+    NSSet *families = [NSSet setWithObjects: PLSimulatorDeviceFamilyiPad, nil];
+    _discovery = [[PLSimulatorDiscovery alloc] initWithMinimumVersion: @"3.0"
+                                                       deviceFamilies: families];
+    _discovery.delegate = self;
+    [_discovery startQuery];
+    
+}
+
+// from PLSimulatorDiscoveryDelegate protocol
+- (void) simulatorDiscovery: (PLSimulatorDiscovery *) discovery didFindMatchingSimulatorPlatforms: (NSArray *) platforms {
+    for (PLSimulatorPlatform *platform in platforms) {
+        NSLog(@"Found matching platform SDK at %@", platform.path);
+    }
 }
 
 @end

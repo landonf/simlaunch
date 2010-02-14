@@ -25,9 +25,15 @@
  * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR
  * OTHER DEALINGS IN THE SOFTWARE.
  */
+
 #import <Cocoa/Cocoa.h>
 
-@interface LauncherAppDelegate : NSObject {
+#import "PLSimulator.h"
+
+@interface LauncherAppDelegate : NSObject <PLSimulatorDiscoveryDelegate> {
+@private
+    /** Instance used to find the required simulator platform SDK */
+    PLSimulatorDiscovery *_discovery;
 }
 
 @end
