@@ -26,11 +26,11 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "PLSimulatorSDK.h"
+#import <Cocoa/Cocoa.h>
 
-/**
- * Meta-data for a specific Simulator SDK version.
- */
-@implementation PLSimulatorSDK
+
+@interface PLSimulatorPlatform : NSObject {
+@private
+}
 
 @end

@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		052360C8112874B3001C9661 /* PLSimulatorPlatform.m in Sources */ = {isa = PBXBuildFile; fileRef = 052360C7112874B3001C9661 /* PLSimulatorPlatform.m */; };
+		052360C9112874B3001C9661 /* PLSimulatorPlatform.m in Sources */ = {isa = PBXBuildFile; fileRef = 052360C7112874B3001C9661 /* PLSimulatorPlatform.m */; };
+		052360CC1128762C001C9661 /* PLSimulator.m in Sources */ = {isa = PBXBuildFile; fileRef = 052360CB1128762C001C9661 /* PLSimulator.m */; };
+		052360CD1128762C001C9661 /* PLSimulator.m in Sources */ = {isa = PBXBuildFile; fileRef = 052360CB1128762C001C9661 /* PLSimulator.m */; };
 		0523F61511269281004FB4EB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0523F61211269281004FB4EB /* main.m */; };
 		0523F61611269281004FB4EB /* LauncherAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0523F61411269281004FB4EB /* LauncherAppDelegate.m */; };
 		0523F61E11269298004FB4EB /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0523F61A11269298004FB4EB /* MainMenu.xib */; };
@@ -19,6 +23,10 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		052360C6112874B3001C9661 /* PLSimulatorPlatform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLSimulatorPlatform.h; sourceTree = "<group>"; };
+		052360C7112874B3001C9661 /* PLSimulatorPlatform.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLSimulatorPlatform.m; sourceTree = "<group>"; };
+		052360CA1128762C001C9661 /* PLSimulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLSimulator.h; sourceTree = "<group>"; };
+		052360CB1128762C001C9661 /* PLSimulator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLSimulator.m; sourceTree = "<group>"; };
 		0523F61211269281004FB4EB /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0523F61311269281004FB4EB /* LauncherAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LauncherAppDelegate.h; sourceTree = "<group>"; };
 		0523F61411269281004FB4EB /* LauncherAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LauncherAppDelegate.m; sourceTree = "<group>"; };
@@ -104,6 +112,10 @@
 		0523F66011269845004FB4EB /* SDK Interface */ = {
 			isa = PBXGroup;
 			children = (
+				052360CA1128762C001C9661 /* PLSimulator.h */,
+				052360CB1128762C001C9661 /* PLSimulator.m */,
+				052360C6112874B3001C9661 /* PLSimulatorPlatform.h */,
+				052360C7112874B3001C9661 /* PLSimulatorPlatform.m */,
 				0523F65D11269837004FB4EB /* PLSimulatorSDK.h */,
 				0523F65E11269837004FB4EB /* PLSimulatorSDK.m */,
 				0523F66111269860004FB4EB /* PLSimulatorDiscovery.h */,
@@ -286,6 +298,8 @@
 				0523F67D112699D0004FB4EB /* PLTestCase.m in Sources */,
 				0523F69F1126A086004FB4EB /* PLSimulatorDiscovery.m in Sources */,
 				0523F67311269977004FB4EB /* PLSimulatorDiscoveryTests.m in Sources */,
+				052360C8112874B3001C9661 /* PLSimulatorPlatform.m in Sources */,
+				052360CC1128762C001C9661 /* PLSimulator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -297,6 +311,8 @@
 				0523F61611269281004FB4EB /* LauncherAppDelegate.m in Sources */,
 				0523F65F11269837004FB4EB /* PLSimulatorSDK.m in Sources */,
 				0523F66311269860004FB4EB /* PLSimulatorDiscovery.m in Sources */,
+				052360C9112874B3001C9661 /* PLSimulatorPlatform.m in Sources */,
+				052360CD1128762C001C9661 /* PLSimulator.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -333,7 +349,7 @@
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_MODEL_TUNING = G5;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				INFOPLIST_FILE = "Launcher Tests-Info.plist";
+				INFOPLIST_FILE = "Resources/Launcher/Launcher Tests-Info.plist";
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
 				OTHER_LDFLAGS = (
 					"-framework",
@@ -357,7 +373,7 @@
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
 				GCC_MODEL_TUNING = G5;
-				INFOPLIST_FILE = "Launcher Tests-Info.plist";
+				INFOPLIST_FILE = "Resources/Launcher/Launcher Tests-Info.plist";
 				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
 				OTHER_LDFLAGS = (
 					"-framework",

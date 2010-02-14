@@ -26,11 +26,32 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import "PLSimulatorSDK.h"
+#import "PLSimulatorPlatform.h"
+
+#import "PLSimulator.h"
 
 /**
- * Meta-data for a specific Simulator SDK version.
+ * Manages a Simulator Platform SDK, allows querying of the bundled PLSimulatorSDK meta-data.
  */
-@implementation PLSimulatorSDK
+@implementation PLSimulatorPlatform
+
+/**
+ * Initialize with the provided simulator platform SDK path.
+ *
+ * @param path Simulator platform SDK path (eg, /Developer/Platforms/iPhoneSimulator.platform)
+ * @param error If an error occurs, upon return contains an NSError object that describes the problem.
+ *
+ * @return Returns an initialized PLSimulatorPlatform instance, or nil if the simulator meta-data can not
+ * be parsed or the path appears to not be a valid platform SDK.
+ */
+- (id) initWithPath: (NSString *) path error: (NSError **) outError {
+    if ((self = [super init]) == nil) {
+        // Shouldn't happen
+        plsimulator_populate_nserror(outError, PLSimulatorErrorUnknown, @"Unexpected error", nil);
+        return nil;
+    }
+
+    return nil;
+}
 
 @end

@@ -97,7 +97,7 @@
 
     /* Convert the items into NSString paths. */
     NSArray *results = [_query results];
-    NSMutableArray *paths = [NSMutableArray arrayWithCapacity: results];
+    NSMutableArray *paths = [NSMutableArray arrayWithCapacity: [results count]];
 
     for (NSMetadataItem *item in results) {
         NSString *path = [[item valueForAttribute: (NSString *) kMDItemPath] stringByResolvingSymlinksInPath];
