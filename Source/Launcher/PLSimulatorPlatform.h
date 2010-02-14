@@ -33,4 +33,6 @@
 @private
 }
 
+- (id) initWithPath: (NSString *) path error: (NSError **) outError;
+
 @end

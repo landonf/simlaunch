@@ -38,8 +38,9 @@
     PLSimulatorDiscovery *query = [[PLSimulatorDiscovery alloc] initWithVersion: @"3.0"];
     [query startQuery];
 
-    BOOL pred = NO;
-    [self spinRunloopWithTimeout: 60.0 predicate: &pred];
+    // TODO
+    // BOOL pred = NO;
+    // [self spinRunloopWithTimeout: 60.0 predicate: &pred];
 }
 
 @end

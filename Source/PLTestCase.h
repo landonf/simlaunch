@@ -31,4 +31,7 @@
 @interface PLTestCase : SenTestCase
 
 - (void) spinRunloopWithTimeout: (NSTimeInterval) timeout predicate: (BOOL *) predicate;
+
+- (NSString *) pathForResource: (NSString *) resource;
+
 @end

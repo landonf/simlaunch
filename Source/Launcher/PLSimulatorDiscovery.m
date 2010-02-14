@@ -34,6 +34,9 @@
 
 /**
  * Implements automatic discovery of local Simulator Platform SDKs.
+ *
+ * @par Thread Safety
+ * Mutable and may not be shared across threads.
  */
 @implementation PLSimulatorDiscovery
 

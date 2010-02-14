@@ -33,7 +33,27 @@
  */
 @implementation PLTestCase
 
-/** Spin the runloop until timeout is reached or the provided predicate is set to YES. */
+/**
+ * Return the full path to the given test resource. Test resources are located in
+ * TestBundle/Resources/Tests/TestName/ResourceName
+ *
+ * @param resource Relative resource path.
+ */
+- (NSString *) pathForResource: (NSString *) resource {
+    NSString *className = NSStringFromClass([self class]);
+    NSString *resources = [[NSBundle bundleForClass: [self class]] resourcePath];
+    NSString *testResources = [resources stringByAppendingPathComponent: @"Tests"];
+    NSString *root = [testResources stringByAppendingPathComponent: className];
+
+    return [root stringByAppendingPathComponent: resource];
+}
+
+/**
+ * Spin the runloop until timeout is reached or the provided predicate is set to YES.
+ *
+ * @param timeout Maximum amount of time to wait for the predicate to be set to YES.
+ * @param predicate Predicate to test.
+ */
 - (void) spinRunloopWithTimeout: (NSTimeInterval) timeout predicate: (BOOL *) predicate {
     /* Determine the date at which timeout will occur */
     NSDate *future = [NSDate dateWithTimeIntervalSinceNow: timeout];

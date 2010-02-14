@@ -30,6 +30,9 @@
 
 /**
  * Meta-data for a specific Simulator SDK version.
+ *
+ * @par Thread Safety
+ * Immutable and thread-safe. May be used from any thread.
  */
 @implementation PLSimulatorSDK
 

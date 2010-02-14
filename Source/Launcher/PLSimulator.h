@@ -78,7 +78,10 @@ typedef enum {
     
     /** An Mach or POSIX operating system error has occured. The underlying NSError cause may be fetched from the userInfo
      * dictionary using the NSUnderlyingErrorKey key. */
-    PLSimulatorOperatingSystem = 2,
+    PLSimulatorErrorOperatingSystem = 2,
+
+    /** The provided path is not a valid SDK. */
+    PLSimulatorErrorInvalidSDK = 3
 } PLSimulatorError;
 
 

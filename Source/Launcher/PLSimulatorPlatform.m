@@ -32,6 +32,9 @@
 
 /**
  * Manages a Simulator Platform SDK, allows querying of the bundled PLSimulatorSDK meta-data.
+ *
+ * @par Thread Safety
+ * Immutable and thread-safe. May be used from any thread.
  */
 @implementation PLSimulatorPlatform
 
@@ -51,7 +54,20 @@
         return nil;
     }
 
-    return nil;
+    NSFileManager *fm = [NSFileManager new];
+
+    /* Verify that the path exists */
+    BOOL isDir;
+    if (![fm fileExistsAtPath: path isDirectory: &isDir] || isDir == NO) {
+        plsimulator_populate_nserror(outError,
+                                     PLSimulatorErrorInvalidSDK,
+                                     NSLocalizedString(@"The provided SDK path does exist or is not a directory.",
+                                                       @"Missing/non-directory SDK path"), 
+                                     nil);
+        return nil;
+    }
+
+    return self;
 }
 
 @end

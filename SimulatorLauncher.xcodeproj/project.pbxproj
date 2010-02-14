@@ -11,6 +11,8 @@
 		052360C9112874B3001C9661 /* PLSimulatorPlatform.m in Sources */ = {isa = PBXBuildFile; fileRef = 052360C7112874B3001C9661 /* PLSimulatorPlatform.m */; };
 		052360CC1128762C001C9661 /* PLSimulator.m in Sources */ = {isa = PBXBuildFile; fileRef = 052360CB1128762C001C9661 /* PLSimulator.m */; };
 		052360CD1128762C001C9661 /* PLSimulator.m in Sources */ = {isa = PBXBuildFile; fileRef = 052360CB1128762C001C9661 /* PLSimulator.m */; };
+		0523618C11287A2D001C9661 /* PLSimulatorPlatformTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0523618B11287A2D001C9661 /* PLSimulatorPlatformTests.m */; };
+		0523619811287BA7001C9661 /* Tests in Resources */ = {isa = PBXBuildFile; fileRef = 0523619611287BA7001C9661 /* Tests */; };
 		0523F61511269281004FB4EB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0523F61211269281004FB4EB /* main.m */; };
 		0523F61611269281004FB4EB /* LauncherAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0523F61411269281004FB4EB /* LauncherAppDelegate.m */; };
 		0523F61E11269298004FB4EB /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0523F61A11269298004FB4EB /* MainMenu.xib */; };
@@ -27,6 +29,8 @@
 		052360C7112874B3001C9661 /* PLSimulatorPlatform.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLSimulatorPlatform.m; sourceTree = "<group>"; };
 		052360CA1128762C001C9661 /* PLSimulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLSimulator.h; sourceTree = "<group>"; };
 		052360CB1128762C001C9661 /* PLSimulator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLSimulator.m; sourceTree = "<group>"; };
+		0523618B11287A2D001C9661 /* PLSimulatorPlatformTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLSimulatorPlatformTests.m; sourceTree = "<group>"; };
+		0523619611287BA7001C9661 /* Tests */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Tests; sourceTree = "<group>"; };
 		0523F61211269281004FB4EB /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0523F61311269281004FB4EB /* LauncherAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LauncherAppDelegate.h; sourceTree = "<group>"; };
 		0523F61411269281004FB4EB /* LauncherAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LauncherAppDelegate.m; sourceTree = "<group>"; };
@@ -84,6 +88,7 @@
 		0523F61711269298004FB4EB /* Launcher */ = {
 			isa = PBXGroup;
 			children = (
+				0523619611287BA7001C9661 /* Tests */,
 				0523F61811269298004FB4EB /* InfoPlist.strings */,
 				0523F61A11269298004FB4EB /* MainMenu.xib */,
 				0523F61C11269298004FB4EB /* Launcher-Info.plist */,
@@ -116,6 +121,7 @@
 				052360CB1128762C001C9661 /* PLSimulator.m */,
 				052360C6112874B3001C9661 /* PLSimulatorPlatform.h */,
 				052360C7112874B3001C9661 /* PLSimulatorPlatform.m */,
+				0523618B11287A2D001C9661 /* PLSimulatorPlatformTests.m */,
 				0523F65D11269837004FB4EB /* PLSimulatorSDK.h */,
 				0523F65E11269837004FB4EB /* PLSimulatorSDK.m */,
 				0523F66111269860004FB4EB /* PLSimulatorDiscovery.h */,
@@ -261,6 +267,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0523619811287BA7001C9661 /* Tests in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,6 +307,7 @@
 				0523F67311269977004FB4EB /* PLSimulatorDiscoveryTests.m in Sources */,
 				052360C8112874B3001C9661 /* PLSimulatorPlatform.m in Sources */,
 				052360CC1128762C001C9661 /* PLSimulator.m in Sources */,
+				0523618C11287A2D001C9661 /* PLSimulatorPlatformTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
