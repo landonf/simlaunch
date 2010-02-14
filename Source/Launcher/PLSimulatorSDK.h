@@ -32,8 +32,20 @@
 @private
     /** SDK path */
     NSString *_path;
+
+    /** SDK version */
+    NSString *_version;
+
+    /** Supported device families. Values will be one of the \ref plsimulator_device_family device family constants. */
+    NSSet *_deviceFamilies;
 }
 
 - (id) initWithPath: (NSString *) path error: (NSError **) outError;
+
+/** SDK version. */
+@property(nonatomic, readonly) NSString *version;
+
+/** Supported device families. See \ref plsimulator_device_family Device Family Constants. */
+@property(nonatomic, readonly) NSSet *deviceFamilies;
 
 @end

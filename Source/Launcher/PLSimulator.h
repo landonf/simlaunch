@@ -40,6 +40,9 @@
  * @defgroup constants Constants Reference
  */
 
+extern NSString *PLSimulatorDeviceFamilyiPhone;
+extern NSString *PLSimulatorDeviceFamilyiPad;
+
 /**
  * @defgroup internal Internal Documentation
  */

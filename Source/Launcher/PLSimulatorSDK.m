@@ -30,6 +30,25 @@
 
 #import "PLSimulator.h"
 
+/* Relative path to the setting plist */
+#define SDK_SETTINGS_PLIST @"SDKSettings.plist"
+
+/*
+ * SDKSettings keys.
+ */
+
+/* SDK Version */
+#define VersionKey @"Version"
+
+/* Device Families */
+#define DevicesKey @"UIDeviceFamily"
+
+/* Device family constants used by Apple */
+enum {
+    iPhoneFamily = 1,
+    iPadFamily = 2
+};
+
 /**
  * Meta-data for a specific Simulator SDK version.
  *
@@ -37,6 +56,9 @@
  * Immutable and thread-safe. May be used from any thread.
  */
 @implementation PLSimulatorSDK
+
+@synthesize version = _version;
+@synthesize deviceFamilies = _deviceFamilies;
 
 /**
  * Initialize with the provided SDK path.
@@ -53,20 +75,124 @@
         plsimulator_populate_nserror(outError, PLSimulatorErrorUnknown, @"Unexpected error", nil);
         return nil;
     }
-    
+
+    /* Save the SDK path */
     _path = path;
     
     /* Verify that the path exists */
     NSFileManager *fm = [NSFileManager new];
-    BOOL isDir;
-    if (![fm fileExistsAtPath: _path isDirectory: &isDir] || isDir == NO) {
-        NSString *desc = NSLocalizedString(@"The provided SDK path does exist or is not a directory.",
-                                           @"Missing/non-directory SDK path");
-        plsimulator_populate_nserror(outError, PLSimulatorErrorInvalidSDK, desc, nil);
-        return nil;
+    {
+        BOOL isDir;
+        if (![fm fileExistsAtPath: _path isDirectory: &isDir] || isDir == NO) {
+            NSString *desc = NSLocalizedString(@"The provided SDK path does exist or is not a directory.",
+                                               @"Missing/non-directory SDK path");
+            plsimulator_populate_nserror(outError, PLSimulatorErrorInvalidSDK, desc, nil);
+            return nil;
+        }
     }
+
+    /* Load the SDK settings plist */
+    NSDictionary *plist;
+    {
+        NSString *plistPath = [_path stringByAppendingPathComponent: SDK_SETTINGS_PLIST];
+        NSData *plistData = [NSData dataWithContentsOfMappedFile: plistPath];
+        NSString *errorDesc;
+
+        /* Try to read the plist data */
+        id plistInstance = [NSPropertyListSerialization propertyListFromData: plistData
+                                                            mutabilityOption: NSPropertyListImmutable
+                                                                      format: NULL
+                                                            errorDescription: &errorDesc];
+
+        /* Invalid format */
+        if (plistInstance == nil) {
+            NSString *desc = NSLocalizedString(@"The provided SDK does not contain a valid SDKSettings property list.",
+                                               @"Missing/non-directory SDK path");
+            NSLog(@"Error loading SDK path '%@': %@", _path, errorDesc);
+
+            plsimulator_populate_nserror(outError, PLSimulatorErrorInvalidSDK, desc, nil);
+            return nil;
+        }
+
+        /* We expect a dictionary */
+        if (![plistInstance isKindOfClass: [NSDictionary class]]) {
+            NSString *desc = NSLocalizedString(@"The provided SDK SDKSettings property list uses an unsupported data schema.",
+                                               @"Missing/non-directory SDK path");        
+            plsimulator_populate_nserror(outError, PLSimulatorErrorInvalidSDK, desc, nil);
+            return nil;
+        }
+        
+        plist = plistInstance;
+    }
+
+    /* Block to fetch a key from the plist */
+    BOOL (^Get) (NSString *, id *, Class cls, BOOL) = ^(NSString *key, id *value, Class cls, BOOL required) {
+        *value = [plist objectForKey: key];
+        if (*value != nil && (cls == nil || [*value isKindOfClass: cls]))
+            return YES;
     
-    // TODO - Parse SDKSettings.plist
+        /* Populate the error */
+        if (required) {
+            NSString *desc = NSLocalizedString(@"The provided SDK's SDKSettings property list schema is missing required %@ key.",
+                                               @"Missing/non-directory SDK path");
+            [NSString stringWithFormat: desc, key];
+            plsimulator_populate_nserror(outError, PLSimulatorErrorInvalidSDK, desc, nil);
+        }
+
+        return NO;
+    };
+    
+    /* Map an Apple device identifier constant to our family constants. We accept either NSNumber
+     * or NSString instances, and will validate the argument's type. */
+    NSString *(^FamilyConstant)(id) = ^(id str) {
+        /* Try to handle string/number confusion. The current plist uses strings, but it's
+         * clearly a numeric constant. We assume that if it responds to intValue, it will
+         * work as either a NSNumber or NSString */
+        if (![str isKindOfClass: [NSString class]] && [str isKindOfClass: [NSNumber class]]) {
+            NSLog(@"Unsupported %@ value type while parsing '%@' settings: %@", DevicesKey, _path, str);
+            return (NSString *) nil;
+        }
+
+        /* Map the Apple family number to our family constants */
+        switch ([(NSString *)str intValue]) {
+            case iPhoneFamily:
+                return PLSimulatorDeviceFamilyiPhone;
+            case iPadFamily:
+                return PLSimulatorDeviceFamilyiPad;
+            default:
+                NSLog(@"Unsupported %@ value while parsing '%@' settings: %@", DevicesKey, _path, str);
+                return (NSString *) nil;
+        }
+    };
+
+    /* Fetch required values */
+    if (!Get(VersionKey, &_version, [NSString class], YES))
+        return nil;
+
+    /* Get the list of supported devices */
+    {
+        NSArray *devices;
+        NSString *deviceStr;
+        if (Get(DevicesKey, &devices, [NSArray class], NO)) {
+            NSMutableSet *deviceFamilies = [NSMutableSet setWithCapacity: [devices count]];
+            for (NSString *str in devices) {
+                NSString *constant = FamilyConstant(str);
+                if (constant != nil)
+                    [deviceFamilies addObject: constant];
+            }
+
+            /* Save the populated set */
+            _deviceFamilies = deviceFamilies;
+        } else if (Get(DevicesKey, &deviceStr, nil, NO)) {
+            NSString *constant = FamilyConstant(deviceStr);
+            if (constant != nil)
+                _deviceFamilies = [NSSet setWithObject: constant];
+        }
+
+        /* If no valid setting, assume that this is a <3.2 SDK and it supports the iPhone family */
+        if (_deviceFamilies == nil)
+            _deviceFamilies = [NSSet setWithObject: PLSimulatorDeviceFamilyiPhone];
+    }
 
     return self;
 }

@@ -3,10 +3,15 @@
 <plist version="1.0">
 <dict>
 	<key>Version</key>
-	<string>3.1</string>
+	<string>3.2</string>
 	<key>isBaseSDK</key>
 	<string>YES</string>
 	<key>MinimalDisplayName</key>
-	<string>Simulator - 3.1</string>
+	<string>Simulator - 3.2</string>
+	<key>UIDeviceFamily</key>
+	<array>
+		<string>1</string>
+		<string>2</string>
+	</array>
 </dict>
 </plist>

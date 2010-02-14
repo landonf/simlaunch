@@ -28,6 +28,24 @@
 
 #import "PLSimulator.h"
 
+/**
+ * @defgroup plsimulator_device_family Device Family Constants
+ * @ingroup constants
+ */
+
+/**
+ * iPhone Device Family.
+ * @ingroup plsimulator_device_family
+ */
+NSString *PLSimulatorDeviceFamilyiPhone = @"PLSimulatorDeviceFamilyiPhone";
+
+/**
+ * iPad Device Family.
+ * @ingroup plsimulator_device_family
+ */
+NSString *PLSimulatorDeviceFamilyiPad = @"PLSimulatorDeviceFamilyiPad";
+
+
 /** 
  * Generic Plausible Simulator Exception
  * @ingroup exceptions

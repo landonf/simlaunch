@@ -30,6 +30,9 @@
 
 #import "PLSimulator.h"
 
+/* Relative path to the set of platform sub-SDKs */
+#define PLATFORM_SUBSDK_PATH @"Developer/SDKs/"
+
 /**
  * Manages a Simulator Platform SDK, allows querying of the bundled PLSimulatorSDK meta-data.
  *
@@ -71,7 +74,7 @@
 
     /* Load all SDKs */
     NSError *error;
-    NSString *sdkDir = [_path stringByAppendingPathComponent: @"Developer/SDKs/"];
+    NSString *sdkDir = [_path stringByAppendingPathComponent: PLATFORM_SUBSDK_PATH];
     NSArray *sdkPaths = [fm contentsOfDirectoryAtPath: sdkDir error: &error];
     
     if (sdkPaths == nil) {
