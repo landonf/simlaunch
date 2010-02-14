@@ -36,7 +36,6 @@
 
 - (void) testInit {
     NSError *error;
-    NSLog(@"Looking for %@", [self pathForResource: @"Sim.platform"]);
     PLSimulatorPlatform *platform = [[PLSimulatorPlatform alloc] initWithPath: [self pathForResource: @"Sim.platform"]
                                                                         error: &error];
     STAssertNotNil(platform, @"Could not read platform SDK meta-data: %@", error);
