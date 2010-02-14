@@ -1,0 +1,479 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 45;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		0523F61511269281004FB4EB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0523F61211269281004FB4EB /* main.m */; };
+		0523F61611269281004FB4EB /* LauncherAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0523F61411269281004FB4EB /* LauncherAppDelegate.m */; };
+		0523F61E11269298004FB4EB /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0523F61A11269298004FB4EB /* MainMenu.xib */; };
+		0523F65F11269837004FB4EB /* PLSimulatorSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 0523F65E11269837004FB4EB /* PLSimulatorSDK.m */; };
+		0523F66311269860004FB4EB /* PLSimulatorDiscovery.m in Sources */ = {isa = PBXBuildFile; fileRef = 0523F66211269860004FB4EB /* PLSimulatorDiscovery.m */; };
+		0523F67311269977004FB4EB /* PLSimulatorDiscoveryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0523F67211269977004FB4EB /* PLSimulatorDiscoveryTests.m */; };
+		0523F67D112699D0004FB4EB /* PLTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 0523F67C112699D0004FB4EB /* PLTestCase.m */; };
+		0523F69F1126A086004FB4EB /* PLSimulatorDiscovery.m in Sources */ = {isa = PBXBuildFile; fileRef = 0523F66211269860004FB4EB /* PLSimulatorDiscovery.m */; };
+		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		0523F61211269281004FB4EB /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		0523F61311269281004FB4EB /* LauncherAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LauncherAppDelegate.h; sourceTree = "<group>"; };
+		0523F61411269281004FB4EB /* LauncherAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LauncherAppDelegate.m; sourceTree = "<group>"; };
+		0523F61911269298004FB4EB /* English */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = English; path = English.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		0523F61B11269298004FB4EB /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		0523F61C11269298004FB4EB /* Launcher-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Launcher-Info.plist"; sourceTree = "<group>"; };
+		0523F645112694C8004FB4EB /* iPhoneSimulatorRemoteClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iPhoneSimulatorRemoteClient.h; sourceTree = "<group>"; };
+		0523F646112694C8004FB4EB /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
+		0523F65D11269837004FB4EB /* PLSimulatorSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLSimulatorSDK.h; sourceTree = "<group>"; };
+		0523F65E11269837004FB4EB /* PLSimulatorSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLSimulatorSDK.m; sourceTree = "<group>"; };
+		0523F66111269860004FB4EB /* PLSimulatorDiscovery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLSimulatorDiscovery.h; sourceTree = "<group>"; };
+		0523F66211269860004FB4EB /* PLSimulatorDiscovery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLSimulatorDiscovery.m; sourceTree = "<group>"; };
+		0523F66911269876004FB4EB /* Launcher Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Launcher Tests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0523F66A11269876004FB4EB /* Launcher Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Launcher Tests-Info.plist"; sourceTree = "<group>"; };
+		0523F67211269977004FB4EB /* PLSimulatorDiscoveryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLSimulatorDiscoveryTests.m; sourceTree = "<group>"; };
+		0523F67B112699D0004FB4EB /* PLTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTestCase.h; sourceTree = "<group>"; };
+		0523F67C112699D0004FB4EB /* PLTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTestCase.m; sourceTree = "<group>"; };
+		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
+		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
+		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
+		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
+		8D1107320486CEB800E47090 /* Launcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Launcher.app; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		0523F66611269876004FB4EB /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8D11072E0486CEB800E47090 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		0523F61111269281004FB4EB /* Launcher */ = {
+			isa = PBXGroup;
+			children = (
+				0523F61211269281004FB4EB /* main.m */,
+				0523F61311269281004FB4EB /* LauncherAppDelegate.h */,
+				0523F61411269281004FB4EB /* LauncherAppDelegate.m */,
+				0523F66011269845004FB4EB /* SDK Interface */,
+			);
+			path = Launcher;
+			sourceTree = "<group>";
+		};
+		0523F61711269298004FB4EB /* Launcher */ = {
+			isa = PBXGroup;
+			children = (
+				0523F61811269298004FB4EB /* InfoPlist.strings */,
+				0523F61A11269298004FB4EB /* MainMenu.xib */,
+				0523F61C11269298004FB4EB /* Launcher-Info.plist */,
+				0523F66A11269876004FB4EB /* Launcher Tests-Info.plist */,
+			);
+			path = Launcher;
+			sourceTree = "<group>";
+		};
+		0523F643112694C8004FB4EB /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				0523F644112694C8004FB4EB /* iPhoneSimulatorRemoteClient */,
+				0523F646112694C8004FB4EB /* README.txt */,
+			);
+			path = Dependencies;
+			sourceTree = "<group>";
+		};
+		0523F644112694C8004FB4EB /* iPhoneSimulatorRemoteClient */ = {
+			isa = PBXGroup;
+			children = (
+				0523F645112694C8004FB4EB /* iPhoneSimulatorRemoteClient.h */,
+			);
+			path = iPhoneSimulatorRemoteClient;
+			sourceTree = "<group>";
+		};
+		0523F66011269845004FB4EB /* SDK Interface */ = {
+			isa = PBXGroup;
+			children = (
+				0523F65D11269837004FB4EB /* PLSimulatorSDK.h */,
+				0523F65E11269837004FB4EB /* PLSimulatorSDK.m */,
+				0523F66111269860004FB4EB /* PLSimulatorDiscovery.h */,
+				0523F66211269860004FB4EB /* PLSimulatorDiscovery.m */,
+				0523F67211269977004FB4EB /* PLSimulatorDiscoveryTests.m */,
+			);
+			name = "SDK Interface";
+			sourceTree = "<group>";
+		};
+		0523F67A112699C6004FB4EB /* Test Support */ = {
+			isa = PBXGroup;
+			children = (
+				0523F67B112699D0004FB4EB /* PLTestCase.h */,
+				0523F67C112699D0004FB4EB /* PLTestCase.m */,
+			);
+			name = "Test Support";
+			sourceTree = "<group>";
+		};
+		080E96DDFE201D6D7F000001 /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				0523F61111269281004FB4EB /* Launcher */,
+				0523F67A112699C6004FB4EB /* Test Support */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
+			);
+			name = "Linked Frameworks";
+			sourceTree = "<group>";
+		};
+		1058C7A2FEA54F0111CA2CBB /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				29B97324FDCFA39411CA2CEA /* AppKit.framework */,
+				13E42FB307B3F0F600E4EEF1 /* CoreData.framework */,
+				29B97325FDCFA39411CA2CEA /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		19C28FACFE9D520D11CA2CBB /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8D1107320486CEB800E47090 /* Launcher.app */,
+				0523F66911269876004FB4EB /* Launcher Tests.octest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		29B97314FDCFA39411CA2CEA /* SimLauncher */ = {
+			isa = PBXGroup;
+			children = (
+				080E96DDFE201D6D7F000001 /* Source */,
+				29B97317FDCFA39411CA2CEA /* Resources */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
+				0523F643112694C8004FB4EB /* Dependencies */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+			);
+			name = SimLauncher;
+			sourceTree = "<group>";
+		};
+		29B97317FDCFA39411CA2CEA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				0523F61711269298004FB4EB /* Launcher */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1058C7A0FEA54F0111CA2CBB /* Linked Frameworks */,
+				1058C7A2FEA54F0111CA2CBB /* Other Frameworks */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		0523F66811269876004FB4EB /* Launcher Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0523F66D11269876004FB4EB /* Build configuration list for PBXNativeTarget "Launcher Tests" */;
+			buildPhases = (
+				0523F66411269876004FB4EB /* Resources */,
+				0523F66511269876004FB4EB /* Sources */,
+				0523F66611269876004FB4EB /* Frameworks */,
+				0523F66711269876004FB4EB /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Launcher Tests";
+			productName = "Launcher Tests";
+			productReference = 0523F66911269876004FB4EB /* Launcher Tests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+		8D1107260486CEB800E47090 /* Launcher */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "Launcher" */;
+			buildPhases = (
+				8D1107290486CEB800E47090 /* Resources */,
+				8D11072C0486CEB800E47090 /* Sources */,
+				8D11072E0486CEB800E47090 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Launcher;
+			productInstallPath = "$(HOME)/Applications";
+			productName = SimLauncher;
+			productReference = 8D1107320486CEB800E47090 /* Launcher.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		29B97313FDCFA39411CA2CEA /* Project object */ = {
+			isa = PBXProject;
+			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "SimulatorLauncher" */;
+			compatibilityVersion = "Xcode 3.1";
+			hasScannedForEncodings = 1;
+			mainGroup = 29B97314FDCFA39411CA2CEA /* SimLauncher */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8D1107260486CEB800E47090 /* Launcher */,
+				0523F66811269876004FB4EB /* Launcher Tests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		0523F66411269876004FB4EB /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8D1107290486CEB800E47090 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0523F61E11269298004FB4EB /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		0523F66711269876004FB4EB /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		0523F66511269876004FB4EB /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0523F67D112699D0004FB4EB /* PLTestCase.m in Sources */,
+				0523F69F1126A086004FB4EB /* PLSimulatorDiscovery.m in Sources */,
+				0523F67311269977004FB4EB /* PLSimulatorDiscoveryTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8D11072C0486CEB800E47090 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0523F61511269281004FB4EB /* main.m in Sources */,
+				0523F61611269281004FB4EB /* LauncherAppDelegate.m in Sources */,
+				0523F65F11269837004FB4EB /* PLSimulatorSDK.m in Sources */,
+				0523F66311269860004FB4EB /* PLSimulatorDiscovery.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		0523F61811269298004FB4EB /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0523F61911269298004FB4EB /* English */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		0523F61A11269298004FB4EB /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				0523F61B11269298004FB4EB /* English */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		0523F66B11269876004FB4EB /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INFOPLIST_FILE = "Launcher Tests-Info.plist";
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Cocoa,
+					"-framework",
+					SenTestingKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = "Launcher Tests";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		0523F66C11269876004FB4EB /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = "$(DEVELOPER_LIBRARY_DIR)/Frameworks";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_MODEL_TUNING = G5;
+				INFOPLIST_FILE = "Launcher Tests-Info.plist";
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Cocoa,
+					"-framework",
+					SenTestingKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = "Launcher Tests";
+				WRAPPER_EXTENSION = octest;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		C01FCF4B08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INFOPLIST_FILE = "Resources/Launcher/Launcher-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				PRODUCT_NAME = Launcher;
+			};
+			name = Debug;
+		};
+		C01FCF4C08A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_MODEL_TUNING = G5;
+				INFOPLIST_FILE = "Resources/Launcher/Launcher-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				PRODUCT_NAME = Launcher;
+			};
+			name = Release;
+		};
+		C01FCF4F08A954540054247B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_GC = supported;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.5;
+				WARNING_CFLAGS = (
+					"-Wall",
+					"-Wextra",
+					"-Werror",
+					"-Wno-unused-parameter",
+					"-Wundeclared-selector",
+					"-Wstrict-selector-match",
+				);
+			};
+			name = Debug;
+		};
+		C01FCF5008A954540054247B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_GC = supported;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				PREBINDING = NO;
+				SDKROOT = macosx10.5;
+				WARNING_CFLAGS = (
+					"-Wall",
+					"-Wextra",
+					"-Werror",
+					"-Wno-unused-parameter",
+					"-Wundeclared-selector",
+					"-Wstrict-selector-match",
+				);
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		0523F66D11269876004FB4EB /* Build configuration list for PBXNativeTarget "Launcher Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0523F66B11269876004FB4EB /* Debug */,
+				0523F66C11269876004FB4EB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "Launcher" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4B08A954540054247B /* Debug */,
+				C01FCF4C08A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C01FCF4E08A954540054247B /* Build configuration list for PBXProject "SimulatorLauncher" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C01FCF4F08A954540054247B /* Debug */,
+				C01FCF5008A954540054247B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 29B97313FDCFA39411CA2CEA /* Project object */;
+}
