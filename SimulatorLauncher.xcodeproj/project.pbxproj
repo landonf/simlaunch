@@ -13,6 +13,7 @@
 		052360CD1128762C001C9661 /* PLSimulator.m in Sources */ = {isa = PBXBuildFile; fileRef = 052360CB1128762C001C9661 /* PLSimulator.m */; };
 		0523618C11287A2D001C9661 /* PLSimulatorPlatformTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0523618B11287A2D001C9661 /* PLSimulatorPlatformTests.m */; };
 		0523619811287BA7001C9661 /* Tests in Resources */ = {isa = PBXBuildFile; fileRef = 0523619611287BA7001C9661 /* Tests */; };
+		0523621C1128ACA2001C9661 /* PLSimulatorSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 0523F65E11269837004FB4EB /* PLSimulatorSDK.m */; };
 		0523F61511269281004FB4EB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0523F61211269281004FB4EB /* main.m */; };
 		0523F61611269281004FB4EB /* LauncherAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0523F61411269281004FB4EB /* LauncherAppDelegate.m */; };
 		0523F61E11269298004FB4EB /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0523F61A11269298004FB4EB /* MainMenu.xib */; };
@@ -307,6 +308,7 @@
 				0523F67311269977004FB4EB /* PLSimulatorDiscoveryTests.m in Sources */,
 				052360C8112874B3001C9661 /* PLSimulatorPlatform.m in Sources */,
 				052360CC1128762C001C9661 /* PLSimulator.m in Sources */,
+				0523621C1128ACA2001C9661 /* PLSimulatorSDK.m in Sources */,
 				0523618C11287A2D001C9661 /* PLSimulatorPlatformTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

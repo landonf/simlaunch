@@ -30,6 +30,10 @@
 
 @interface PLSimulatorSDK : NSObject {
 @private
+    /** SDK path */
+    NSString *_path;
 }
+
+- (id) initWithPath: (NSString *) path error: (NSError **) outError;
 
 @end

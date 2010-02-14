@@ -28,6 +28,8 @@
 
 #import "PLSimulatorSDK.h"
 
+#import "PLSimulator.h"
+
 /**
  * Meta-data for a specific Simulator SDK version.
  *
@@ -35,5 +37,39 @@
  * Immutable and thread-safe. May be used from any thread.
  */
 @implementation PLSimulatorSDK
+
+/**
+ * Initialize with the provided SDK path.
+ *
+ * @param path Simulator SDK path (eg, /Developer/Platforms/iPhoneSimulator.platform/Developer/SDKs/iPhoneSimulator3.1.sdk)
+ * @param error If an error occurs, upon return contains an NSError object that describes the problem.
+ *
+ * @return Returns an initialized PLSimulatorSDK instance, or nil if the SDK meta-data can not
+ * be parsed or the path appears to not be a valid SDK.
+ */
+- (id) initWithPath: (NSString *) path error: (NSError **) outError {
+    if ((self = [super init]) == nil) {
+        // Shouldn't happen
+        plsimulator_populate_nserror(outError, PLSimulatorErrorUnknown, @"Unexpected error", nil);
+        return nil;
+    }
+    
+    _path = path;
+    
+    /* Verify that the path exists */
+    NSFileManager *fm = [NSFileManager new];
+    BOOL isDir;
+    if (![fm fileExistsAtPath: _path isDirectory: &isDir] || isDir == NO) {
+        NSString *desc = NSLocalizedString(@"The provided SDK path does exist or is not a directory.",
+                                           @"Missing/non-directory SDK path");
+        plsimulator_populate_nserror(outError, PLSimulatorErrorInvalidSDK, desc, nil);
+        return nil;
+    }
+    
+    // TODO - Parse SDKSettings.plist
+
+    return self;
+}
+
 
 @end

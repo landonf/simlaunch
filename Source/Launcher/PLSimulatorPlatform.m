@@ -80,9 +80,23 @@
         plsimulator_populate_nserror(outError, PLSimulatorErrorInvalidSDK, desc, error);
         return nil;
     }
-    
+
+    /* Iterate and load the SDK subdirectories */
+    NSMutableArray *sdks = [NSMutableArray arrayWithCapacity: [sdkPaths count]];
+    _sdks = sdks;
+
     for (NSString *sdkPath in sdkPaths) {
-        NSLog(@"PATH: %@", sdkPath);
+        NSString *absolutePath = [sdkDir stringByAppendingPathComponent: sdkPath];
+
+        PLSimulatorSDK *sdk = [[PLSimulatorSDK alloc] initWithPath: absolutePath error: &error];
+
+        /* Simply skip unparsable SDKs */
+        if (sdk == nil) {
+            NSLog(@"Skipping bad SDK %@: %@", absolutePath, error);
+            continue;
+        }
+
+        [sdks addObject: sdk];
     }
 
     return self;

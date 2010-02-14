@@ -39,6 +39,8 @@
     PLSimulatorPlatform *platform = [[PLSimulatorPlatform alloc] initWithPath: [self pathForResource: @"Sim.platform"]
                                                                         error: &error];
     STAssertNotNil(platform, @"Could not read platform SDK meta-data: %@", error);
+
+    STAssertEquals((NSUInteger)1, [platform.sdks count], @"Did not load platform's SDKs");
 }
 
 @end
