@@ -1,1 +1,25 @@
-Work in progress
+Simulator Launcher
+
+== Introduction ==
+
+This is a Mac OS X application that will automatically launch an embedded iPhone Simulator application
+using the correct SDK.
+
+The launcher will:
+- Detect all installed iPhone SDKs (such as the beta iPad SDK) using Spotlight.
+- Automatically select the best available SDK for your application.
+- Install and launch your application in the appropriate Simulator.
+
+To use, place your iPhone/iPad application that has been built using a Simulator SDK in:
+    Launcher.app/Contents/Resources/EmbeddedApp/
+
+You can also rename the Launcher.app, and provide a proper Icon.
+
+== Building ==
+
+The launcher should build and run on Mac OS X 10.5 and 10.6.
+
+Building also requires the PLBlocks 1.1-beta2 SDK to support blocks on 10.5:
+    http://code.google.com/p/plblocks/
+
+We will also be providing pre-built binaries.
