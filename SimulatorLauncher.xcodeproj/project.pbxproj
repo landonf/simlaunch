@@ -84,6 +84,9 @@
 		05CC954F1129100D001912D5 /* PLBlocks.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 05CC8F711128B62F001912D5 /* PLBlocks.framework */; };
 		05CC959D1129189A001912D5 /* BundlerConfigWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CC959C1129189A001912D5 /* BundlerConfigWindowController.m */; };
 		05CC95A111291990001912D5 /* AppConfig.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05CC95A011291990001912D5 /* AppConfig.xib */; };
+		05CC964611292469001912D5 /* BundlerTool.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CC964511292469001912D5 /* BundlerTool.m */; };
+		05CC967111292E9B001912D5 /* PLBlocks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05CC8F711128B62F001912D5 /* PLBlocks.framework */; };
+		05CC968611292F19001912D5 /* bundle-tool.sh in Copy Executables */ = {isa = PBXBuildFile; fileRef = 05CC967F11292EFE001912D5 /* bundle-tool.sh */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
 
@@ -202,6 +205,17 @@
 			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		05CC969011292F3F001912D5 /* Copy Executables */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 6;
+			files = (
+				05CC968611292F19001912D5 /* bundle-tool.sh in Copy Executables */,
+			);
+			name = "Copy Executables";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -255,6 +269,9 @@
 		05CC959B1129189A001912D5 /* BundlerConfigWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BundlerConfigWindowController.h; sourceTree = "<group>"; };
 		05CC959C1129189A001912D5 /* BundlerConfigWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BundlerConfigWindowController.m; sourceTree = "<group>"; };
 		05CC959E1129198C001912D5 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/AppConfig.xib; sourceTree = "<group>"; };
+		05CC964411292469001912D5 /* BundlerTool.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BundlerTool.h; sourceTree = "<group>"; };
+		05CC964511292469001912D5 /* BundlerTool.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BundlerTool.m; sourceTree = "<group>"; };
+		05CC967F11292EFE001912D5 /* bundle-tool.sh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.sh; path = "bundle-tool.sh"; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
@@ -293,6 +310,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05CC967111292E9B001912D5 /* PLBlocks.framework in Frameworks */,
 				05CC94EB11290AB9001912D5 /* PLSimulator.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -428,9 +446,12 @@
 			children = (
 				05CC950611290BA0001912D5 /* BundlerAppDelegate.h */,
 				05CC950711290BA0001912D5 /* BundlerAppDelegate.m */,
-				05CC951011290CCA001912D5 /* main.m */,
 				05CC959B1129189A001912D5 /* BundlerConfigWindowController.h */,
 				05CC959C1129189A001912D5 /* BundlerConfigWindowController.m */,
+				05CC964411292469001912D5 /* BundlerTool.h */,
+				05CC964511292469001912D5 /* BundlerTool.m */,
+				05CC951011290CCA001912D5 /* main.m */,
+				05CC967F11292EFE001912D5 /* bundle-tool.sh */,
 			);
 			path = Bundler;
 			sourceTree = "<group>";
@@ -603,6 +624,7 @@
 			buildConfigurationList = 05CC94DF11290A75001912D5 /* Build configuration list for PBXNativeTarget "Simulator Bundler" */;
 			buildPhases = (
 				05CC94D611290A74001912D5 /* Resources */,
+				05CC969011292F3F001912D5 /* Copy Executables */,
 				05CC94F511290AE8001912D5 /* Copy Frameworks */,
 				05CC94D711290A74001912D5 /* Sources */,
 				05CC94D811290A74001912D5 /* Frameworks */,
@@ -792,6 +814,7 @@
 				05CC950811290BA0001912D5 /* BundlerAppDelegate.m in Sources */,
 				05CC951111290CCA001912D5 /* main.m in Sources */,
 				05CC959D1129189A001912D5 /* BundlerConfigWindowController.m in Sources */,
+				05CC964611292469001912D5 /* BundlerTool.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1087,6 +1110,10 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Dependencies\"",
+				);
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_ENABLE_FIX_AND_CONTINUE = YES;
 				GCC_MODEL_TUNING = G5;
@@ -1112,6 +1139,10 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Dependencies\"",
+				);
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
 				GCC_MODEL_TUNING = G5;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
