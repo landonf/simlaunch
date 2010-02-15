@@ -46,7 +46,8 @@
  * Initialize a new query with the requested minumum simulator SDK version.
  *
  * @param version The required minumum simulator SDK version (3.0, 3.1.2, 3.2, etc).
- * @param deviceFamilies The set of required device families. See \ref plsimulator_device_family Device Family Constants.
+ * @param deviceFamilies The set of requested device families. Platform SDKs that match any of these device
+ * families will be returned. See \ref plsimulator_device_family Device Family Constants.
  */
 - (id) initWithMinimumVersion: (NSString *) version deviceFamilies: (NSSet *) deviceFamilies {
     if ((self = [super init]) == nil)
@@ -121,18 +122,22 @@
 
         /* Check the minimum version and device families */
         BOOL hasMinVersion = NO;
-        BOOL hasDeviceFamilies = NO;
+        BOOL hasDeviceFamily = NO;
         for (PLSimulatorSDK *sdk in platform.sdks) {
             /* If greater than or equal to the minimum version, this platform SDK meets the requirements */
             if (rpm_vercomp([sdk.version UTF8String], [_version UTF8String]) >= 0)
                 hasMinVersion = YES;
 
-            /* If all our requested families are included, this platform SDK meets the requirements. */
-            if ([_deviceFamilies isSubsetOfSet: sdk.deviceFamilies])
-                hasDeviceFamilies = YES;
+            /* If any our requested families are included, this platform SDK meets the requirements. */
+            for (NSString *family in _deviceFamilies) {
+                if ([sdk.deviceFamilies containsObject: family]) {
+                    hasDeviceFamily = YES;
+                    continue;
+                }
+            }
         }
 
-        if (!hasMinVersion || !hasDeviceFamilies)
+        if (!hasMinVersion || !hasDeviceFamily)
             continue;
 
         [platformSDKs addObject: platform];

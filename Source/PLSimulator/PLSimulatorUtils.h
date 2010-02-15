@@ -28,30 +28,13 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface PLSimulatorSDK : NSObject {
-@private
-    /** SDK path */
-    NSString *_path;
+#import "PLSimulator.h"
 
-    /** SDK version */
-    NSString *_version;
-    
-    /** Canonical name */
-    NSString *_canonicalName;
+@interface PLSimulatorUtils : NSObject {
 
-    /** Supported device families. Values will be one of the \ref plsimulator_device_family device family constants. */
-    NSSet *_deviceFamilies;
 }
 
-- (id) initWithPath: (NSString *) path error: (NSError **) outError;
-
-/** SDK version. */
-@property(readonly) NSString *version;
-
-/** SDK's canonical name. */
-@property(readonly) NSString *canonicalName;
-
-/** Supported device families. See \ref plsimulator_device_family Device Family Constants. */
-@property(readonly) NSSet *deviceFamilies;
++ (NSString *) deviceFamilyForDeviceCode: (id) deviceCode;
++ (NSSet *) deviceFamiliesForDeviceCodes: (NSArray *) deviceCodes;
 
 @end

@@ -28,6 +28,8 @@
 
 #import <Foundation/Foundation.h>
 
+#define PLSIM_HIDDEN __attribute((visibility("hidden")))
+
 /**
  * @defgroup functions Functions Reference
  */
@@ -84,12 +86,15 @@ typedef enum {
     PLSimulatorErrorOperatingSystem = 2,
 
     /** The provided path is not a valid SDK. */
-    PLSimulatorErrorInvalidSDK = 3
+    PLSimulatorErrorInvalidSDK = 3,
+    
+    /** The provided path is not a valid simulator application. */
+    PLSimulatorErrorInvalidApplication = 3
 } PLSimulatorError;
 
 
-NSError *plsimulator_nserror (PLSimulatorError code, NSString *description, NSError *cause);
-void plsimulator_populate_nserror (NSError **error, PLSimulatorError code, NSString *description, NSError *cause);
+NSError *plsimulator_nserror (PLSimulatorError code, NSString *description, NSError *cause) PLSIM_HIDDEN;
+void plsimulator_populate_nserror (NSError **error, PLSimulatorError code, NSString *description, NSError *cause) PLSIM_HIDDEN;
 
 /* Library Imports */
 #import "PLSimulatorSDK.h"

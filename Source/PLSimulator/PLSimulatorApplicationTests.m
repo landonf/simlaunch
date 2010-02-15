@@ -28,6 +28,7 @@
 
 #import "PLTestCase.h"
 
+#import "PLSimulator.h"
 #import "PLSimulatorApplication.h"
 
 @interface PLSimulatorApplicationTests : PLTestCase {
@@ -41,6 +42,9 @@
     PLSimulatorApplication *app = [[PLSimulatorApplication alloc] initWithPath: [self pathForResource: @"iPadHelloWorld.app"] 
                                                                          error: &error];
     STAssertNotNil(app, @"Could not read app meta-data: %@", error);
+    
+    STAssertEqualObjects([NSSet setWithObject: PLSimulatorDeviceFamilyiPad], app.deviceFamilies, @"Incorrect device family setting");
+    STAssertEqualObjects(@"iphonesimulator3.2", app.canonicalSDKName, @"Incorrect SDK name");
 }
 
 @end

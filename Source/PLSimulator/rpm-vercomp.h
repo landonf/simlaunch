@@ -32,4 +32,6 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-int rpm_vercomp (const char *versionA, const char *versionB) __attribute__((visibility("hidden")));
+#import "PLSimulator.h"
+
+int rpm_vercomp (const char *versionA, const char *versionB) PLSIM_HIDDEN;

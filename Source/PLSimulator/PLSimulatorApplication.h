@@ -33,8 +33,24 @@
 @private
     /** Application path */
     NSString *_path;
+
+    /** Canonical name of the SDK used to build this application. */
+    NSString *_canonicalSDKName;
+
+    /** Set of device families supported by this application. 
+     * See \ref plsimulator_device_family Device Family Constants. */
+    NSSet *_deviceFamilies;
 }
 
 - (id) initWithPath: (NSString *) path error: (NSError **) outError;
+
+/** Return the canonical name of the SDK used to build this application. */ 
+@property(readonly) NSString *canonicalSDKName;
+
+/** 
+ * Return the set of device families supported by this application.
+ * See \ref plsimulator_device_family Device Family Constants.
+ */
+@property(readonly) NSSet *deviceFamilies;
 
 @end

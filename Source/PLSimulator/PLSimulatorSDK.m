@@ -29,6 +29,7 @@
 #import "PLSimulatorSDK.h"
 
 #import "PLSimulator.h"
+#import "PLSimulatorUtils.h"
 
 /* Relative path to the setting plist */
 #define SDK_SETTINGS_PLIST @"SDKSettings.plist"
@@ -42,6 +43,9 @@
 
 /* Device Families */
 #define DevicesKey @"UIDeviceFamily"
+
+/* Canonical name */
+#define CanonicalNameKey @"CanonicalName"
 
 /* Device family constants used by Apple */
 enum {
@@ -58,6 +62,7 @@ enum {
 @implementation PLSimulatorSDK
 
 @synthesize version = _version;
+@synthesize canonicalName = _canonicalName;
 @synthesize deviceFamilies = _deviceFamilies;
 
 /**
@@ -141,56 +146,23 @@ enum {
 
         return NO;
     };
-    
-    /* Map an Apple device identifier constant to our family constants. We accept either NSNumber
-     * or NSString instances, and will validate the argument's type. */
-    NSString *(^FamilyConstant)(id) = ^(id str) {
-        /* Try to handle string/number confusion. The current plist uses strings, but it's
-         * clearly a numeric constant. We assume that if it responds to intValue, it will
-         * work as either a NSNumber or NSString */
-        if (![str isKindOfClass: [NSString class]] && [str isKindOfClass: [NSNumber class]]) {
-            NSLog(@"Unsupported %@ value type while parsing '%@' settings: %@", DevicesKey, _path, str);
-            return (NSString *) nil;
-        }
-
-        /* Map the Apple family number to our family constants */
-        switch ([(NSString *)str intValue]) {
-            case iPhoneFamily:
-                return PLSimulatorDeviceFamilyiPhone;
-            case iPadFamily:
-                return PLSimulatorDeviceFamilyiPad;
-            default:
-                NSLog(@"Unsupported %@ value while parsing '%@' settings: %@", DevicesKey, _path, str);
-                return (NSString *) nil;
-        }
-    };
 
     /* Fetch required values */
     if (!Get(VersionKey, &_version, [NSString class], YES))
         return nil;
 
+    if (!Get(CanonicalNameKey, &_canonicalName, [NSString class], YES))
+        return nil;
+
     /* Get the list of supported devices */
     {
         NSArray *devices;
-        NSString *deviceStr;
         if (Get(DevicesKey, &devices, [NSArray class], NO)) {
-            NSMutableSet *deviceFamilies = [NSMutableSet setWithCapacity: [devices count]];
-            for (NSString *str in devices) {
-                NSString *constant = FamilyConstant(str);
-                if (constant != nil)
-                    [deviceFamilies addObject: constant];
-            }
-
-            /* Save the populated set */
-            _deviceFamilies = deviceFamilies;
-        } else if (Get(DevicesKey, &deviceStr, nil, NO)) {
-            NSString *constant = FamilyConstant(deviceStr);
-            if (constant != nil)
-                _deviceFamilies = [NSSet setWithObject: constant];
+            _deviceFamilies = [PLSimulatorUtils deviceFamiliesForDeviceCodes: devices];
         }
 
-        /* If no valid setting, assume that this is a <3.2 SDK and it supports the iPhone family */
-        if (_deviceFamilies == nil)
+        /* If no valid settings, assume that this is a <3.2 SDK and it supports the iPhone family */
+        if (_deviceFamilies == nil || [_deviceFamilies count] == 0)
             _deviceFamilies = [NSSet setWithObject: PLSimulatorDeviceFamilyiPhone];
     }
 

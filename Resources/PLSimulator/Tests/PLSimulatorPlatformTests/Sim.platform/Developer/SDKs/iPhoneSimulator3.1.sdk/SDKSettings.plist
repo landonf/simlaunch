@@ -8,5 +8,7 @@
 	<string>YES</string>
 	<key>MinimalDisplayName</key>
 	<string>Simulator - 3.1</string>
+	<key>CanonicalName</key>
+	<string>iphonesimulator3.2</string>
 </dict>
 </plist>
