@@ -60,6 +60,7 @@
 		05CC92151128D38D001912D5 /* PLSimulatorApplicationTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CC92141128D38D001912D5 /* PLSimulatorApplicationTests.m */; };
 		05CC92601128DA11001912D5 /* PLSimulatorUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 05CC925E1128DA11001912D5 /* PLSimulatorUtils.h */; };
 		05CC92611128DA11001912D5 /* PLSimulatorUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CC925F1128DA11001912D5 /* PLSimulatorUtils.m */; };
+		05CC933A1128E3FD001912D5 /* EmbeddedApp in Resources */ = {isa = PBXBuildFile; fileRef = 05CC93371128E3FD001912D5 /* EmbeddedApp */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
 
@@ -178,6 +179,7 @@
 		05CC92141128D38D001912D5 /* PLSimulatorApplicationTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLSimulatorApplicationTests.m; sourceTree = "<group>"; };
 		05CC925E1128DA11001912D5 /* PLSimulatorUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLSimulatorUtils.h; sourceTree = "<group>"; };
 		05CC925F1128DA11001912D5 /* PLSimulatorUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLSimulatorUtils.m; sourceTree = "<group>"; };
+		05CC93371128E3FD001912D5 /* EmbeddedApp */ = {isa = PBXFileReference; lastKnownFileType = folder; path = EmbeddedApp; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
@@ -238,6 +240,7 @@
 		0523F61711269298004FB4EB /* Launcher */ = {
 			isa = PBXGroup;
 			children = (
+				05CC93371128E3FD001912D5 /* EmbeddedApp */,
 				0523619611287BA7001C9661 /* Tests */,
 				0523F61811269298004FB4EB /* InfoPlist.strings */,
 				0523F61A11269298004FB4EB /* MainMenu.xib */,
@@ -450,6 +453,7 @@
 				05CC90ED1128C8C5001912D5 /* Headers */,
 				05CC90EE1128C8C5001912D5 /* Resources */,
 				05CC90EF1128C8C5001912D5 /* Sources */,
+				05CC92D41128E190001912D5 /* Fix Install Names */,
 				05CC90F01128C8C5001912D5 /* Frameworks */,
 			);
 			buildRules = (
@@ -551,6 +555,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0523F61E11269298004FB4EB /* MainMenu.xib in Resources */,
+				05CC933A1128E3FD001912D5 /* EmbeddedApp in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -583,6 +588,20 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Run the unit tests in this test bundle.\n\n# RunUnitTests sets this, so we need to add our own dependencies, otherwise we have trouble loading\n# secondary framework dependencies.\nexport DYLD_FRAMEWORK_PATH=\"${SOURCE_ROOT}/Dependencies\"\n\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+		05CC92D41128E190001912D5 /* Fix Install Names */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Fix Install Names";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "BINARY=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/PLSimulator\"\n\ninstall_name_tool -change @loader_path/../Frameworks/PLBlocks.framework/Versions/A/PLBlocks @loader_path/../../../../Frameworks/PLBlocks.framework/Versions/A/PLBlocks \"${BINARY}\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 

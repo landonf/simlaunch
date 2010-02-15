@@ -72,9 +72,9 @@
     {
         BOOL isDir;
         if (![fm fileExistsAtPath: _path isDirectory: &isDir] || isDir == NO) {
-            NSString *desc = NSLocalizedString(@"The provided SDK path does exist or is not a directory.",
-                                               @"Missing/non-directory SDK path");
-            plsimulator_populate_nserror(outError, PLSimulatorErrorInvalidSDK, desc, nil);
+            NSString *desc = NSLocalizedString(@"The provided application path does exist or is not a directory.",
+                                               @"Missing/non-directory application path");
+            plsimulator_populate_nserror(outError, PLSimulatorErrorInvalidApplication, desc, nil);
             return nil;
         }
     }

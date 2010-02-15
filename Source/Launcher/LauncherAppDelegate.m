@@ -27,10 +27,59 @@
  */
 
 #import "LauncherAppDelegate.h"
+#import "PLSimulator.h"
+
+/* Resource subdirectory for the embedded application */
+#define APP_DIR @"EmbeddedApp"
+
+/* Full application-relative path to the embeddedapp dir */
+#define FULL_APP_DIR @"Contents/Resources/" APP_DIR
 
 @implementation LauncherAppDelegate
 
 - (void) applicationDidFinishLaunching: (NSNotification *) aNotification {
+    NSError *error;
+
+    /* Display a fatal configuration error modaly */
+    void (^ConfigError)(NSString *) = ^(NSString *text) {
+        NSAlert *alert = [NSAlert alertWithMessageText: @"The launcher has not been correctly configured." 
+                                         defaultButton: @"Quit"
+                                       alternateButton: nil 
+                                           otherButton: nil
+                             informativeTextWithFormat: text];
+        [alert runModal];
+        [[NSApplication sharedApplication] terminate: self];
+    };
+
+    /* Find the embedded application dir */
+    NSString *appContainer = [[NSBundle mainBundle] pathForResource: APP_DIR ofType: nil];
+    if (appContainer == nil) {
+        ConfigError(@"Missing the " FULL_APP_DIR " directory.");
+        return;
+    }
+
+    /* Scan for applications */
+    NSArray *appPaths = [[NSFileManager defaultManager] contentsOfDirectoryAtPath: appContainer error: &error];
+    if (appPaths == nil) {
+        ConfigError(FULL_APP_DIR " could not be read.");
+        return;
+    } else if ([appPaths count] == 0) {
+        ConfigError(@"No applications found in " FULL_APP_DIR ".");
+        return;
+    } else if ([appPaths count] > 1) {
+        ConfigError(@"More than one application found in " FULL_APP_DIR ".");
+        return;
+    }
+
+    /* Load the app meta-data */
+    NSString *appPath = [appContainer stringByAppendingPathComponent: [appPaths objectAtIndex: 0]];
+    PLSimulatorApplication *app = [[PLSimulatorApplication alloc] initWithPath: appPath error: &error];
+    if (app == nil) {
+        [[NSAlert alertWithError: error] runModal];
+        [[NSApplication sharedApplication] terminate: self];
+        return;
+    }
+
     /* Find the matching platform SDKs */
     NSSet *families = [NSSet setWithObjects: PLSimulatorDeviceFamilyiPad, nil];
     _discovery = [[PLSimulatorDiscovery alloc] initWithMinimumVersion: @"3.0"
