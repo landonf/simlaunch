@@ -19,18 +19,18 @@
 			name = Tests;
 			productName = Tests;
 		};
-		05CC94E311290A8B001912D5 /* World */ = {
+		05CC975611294830001912D5 /* Disk Image */ = {
 			isa = PBXAggregateTarget;
-			buildConfigurationList = 05CC94F611290AE8001912D5 /* Build configuration list for PBXAggregateTarget "World" */;
+			buildConfigurationList = 05CC97611129484E001912D5 /* Build configuration list for PBXAggregateTarget "Disk Image" */;
 			buildPhases = (
+				05CC975511294830001912D5 /* Create Disk Image */,
 			);
 			dependencies = (
-				05CC971F112945BB001912D5 /* PBXTargetDependency */,
-				05CC94E911290A91001912D5 /* PBXTargetDependency */,
-				05CC94E711290A8F001912D5 /* PBXTargetDependency */,
+				05CC975C11294840001912D5 /* PBXTargetDependency */,
+				05CC975E11294843001912D5 /* PBXTargetDependency */,
 			);
-			name = World;
-			productName = World;
+			name = "Disk Image";
+			productName = "Disk Image";
 		};
 /* End PBXAggregateTarget section */
 
@@ -96,71 +96,64 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 05CC90F11128C8C5001912D5 /* PLSimulator */;
+			remoteGlobalIDString = 05CC90F11128C8C5001912D5;
 			remoteInfo = PLSimulator;
 		};
 		05CC91481128C9E4001912D5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 05CC90F11128C8C5001912D5 /* PLSimulator */;
+			remoteGlobalIDString = 05CC90F11128C8C5001912D5;
 			remoteInfo = PLSimulator;
 		};
 		05CC914F1128C9F3001912D5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 05CC90F11128C8C5001912D5 /* PLSimulator */;
+			remoteGlobalIDString = 05CC90F11128C8C5001912D5;
 			remoteInfo = PLSimulator;
 		};
 		05CC91671128CAAC001912D5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 0523F66811269876004FB4EB /* Launcher Tests */;
+			remoteGlobalIDString = 0523F66811269876004FB4EB;
 			remoteInfo = "Launcher Tests";
 		};
 		05CC91691128CAAD001912D5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 05CC912C1128C974001912D5 /* PLSimulator Tests */;
+			remoteGlobalIDString = 05CC912C1128C974001912D5;
 			remoteInfo = "PLSimulator Tests";
 		};
 		05CC94E111290A82001912D5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 05CC90F11128C8C5001912D5 /* PLSimulator */;
+			remoteGlobalIDString = 05CC90F11128C8C5001912D5;
 			remoteInfo = PLSimulator;
-		};
-		05CC94E611290A8F001912D5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 8D1107260486CEB800E47090 /* Launcher */;
-			remoteInfo = Launcher;
-		};
-		05CC94E811290A91001912D5 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 05CC94D911290A74001912D5 /* Simulator Bundler */;
-			remoteInfo = "Simulator Bundler";
 		};
 		05CC94EF11290AD5001912D5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 8D1107260486CEB800E47090 /* Launcher */;
+			remoteGlobalIDString = 8D1107260486CEB800E47090;
 			remoteInfo = Launcher;
 		};
-		05CC971E112945BB001912D5 /* PBXContainerItemProxy */ = {
+		05CC975B11294840001912D5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 05CC91641128CAA8001912D5 /* Tests */;
 			remoteInfo = Tests;
+		};
+		05CC975D11294843001912D5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 05CC94D911290A74001912D5 /* Simulator Bundler */;
+			remoteInfo = "Simulator Bundler";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -680,7 +673,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				05CC94E311290A8B001912D5 /* World */,
+				05CC975611294830001912D5 /* Disk Image */,
 				05CC91641128CAA8001912D5 /* Tests */,
 				05CC94D911290A74001912D5 /* Simulator Bundler */,
 				8D1107260486CEB800E47090 /* Launcher */,
@@ -778,6 +771,20 @@
 			shellPath = /bin/sh;
 			shellScript = "BINARY=\"${CONFIGURATION_BUILD_DIR}/${CONTENTS_FOLDER_PATH}/PLSimulator\"\n\ninstall_name_tool -change @loader_path/../Frameworks/PLBlocks.framework/Versions/A/PLBlocks @loader_path/../../../../Frameworks/PLBlocks.framework/Versions/A/PLBlocks \"${BINARY}\"";
 		};
+		05CC975511294830001912D5 /* Create Disk Image */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Create Disk Image";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Set the destroot\nDESTROOT=\"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME} ${CURRENT_PROJECT_VERSION}\"\nmkdir -p \"${DESTROOT}\"\n\n# Populate the destroot\ntar -C \"${BUILD_DIR}/${CONFIGURATION}\" -cf - \"Simulator Bundler.app\" | tar -C \"${DESTROOT}\" -xf -\ncp \"${SOURCE_ROOT}/README.txt\" \"${DESTROOT}\"\n\n# Create the disk image\nrm -f \"${DESTROOT}.dmg\"\nhdiutil create -srcfolder \"${DESTROOT}\" \"${DESTROOT}.dmg\"";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -869,25 +876,20 @@
 			target = 05CC90F11128C8C5001912D5 /* PLSimulator */;
 			targetProxy = 05CC94E111290A82001912D5 /* PBXContainerItemProxy */;
 		};
-		05CC94E711290A8F001912D5 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 8D1107260486CEB800E47090 /* Launcher */;
-			targetProxy = 05CC94E611290A8F001912D5 /* PBXContainerItemProxy */;
-		};
-		05CC94E911290A91001912D5 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 05CC94D911290A74001912D5 /* Simulator Bundler */;
-			targetProxy = 05CC94E811290A91001912D5 /* PBXContainerItemProxy */;
-		};
 		05CC94F011290AD5001912D5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 8D1107260486CEB800E47090 /* Launcher */;
 			targetProxy = 05CC94EF11290AD5001912D5 /* PBXContainerItemProxy */;
 		};
-		05CC971F112945BB001912D5 /* PBXTargetDependency */ = {
+		05CC975C11294840001912D5 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 05CC91641128CAA8001912D5 /* Tests */;
-			targetProxy = 05CC971E112945BB001912D5 /* PBXContainerItemProxy */;
+			targetProxy = 05CC975B11294840001912D5 /* PBXContainerItemProxy */;
+		};
+		05CC975E11294843001912D5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 05CC94D911290A74001912D5 /* Simulator Bundler */;
+			targetProxy = 05CC975D11294843001912D5 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -1174,23 +1176,23 @@
 			};
 			name = Release;
 		};
-		05CC94E411290A8B001912D5 /* Debug */ = {
+		05CC975711294831001912D5 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = NO;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_OPTIMIZATION_LEVEL = 0;
-				PRODUCT_NAME = World;
+				PRODUCT_NAME = "Simulator Launcher";
 			};
 			name = Debug;
 		};
-		05CC94E511290A8B001912D5 /* Release */ = {
+		05CC975811294831001912D5 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				COPY_PHASE_STRIP = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				GCC_ENABLE_FIX_AND_CONTINUE = NO;
-				PRODUCT_NAME = World;
+				PRODUCT_NAME = "Simulator Launcher";
 				ZERO_LINK = NO;
 			};
 			name = Release;
@@ -1234,6 +1236,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CURRENT_PROJECT_VERSION = "1.0-beta1";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_GC = required;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1258,6 +1261,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
+				CURRENT_PROJECT_VERSION = "1.0-beta1";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_GC = required;
 				GCC_VERSION = coop.plausible.blocks.compilers.gcc.4_2;
@@ -1324,11 +1328,11 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		05CC94F611290AE8001912D5 /* Build configuration list for PBXAggregateTarget "World" */ = {
+		05CC97611129484E001912D5 /* Build configuration list for PBXAggregateTarget "Disk Image" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				05CC94E411290A8B001912D5 /* Debug */,
-				05CC94E511290A8B001912D5 /* Release */,
+				05CC975711294831001912D5 /* Debug */,
+				05CC975811294831001912D5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
