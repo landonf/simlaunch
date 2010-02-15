@@ -26,15 +26,21 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
-#import <Cocoa/Cocoa.h>
+#import "PLTestCase.h"
 
+#import "PLSimulatorApplication.h"
 
-@interface PLSimulatorApplication : NSObject {
-@private
-    /** Application path */
-    NSString *_path;
+@interface PLSimulatorApplicationTests : PLTestCase {
 }
+@end
 
-- (id) initWithPath: (NSString *) path error: (NSError **) outError;
+@implementation PLSimulatorApplicationTests
+
+- (void) testInit {
+    NSError *error;
+    PLSimulatorApplication *app = [[PLSimulatorApplication alloc] initWithPath: [self pathForResource: @"iPadHelloWorld.app"] 
+                                                                         error: &error];
+    STAssertNotNil(app, @"Could not read app meta-data: %@", error);
+}
 
 @end

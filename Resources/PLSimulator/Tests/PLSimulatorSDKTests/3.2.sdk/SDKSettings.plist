@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+	<key>CanonicalName</key>
+	<string>iphonesimulator3.2</string>
 	<key>Version</key>
 	<string>3.2</string>
 	<key>isBaseSDK</key>

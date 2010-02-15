@@ -26,6 +26,8 @@
  * OTHER DEALINGS IN THE SOFTWARE.
  */
 
+#import "PLSimulator.h"
+
 #import "PLSimulatorApplication.h"
 
 /**
@@ -35,5 +37,73 @@
  * Immutable and thread-safe. May be used from any thread.
  */
 @implementation PLSimulatorApplication
+
+/**
+ * Initialize with the provided application path.
+ *
+ * @param path Simulator application path (eg, HelloWorld.app)
+ * @param error If an error occurs, upon return contains an NSError object that describes the problem.
+ *
+ * @return Returns an initialized PLSimulatorApplication instance, or nil if the application meta-data can not
+ * be parsed or the path appears to not be a valid application.
+ */
+- (id) initWithPath: (NSString *) path error: (NSError **) outError {
+    if ((self = [super init]) == nil) {
+        // Shouldn't happen
+        plsimulator_populate_nserror(outError, PLSimulatorErrorUnknown, @"Unexpected error", nil);
+        return nil;
+    }
+    
+    /* Save the application path */
+    _path = path;
+    
+    /* Verify that the path exists */
+    NSFileManager *fm = [NSFileManager new];
+    {
+        BOOL isDir;
+        if (![fm fileExistsAtPath: _path isDirectory: &isDir] || isDir == NO) {
+            NSString *desc = NSLocalizedString(@"The provided SDK path does exist or is not a directory.",
+                                               @"Missing/non-directory SDK path");
+            plsimulator_populate_nserror(outError, PLSimulatorErrorInvalidSDK, desc, nil);
+            return nil;
+        }
+    }
+    
+    /* Load the application Info.plist */
+    NSDictionary *plist;
+    {
+        NSString *plistPath = [_path stringByAppendingPathComponent: @"Info.plist"];
+        NSData *plistData = [NSData dataWithContentsOfMappedFile: plistPath];
+        NSString *errorDesc;
+        
+        /* Try to read the plist data */
+        id plistInstance = [NSPropertyListSerialization propertyListFromData: plistData
+                                                            mutabilityOption: NSPropertyListImmutable
+                                                                      format: NULL
+                                                            errorDescription: &errorDesc];
+        
+        /* Invalid format */
+        if (plistInstance == nil) {
+            NSString *desc = NSLocalizedString(@"The provided SDK does not contain a valid SDKSettings property list.",
+                                               @"Missing/non-directory SDK path");
+            NSLog(@"Error loading SDK path '%@': %@", _path, errorDesc);
+            
+            plsimulator_populate_nserror(outError, PLSimulatorErrorInvalidSDK, desc, nil);
+            return nil;
+        }
+        
+        /* We expect a dictionary */
+        if (![plistInstance isKindOfClass: [NSDictionary class]]) {
+            NSString *desc = NSLocalizedString(@"The provided SDK SDKSettings property list uses an unsupported data schema.",
+                                               @"Missing/non-directory SDK path");        
+            plsimulator_populate_nserror(outError, PLSimulatorErrorInvalidSDK, desc, nil);
+            return nil;
+        }
+        
+        plist = plistInstance;
+    }
+    
+    return self;
+}
 
 @end
