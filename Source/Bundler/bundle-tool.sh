@@ -77,7 +77,7 @@ parse_plist () {
 
 # Find a unique destination path
 compute_dest_path () {
-	local dest="`dirname ${APP}`/${APP_NAME} (iPhone Simulator)"
+	local dest="`dirname "${APP}"`/${APP_NAME} (iPhone Simulator)"
 	local suffix=""
 
 	# Find a unique name
@@ -104,9 +104,9 @@ populate_dest_path () {
 	# Copy the source app to the destination
 	mkdir -p "${APP_DEST}/${EMBED_DIR}"
 	check_error "Could not create embedded app destination directory" ${DESTINATION_WRITE_FAILED}
-
-	tar -C `dirname "${APP}"` -cf - `basename "${APP}"` | tar -C "${APP_DEST}/${EMBED_DIR}" -xf -
-	check_error "Could not populate embedded app destination directory" ${DESTINATION_WRITE_FAILED}
+	local app_dirname=`dirname "${APP}"`
+	tar -C "${app_dirname}" -cf - `basename "${APP}"` | tar -C "${APP_DEST}/${EMBED_DIR}" -xf -
+	check_error "Could not populate embedded app destination directory" ${DESTINATION_WRITE_FAILED} 
 
 	# Set the device family for the application
 	if [ ${DEVICE_FAMILY} = "iPhone" ]; then
@@ -118,7 +118,7 @@ populate_dest_path () {
 	fi
 
 	if [ ! -z "${family}" ]; then
-		local dest_plist="${APP_DEST}/${EMBED_DIR}/`basename ${APP}`/Info.plist"
+		local dest_plist="${APP_DEST}/${EMBED_DIR}/`basename "${APP}"`/Info.plist"
 		${PLIST_CMD} -c "Delete UIDeviceFamily" "${dest_plist}"
 		check_error "Failed to modify embedded application's plist" ${DESTINATION_WRITE_FAILED}
 
@@ -139,7 +139,7 @@ populate_meta_data () {
 	check_error "Failed to modify wrapper application's plist" ${DESTINATION_WRITE_FAILED}
 
 	# Convert the embedded application's icon
-	if [ -f ${APP_ICON} ]; then
+	if [ -f "${APP_ICON}" ]; then
 		local resampled=`mktemp /tmp/${tempfoo}.XXXXXX`
 		check_error "Could not create temporary file for Icon resampling" ${DESTINATION_WRITE_FAILED}
 		
