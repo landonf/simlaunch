@@ -62,6 +62,7 @@
 		05CC92611128DA11001912D5 /* PLSimulatorUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CC925F1128DA11001912D5 /* PLSimulatorUtils.m */; };
 		05CC933A1128E3FD001912D5 /* EmbeddedApp in Resources */ = {isa = PBXBuildFile; fileRef = 05CC93371128E3FD001912D5 /* EmbeddedApp */; };
 		05CC93C11128ED3D001912D5 /* LauncherSimClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CC93C01128ED3D001912D5 /* LauncherSimClient.m */; };
+		05CC94BE11290474001912D5 /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05CC94BD11290474001912D5 /* ScriptingBridge.framework */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
 
@@ -183,6 +184,7 @@
 		05CC93371128E3FD001912D5 /* EmbeddedApp */ = {isa = PBXFileReference; lastKnownFileType = folder; path = EmbeddedApp; sourceTree = "<group>"; };
 		05CC93BF1128ED3D001912D5 /* LauncherSimClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LauncherSimClient.h; sourceTree = "<group>"; };
 		05CC93C01128ED3D001912D5 /* LauncherSimClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LauncherSimClient.m; sourceTree = "<group>"; };
+		05CC94BD11290474001912D5 /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = System/Library/Frameworks/ScriptingBridge.framework; sourceTree = SDKROOT; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
@@ -224,6 +226,7 @@
 				05CC914B1128C9EA001912D5 /* PLSimulator.framework in Frameworks */,
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				05CC8F721128B62F001912D5 /* PLBlocks.framework in Frameworks */,
+				05CC94BE11290474001912D5 /* ScriptingBridge.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -356,6 +359,7 @@
 			isa = PBXGroup;
 			children = (
 				1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */,
+				05CC94BD11290474001912D5 /* ScriptingBridge.framework */,
 			);
 			name = "Linked Frameworks";
 			sourceTree = "<group>";

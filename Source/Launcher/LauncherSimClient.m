@@ -28,6 +28,11 @@
 
 #import "LauncherSimClient.h"
 
+#import <ScriptingBridge/ScriptingBridge.h>
+
+/* App bundle ID. Used to request that the simulator be brought to the foreground */
+#define SIM_APP_BUNDLE_ID @"com.apple.iphonesimulator"
+
 /* Load a class from the runtime-loaded iPhoneSimulatorRemoteClient framework */
 #define C(name) NSClassFromString(@"" #name)
 
@@ -173,6 +178,11 @@
     /* If the application starts successfully, we can exit */
     if (started) {
         NSLog(@"Did start app %@ successfully, exiting", _app.path);
+
+        /* Bring simulator to foreground */
+        [[SBApplication applicationWithBundleIdentifier: SIM_APP_BUNDLE_ID] activate];
+
+        /* Exit */
         [[NSApplication sharedApplication] terminate: self];
         return;
     }
