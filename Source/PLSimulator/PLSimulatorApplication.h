@@ -31,6 +31,9 @@
 
 @interface PLSimulatorApplication : NSObject {
 @private
+    /** Application's display name (as shown on the device) */
+    NSString *_displayName;
+
     /** Application path */
     NSString *_path;
 
@@ -43,6 +46,9 @@
 }
 
 - (id) initWithPath: (NSString *) path error: (NSError **) outError;
+
+/** The application display name (as shown on the device) */
+@property(readonly) NSString *displayName;
 
 /** Application path */
 @property(readonly) NSString *path;

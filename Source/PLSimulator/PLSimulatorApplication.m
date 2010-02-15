@@ -46,6 +46,7 @@
 @implementation PLSimulatorApplication
 
 @synthesize path = _path;
+@synthesize displayName = _displayName;
 @synthesize canonicalSDKName = _canonicalSDKName;
 @synthesize deviceFamilies = _deviceFamilies;
 
@@ -131,8 +132,12 @@
         
         return NO;
     };
-    
-    /* Get the canonical name of the SDK that this app was built with */
+
+    /* Get the application's display name. */
+    if (!Get((id)kCFBundleNameKey, &_displayName, [NSString class], YES))
+        return nil;
+
+    /* Get the canonical name of the SDK that this app was built with. */
     if (!Get(SDKNameKey, &_canonicalSDKName, [NSString class], YES))
         return nil;
 

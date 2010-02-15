@@ -43,6 +43,7 @@
                                                                          error: &error];
     STAssertNotNil(app, @"Could not read app meta-data: %@", error);
     
+    STAssertEqualObjects(@"iPadHelloWorld", app.displayName, @"Incorrect display name");
     STAssertEqualObjects([NSSet setWithObject: PLSimulatorDeviceFamilyiPad], app.deviceFamilies, @"Incorrect device family setting");
     STAssertEqualObjects(@"iphonesimulator3.2", app.canonicalSDKName, @"Incorrect SDK name");
 }

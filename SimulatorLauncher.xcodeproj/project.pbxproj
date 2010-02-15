@@ -82,6 +82,8 @@
 		05CC950C11290BF5001912D5 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05CC950B11290BF5001912D5 /* MainMenu.xib */; };
 		05CC951111290CCA001912D5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CC951011290CCA001912D5 /* main.m */; };
 		05CC954F1129100D001912D5 /* PLBlocks.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 05CC8F711128B62F001912D5 /* PLBlocks.framework */; };
+		05CC959D1129189A001912D5 /* BundlerConfigWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CC959C1129189A001912D5 /* BundlerConfigWindowController.m */; };
+		05CC95A111291990001912D5 /* AppConfig.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05CC95A011291990001912D5 /* AppConfig.xib */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
 
@@ -250,6 +252,9 @@
 		05CC950611290BA0001912D5 /* BundlerAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BundlerAppDelegate.h; sourceTree = "<group>"; };
 		05CC950711290BA0001912D5 /* BundlerAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BundlerAppDelegate.m; sourceTree = "<group>"; };
 		05CC951011290CCA001912D5 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		05CC959B1129189A001912D5 /* BundlerConfigWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BundlerConfigWindowController.h; sourceTree = "<group>"; };
+		05CC959C1129189A001912D5 /* BundlerConfigWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BundlerConfigWindowController.m; sourceTree = "<group>"; };
+		05CC959E1129198C001912D5 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/AppConfig.xib; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
@@ -424,6 +429,8 @@
 				05CC950611290BA0001912D5 /* BundlerAppDelegate.h */,
 				05CC950711290BA0001912D5 /* BundlerAppDelegate.m */,
 				05CC951011290CCA001912D5 /* main.m */,
+				05CC959B1129189A001912D5 /* BundlerConfigWindowController.h */,
+				05CC959C1129189A001912D5 /* BundlerConfigWindowController.m */,
 			);
 			path = Bundler;
 			sourceTree = "<group>";
@@ -433,6 +440,7 @@
 			children = (
 				05CC94FB11290B16001912D5 /* Simulator Bundler-Info.plist */,
 				05CC950B11290BF5001912D5 /* MainMenu.xib */,
+				05CC95A011291990001912D5 /* AppConfig.xib */,
 			);
 			path = Bundler;
 			sourceTree = "<group>";
@@ -683,6 +691,7 @@
 			files = (
 				05CC94F111290ADF001912D5 /* Launcher.app in Resources */,
 				05CC950C11290BF5001912D5 /* MainMenu.xib in Resources */,
+				05CC95A111291990001912D5 /* AppConfig.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -782,6 +791,7 @@
 			files = (
 				05CC950811290BA0001912D5 /* BundlerAppDelegate.m in Sources */,
 				05CC951111290CCA001912D5 /* main.m in Sources */,
+				05CC959D1129189A001912D5 /* BundlerConfigWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -868,6 +878,14 @@
 				05CC950411290B7C001912D5 /* English */,
 			);
 			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		05CC95A011291990001912D5 /* AppConfig.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				05CC959E1129198C001912D5 /* English */,
+			);
+			name = AppConfig.xib;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
