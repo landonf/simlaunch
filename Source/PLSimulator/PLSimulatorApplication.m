@@ -45,6 +45,7 @@
  */
 @implementation PLSimulatorApplication
 
+@synthesize path = _path;
 @synthesize canonicalSDKName = _canonicalSDKName;
 @synthesize deviceFamilies = _deviceFamilies;
 

@@ -6,6 +6,15 @@
  *       Current version: 12.0.0, Compatibility version: 1.0.0
  */
 
+/** Device family constants  */
+enum {
+    /** iPhone/iPod Devices. */
+    DTiPhoneSimulatoriPhoneFamily = 1,
+
+    /** iPad Devices */
+    DTiPhoneSimulatoriPadFamily = 2
+};
+
 @class DTiPhoneSimulatorSession;
 
 @protocol DTiPhoneSimulatorSessionDelegate

@@ -44,6 +44,9 @@
 
 - (id) initWithPath: (NSString *) path error: (NSError **) outError;
 
+/** Application path */
+@property(readonly) NSString *path;
+
 /** Return the canonical name of the SDK used to build this application. */ 
 @property(readonly) NSString *canonicalSDKName;
 

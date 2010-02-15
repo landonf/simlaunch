@@ -27,6 +27,7 @@
  */
 
 #import "LauncherAppDelegate.h"
+#import "LauncherSimClient.h"
 
 /* Resource subdirectory for the embedded application */
 #define APP_DIR @"EmbeddedApp"
@@ -91,9 +92,24 @@
 
 // from PLSimulatorDiscoveryDelegate protocol
 - (void) simulatorDiscovery: (PLSimulatorDiscovery *) discovery didFindMatchingSimulatorPlatforms: (NSArray *) platforms {
-    for (PLSimulatorPlatform *platform in platforms) {
-        NSLog(@"Found matching platform SDK at %@", platform.path);
+    /* No platforms found */
+    if ([platforms count] == 0) {
+        NSString *infoFmt = NSLocalizedString(@"The iPhone SDK required by the application could not be found. Please install the %@ SDK and try again.", 
+                                              @"App SDK not found");
+    
+        NSAlert *alert = [NSAlert alertWithMessageText: NSLocalizedString(@"Required iPhone SDK not found.", @"SDK not found")
+                                         defaultButton: NSLocalizedString(@"Quit", @"Quit button")
+                                       alternateButton: nil
+                                           otherButton: nil
+                             informativeTextWithFormat: infoFmt, _app.canonicalSDKName];
+        [alert runModal];
+        [[NSApplication sharedApplication] terminate: self];
+        return;
     }
+
+    /* Launch with the discovery-preferred platform */
+    LauncherSimClient *client = [[LauncherSimClient alloc] initWithPlatform: [platforms objectAtIndex: 0] app: _app];
+    [client launch];
 }
 
 @end

@@ -61,6 +61,7 @@
 		05CC92601128DA11001912D5 /* PLSimulatorUtils.h in Headers */ = {isa = PBXBuildFile; fileRef = 05CC925E1128DA11001912D5 /* PLSimulatorUtils.h */; };
 		05CC92611128DA11001912D5 /* PLSimulatorUtils.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CC925F1128DA11001912D5 /* PLSimulatorUtils.m */; };
 		05CC933A1128E3FD001912D5 /* EmbeddedApp in Resources */ = {isa = PBXBuildFile; fileRef = 05CC93371128E3FD001912D5 /* EmbeddedApp */; };
+		05CC93C11128ED3D001912D5 /* LauncherSimClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CC93C01128ED3D001912D5 /* LauncherSimClient.m */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
 
@@ -180,6 +181,8 @@
 		05CC925E1128DA11001912D5 /* PLSimulatorUtils.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLSimulatorUtils.h; sourceTree = "<group>"; };
 		05CC925F1128DA11001912D5 /* PLSimulatorUtils.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLSimulatorUtils.m; sourceTree = "<group>"; };
 		05CC93371128E3FD001912D5 /* EmbeddedApp */ = {isa = PBXFileReference; lastKnownFileType = folder; path = EmbeddedApp; sourceTree = "<group>"; };
+		05CC93BF1128ED3D001912D5 /* LauncherSimClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LauncherSimClient.h; sourceTree = "<group>"; };
+		05CC93C01128ED3D001912D5 /* LauncherSimClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LauncherSimClient.m; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
@@ -233,6 +236,8 @@
 				0523F61211269281004FB4EB /* main.m */,
 				0523F61311269281004FB4EB /* LauncherAppDelegate.h */,
 				0523F61411269281004FB4EB /* LauncherAppDelegate.m */,
+				05CC93BF1128ED3D001912D5 /* LauncherSimClient.h */,
+				05CC93C01128ED3D001912D5 /* LauncherSimClient.m */,
 			);
 			path = Launcher;
 			sourceTree = "<group>";
@@ -646,6 +651,7 @@
 			files = (
 				0523F61511269281004FB4EB /* main.m in Sources */,
 				0523F61611269281004FB4EB /* LauncherAppDelegate.m in Sources */,
+				05CC93C11128ED3D001912D5 /* LauncherSimClient.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

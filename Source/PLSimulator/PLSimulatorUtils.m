@@ -27,12 +27,7 @@
  */
 
 #import "PLSimulatorUtils.h"
-
-/* Device family constants used by Apple */
-enum {
-    iPhoneFamily = 1,
-    iPadFamily = 2
-};
+#import "iPhoneSimulatorRemoteClient.h"
 
 /**
  * @internal
@@ -49,9 +44,9 @@ enum {
 + (NSString *) deviceFamilyForDeviceCode: (id) deviceCode {
     /* Map the Apple family number to our family constants */
     switch ([(NSString *)deviceCode intValue]) {
-        case iPhoneFamily:
+        case DTiPhoneSimulatoriPhoneFamily:
             return PLSimulatorDeviceFamilyiPhone;
-        case iPadFamily:
+        case DTiPhoneSimulatoriPadFamily:
             return PLSimulatorDeviceFamilyiPad;
         default:
             NSLog(@"Unsupported %@:%@ value type while parsing UIDeviceFamily value.", deviceCode, [deviceCode class]);

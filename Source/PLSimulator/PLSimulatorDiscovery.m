@@ -183,11 +183,11 @@ static NSInteger platform_compare_by_version (id obj1, id obj2, void *context) {
 
         for (PLSimulatorSDK *sdk in platform.sdks) {
             /* If greater than or equal to the minimum version, this platform SDK meets the requirements */
-            if (rpm_vercomp([sdk.version UTF8String], [_version UTF8String]) >= 0)
+            if (_version != nil && rpm_vercomp([sdk.version UTF8String], [_version UTF8String]) >= 0)
                 hasMinVersion = YES;
             
             /* Also check for the canonical SDK name */
-            if ([_canonicalSDKName isEqualToString: sdk.canonicalName])
+            if (_canonicalSDKName != nil && [_canonicalSDKName isEqualToString: sdk.canonicalName])
                 hasExpectedSDK = YES;
 
             /* If any our requested families are included, this platform SDK meets the requirements. */

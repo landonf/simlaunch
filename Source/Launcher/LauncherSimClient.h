@@ -27,29 +27,21 @@
  */
 
 #import <Cocoa/Cocoa.h>
+#import "PLSimulator.h"
 
-#import "PLSimulatorSDK.h"
+#import "iPhoneSimulatorRemoteClient.h"
 
-@interface PLSimulatorPlatform : NSObject {
+@interface LauncherSimClient : NSObject <DTiPhoneSimulatorSessionDelegate> {
 @private
-    /** Platform SDK path. */
-    NSString *_path;
+    /** Platform to use for launching. */
+    PLSimulatorPlatform *_platform;
 
-    /** The list of PLSimulatorSDKs included with the platform SDK. */
-    NSArray *_sdks;
-
-    /** The loaded iPhoneSimulatorRemoteClient bundle, or nil if not loaded. */
-    NSBundle *_remoteClient;
+    /** Application to be launched. */
+    PLSimulatorApplication *_app;
 }
 
-- (id) initWithPath: (NSString *) path error: (NSError **) outError;
+- (id) initWithPlatform: (PLSimulatorPlatform *) platform app: (PLSimulatorApplication *) app;
 
-- (BOOL) loadClientFramework: (NSError **) outError;
-
-/** The full path to the platform SDK. */
-@property(readonly) NSString *path;
-
-/** The list of PLSimulatorSDKs included with the platform SDK. */
-@property(readonly) NSArray *sdks;
+- (void) launch;
 
 @end

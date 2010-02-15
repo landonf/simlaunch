@@ -30,14 +30,26 @@
 
 #import "PLSimulator.h"
 
+/**
+ * Global variable used to track if the iPhoneSimulatorRemoteClient has already been loaded by any instance of this class.
+ * The framework must not be loaded multiple times.
+ */
+static BOOL isBundleLoaded = NO;
+
 /* Relative path to the set of platform sub-SDKs */
 #define PLATFORM_SUBSDK_PATH @"Developer/SDKs/"
+
+/* Relative path to the iPhoneSimulatorRemoteClient framework */
+#define REMOTE_CLIENT_FRAMEWORK @"Developer/Library/PrivateFrameworks/iPhoneSimulatorRemoteClient.framework"
 
 /**
  * Manages a Simulator Platform SDK, allows querying of the bundled PLSimulatorSDK meta-data.
  *
  * @par Thread Safety
  * Immutable and thread-safe. May be used from any thread.
+ *
+ * As an exception to the above, the bundle loading API is not thread-safe and should only be
+ * accessed from the main thread.
  */
 @implementation PLSimulatorPlatform
 
@@ -104,6 +116,30 @@
     }
 
     return self;
+}
+
+/**
+ * Attempt to load Apple's iPhoneSimulatorRemoteClient framework from this platform SDK.
+ *
+ * @param error If an error occurs, upon return contains an NSError object that describes the problem.
+ * @return Returns YES on success, or NO on failure.
+ *
+ * @warning Only one instance of the iPhoneSimulatorRemoteClient framework may be loaded across the entire lifetime
+ * of the process. Attempting to load the framework again will trigger a PLSimulatorException. 
+ */
+- (BOOL) loadClientFramework: (NSError **) outError {
+    /* Verify that it is not loaded */
+    if (isBundleLoaded)
+        [NSException raise: PLSimulatorException format: @"Attempted to load the iPhoneSimulatorRemoteClient twice"];
+
+    /* Determine the path */
+    NSString *path = [_path stringByAppendingPathComponent: REMOTE_CLIENT_FRAMEWORK];
+    _remoteClient = [NSBundle bundleWithPath: path];
+
+    /* Attempt to load */
+    BOOL success = [_remoteClient loadAndReturnError: outError];
+    isBundleLoaded = success;
+    return success;
 }
 
 
