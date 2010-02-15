@@ -19,6 +19,18 @@
 			name = Tests;
 			productName = Tests;
 		};
+		05CC94E311290A8B001912D5 /* World */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 05CC94F611290AE8001912D5 /* Build configuration list for PBXAggregateTarget "World" */;
+			buildPhases = (
+			);
+			dependencies = (
+				05CC94E911290A91001912D5 /* PBXTargetDependency */,
+				05CC94E711290A8F001912D5 /* PBXTargetDependency */,
+			);
+			name = World;
+			productName = World;
+		};
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
@@ -63,6 +75,13 @@
 		05CC933A1128E3FD001912D5 /* EmbeddedApp in Resources */ = {isa = PBXBuildFile; fileRef = 05CC93371128E3FD001912D5 /* EmbeddedApp */; };
 		05CC93C11128ED3D001912D5 /* LauncherSimClient.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CC93C01128ED3D001912D5 /* LauncherSimClient.m */; };
 		05CC94BE11290474001912D5 /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05CC94BD11290474001912D5 /* ScriptingBridge.framework */; };
+		05CC94EB11290AB9001912D5 /* PLSimulator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05CC90F21128C8C5001912D5 /* PLSimulator.framework */; };
+		05CC94EC11290ABB001912D5 /* PLSimulator.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 05CC90F21128C8C5001912D5 /* PLSimulator.framework */; };
+		05CC94F111290ADF001912D5 /* Launcher.app in Resources */ = {isa = PBXBuildFile; fileRef = 8D1107320486CEB800E47090 /* Launcher.app */; };
+		05CC950811290BA0001912D5 /* BundlerAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CC950711290BA0001912D5 /* BundlerAppDelegate.m */; };
+		05CC950C11290BF5001912D5 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 05CC950B11290BF5001912D5 /* MainMenu.xib */; };
+		05CC951111290CCA001912D5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CC951011290CCA001912D5 /* main.m */; };
+		05CC954F1129100D001912D5 /* PLBlocks.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 05CC8F711128B62F001912D5 /* PLBlocks.framework */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
 
@@ -102,6 +121,34 @@
 			remoteGlobalIDString = 05CC912C1128C974001912D5 /* PLSimulator Tests */;
 			remoteInfo = "PLSimulator Tests";
 		};
+		05CC94E111290A82001912D5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 05CC90F11128C8C5001912D5 /* PLSimulator */;
+			remoteInfo = PLSimulator;
+		};
+		05CC94E611290A8F001912D5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8D1107260486CEB800E47090 /* Launcher */;
+			remoteInfo = Launcher;
+		};
+		05CC94E811290A91001912D5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 05CC94D911290A74001912D5 /* Simulator Bundler */;
+			remoteInfo = "Simulator Bundler";
+		};
+		05CC94EF11290AD5001912D5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8D1107260486CEB800E47090 /* Launcher */;
+			remoteInfo = Launcher;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -137,6 +184,18 @@
 			files = (
 				05CC916D1128CABC001912D5 /* PLBlocks.framework in Copy Frameworks */,
 				05CC91451128C9DA001912D5 /* PLSimulator.framework in Copy Frameworks */,
+			);
+			name = "Copy Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		05CC94F511290AE8001912D5 /* Copy Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				05CC954F1129100D001912D5 /* PLBlocks.framework in Copy Frameworks */,
+				05CC94EC11290ABB001912D5 /* PLSimulator.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -185,6 +244,12 @@
 		05CC93BF1128ED3D001912D5 /* LauncherSimClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LauncherSimClient.h; sourceTree = "<group>"; };
 		05CC93C01128ED3D001912D5 /* LauncherSimClient.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LauncherSimClient.m; sourceTree = "<group>"; };
 		05CC94BD11290474001912D5 /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = System/Library/Frameworks/ScriptingBridge.framework; sourceTree = SDKROOT; };
+		05CC94DA11290A74001912D5 /* Simulator Bundler.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Simulator Bundler.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		05CC94FB11290B16001912D5 /* Simulator Bundler-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Simulator Bundler-Info.plist"; sourceTree = "<group>"; };
+		05CC950411290B7C001912D5 /* English */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = English; path = English.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		05CC950611290BA0001912D5 /* BundlerAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BundlerAppDelegate.h; sourceTree = "<group>"; };
+		05CC950711290BA0001912D5 /* BundlerAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BundlerAppDelegate.m; sourceTree = "<group>"; };
+		05CC951011290CCA001912D5 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
@@ -219,6 +284,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		05CC94D811290A74001912D5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05CC94EB11290AB9001912D5 /* PLSimulator.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8D11072E0486CEB800E47090 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -236,11 +309,11 @@
 		0523F61111269281004FB4EB /* Launcher */ = {
 			isa = PBXGroup;
 			children = (
-				0523F61211269281004FB4EB /* main.m */,
 				0523F61311269281004FB4EB /* LauncherAppDelegate.h */,
 				0523F61411269281004FB4EB /* LauncherAppDelegate.m */,
 				05CC93BF1128ED3D001912D5 /* LauncherSimClient.h */,
 				05CC93C01128ED3D001912D5 /* LauncherSimClient.m */,
+				0523F61211269281004FB4EB /* main.m */,
 			);
 			path = Launcher;
 			sourceTree = "<group>";
@@ -295,7 +368,7 @@
 			path = PLSimulator;
 			sourceTree = "<group>";
 		};
-		05CC90FF1128C92F001912D5 /* PLSimulator */ = {
+		05CC90FF1128C92F001912D5 /* PLSimulator Framework */ = {
 			isa = PBXGroup;
 			children = (
 				05CC91001128C92F001912D5 /* PLSimulator.h */,
@@ -306,6 +379,7 @@
 				05CC92331128D47C001912D5 /* SDK */,
 				05CC92341128D493001912D5 /* Application */,
 			);
+			name = "PLSimulator Framework";
 			path = PLSimulator;
 			sourceTree = "<group>";
 		};
@@ -344,11 +418,31 @@
 			name = Application;
 			sourceTree = "<group>";
 		};
+		05CC94D01129099E001912D5 /* Bundler */ = {
+			isa = PBXGroup;
+			children = (
+				05CC950611290BA0001912D5 /* BundlerAppDelegate.h */,
+				05CC950711290BA0001912D5 /* BundlerAppDelegate.m */,
+				05CC951011290CCA001912D5 /* main.m */,
+			);
+			path = Bundler;
+			sourceTree = "<group>";
+		};
+		05CC94FA11290B16001912D5 /* Bundler */ = {
+			isa = PBXGroup;
+			children = (
+				05CC94FB11290B16001912D5 /* Simulator Bundler-Info.plist */,
+				05CC950B11290BF5001912D5 /* MainMenu.xib */,
+			);
+			path = Bundler;
+			sourceTree = "<group>";
+		};
 		080E96DDFE201D6D7F000001 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
 				0523F61111269281004FB4EB /* Launcher */,
-				05CC90FF1128C92F001912D5 /* PLSimulator */,
+				05CC94D01129099E001912D5 /* Bundler */,
+				05CC90FF1128C92F001912D5 /* PLSimulator Framework */,
 				0523F67A112699C6004FB4EB /* Test Support */,
 			);
 			name = Sources;
@@ -381,6 +475,7 @@
 				0523F66911269876004FB4EB /* Launcher Tests.octest */,
 				05CC90F21128C8C5001912D5 /* PLSimulator.framework */,
 				05CC912D1128C974001912D5 /* PLSimulator Tests.octest */,
+				05CC94DA11290A74001912D5 /* Simulator Bundler.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -402,6 +497,7 @@
 			children = (
 				05CC90FC1128C91A001912D5 /* PLSimulator */,
 				0523F61711269298004FB4EB /* Launcher */,
+				05CC94FA11290B16001912D5 /* Bundler */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -494,6 +590,26 @@
 			productReference = 05CC912D1128C974001912D5 /* PLSimulator Tests.octest */;
 			productType = "com.apple.product-type.bundle";
 		};
+		05CC94D911290A74001912D5 /* Simulator Bundler */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 05CC94DF11290A75001912D5 /* Build configuration list for PBXNativeTarget "Simulator Bundler" */;
+			buildPhases = (
+				05CC94D611290A74001912D5 /* Resources */,
+				05CC94F511290AE8001912D5 /* Copy Frameworks */,
+				05CC94D711290A74001912D5 /* Sources */,
+				05CC94D811290A74001912D5 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				05CC94F011290AD5001912D5 /* PBXTargetDependency */,
+				05CC94E211290A82001912D5 /* PBXTargetDependency */,
+			);
+			name = "Simulator Bundler";
+			productName = "Simulator Bundler";
+			productReference = 05CC94DA11290A74001912D5 /* Simulator Bundler.app */;
+			productType = "com.apple.product-type.application";
+		};
 		8D1107260486CEB800E47090 /* Launcher */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = C01FCF4A08A954540054247B /* Build configuration list for PBXNativeTarget "Launcher" */;
@@ -526,9 +642,11 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
+				05CC94E311290A8B001912D5 /* World */,
+				05CC91641128CAA8001912D5 /* Tests */,
+				05CC94D911290A74001912D5 /* Simulator Bundler */,
 				8D1107260486CEB800E47090 /* Launcher */,
 				05CC90F11128C8C5001912D5 /* PLSimulator */,
-				05CC91641128CAA8001912D5 /* Tests */,
 				0523F66811269876004FB4EB /* Launcher Tests */,
 				05CC912C1128C974001912D5 /* PLSimulator Tests */,
 			);
@@ -556,6 +674,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				05CC92111128D249001912D5 /* Tests in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		05CC94D611290A74001912D5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05CC94F111290ADF001912D5 /* Launcher.app in Resources */,
+				05CC950C11290BF5001912D5 /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -649,6 +776,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		05CC94D711290A74001912D5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05CC950811290BA0001912D5 /* BundlerAppDelegate.m in Sources */,
+				05CC951111290CCA001912D5 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		8D11072C0486CEB800E47090 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -687,6 +823,26 @@
 			target = 05CC912C1128C974001912D5 /* PLSimulator Tests */;
 			targetProxy = 05CC91691128CAAD001912D5 /* PBXContainerItemProxy */;
 		};
+		05CC94E211290A82001912D5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 05CC90F11128C8C5001912D5 /* PLSimulator */;
+			targetProxy = 05CC94E111290A82001912D5 /* PBXContainerItemProxy */;
+		};
+		05CC94E711290A8F001912D5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8D1107260486CEB800E47090 /* Launcher */;
+			targetProxy = 05CC94E611290A8F001912D5 /* PBXContainerItemProxy */;
+		};
+		05CC94E911290A91001912D5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 05CC94D911290A74001912D5 /* Simulator Bundler */;
+			targetProxy = 05CC94E811290A91001912D5 /* PBXContainerItemProxy */;
+		};
+		05CC94F011290AD5001912D5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8D1107260486CEB800E47090 /* Launcher */;
+			targetProxy = 05CC94EF11290AD5001912D5 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -702,6 +858,14 @@
 			isa = PBXVariantGroup;
 			children = (
 				0523F61B11269298004FB4EB /* English */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		05CC950B11290BF5001912D5 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				05CC950411290B7C001912D5 /* English */,
 			);
 			name = MainMenu.xib;
 			sourceTree = "<group>";
@@ -900,6 +1064,75 @@
 			};
 			name = Release;
 		};
+		05CC94DD11290A75001912D5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "Resources/Bundler/Simulator Bundler-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = "Simulator Bundler";
+			};
+			name = Debug;
+		};
+		05CC94DE11290A75001912D5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "$(SYSTEM_LIBRARY_DIR)/Frameworks/AppKit.framework/Headers/AppKit.h";
+				INFOPLIST_FILE = "Resources/Bundler/Simulator Bundler-Info.plist";
+				INSTALL_PATH = "$(HOME)/Applications";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = "Simulator Bundler";
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		05CC94E411290A8B001912D5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				PRODUCT_NAME = World;
+			};
+			name = Debug;
+		};
+		05CC94E511290A8B001912D5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				PRODUCT_NAME = World;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
 		C01FCF4B08A954540054247B /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1016,6 +1249,24 @@
 			buildConfigurations = (
 				05CC91651128CAA8001912D5 /* Debug */,
 				05CC91661128CAA8001912D5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		05CC94DF11290A75001912D5 /* Build configuration list for PBXNativeTarget "Simulator Bundler" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				05CC94DD11290A75001912D5 /* Debug */,
+				05CC94DE11290A75001912D5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		05CC94F611290AE8001912D5 /* Build configuration list for PBXAggregateTarget "World" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				05CC94E411290A8B001912D5 /* Debug */,
+				05CC94E511290A8B001912D5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
