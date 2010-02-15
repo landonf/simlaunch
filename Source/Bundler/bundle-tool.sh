@@ -3,10 +3,7 @@
 # bundle-tool.sh
 # SimulatorLauncher
 #
-# Ported from Erica Sadun's applescript bundler
-#
-# Copyright 2010 Erica Sadun. All rights reserved.
-# Copyright 2010 Plausible Labs Cooperative, Inc.. All rights reserved.
+# Ported from Erica Sadun's AppleScript bundler
 
 PLIST_CMD="/usr/libexec/PlistBuddy"
 RSYNC="/usr/bin/rsync -aE"
