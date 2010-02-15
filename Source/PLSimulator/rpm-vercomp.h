@@ -32,4 +32,4 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-int rpm_vercomp (const char *versionA, const char *versionB);
+int rpm_vercomp (const char *versionA, const char *versionB) __attribute__((visibility("hidden")));

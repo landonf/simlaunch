@@ -6,32 +6,97 @@
 	objectVersion = 45;
 	objects = {
 
+/* Begin PBXAggregateTarget section */
+		05CC91641128CAA8001912D5 /* Tests */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = 05CC91771128CAF2001912D5 /* Build configuration list for PBXAggregateTarget "Tests" */;
+			buildPhases = (
+			);
+			dependencies = (
+				05CC916A1128CAAD001912D5 /* PBXTargetDependency */,
+				05CC91681128CAAC001912D5 /* PBXTargetDependency */,
+			);
+			name = Tests;
+			productName = Tests;
+		};
+/* End PBXAggregateTarget section */
+
 /* Begin PBXBuildFile section */
-		052360C8112874B3001C9661 /* PLSimulatorPlatform.m in Sources */ = {isa = PBXBuildFile; fileRef = 052360C7112874B3001C9661 /* PLSimulatorPlatform.m */; };
-		052360C9112874B3001C9661 /* PLSimulatorPlatform.m in Sources */ = {isa = PBXBuildFile; fileRef = 052360C7112874B3001C9661 /* PLSimulatorPlatform.m */; };
-		052360CC1128762C001C9661 /* PLSimulator.m in Sources */ = {isa = PBXBuildFile; fileRef = 052360CB1128762C001C9661 /* PLSimulator.m */; };
-		052360CD1128762C001C9661 /* PLSimulator.m in Sources */ = {isa = PBXBuildFile; fileRef = 052360CB1128762C001C9661 /* PLSimulator.m */; };
-		0523618C11287A2D001C9661 /* PLSimulatorPlatformTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0523618B11287A2D001C9661 /* PLSimulatorPlatformTests.m */; };
 		0523619811287BA7001C9661 /* Tests in Resources */ = {isa = PBXBuildFile; fileRef = 0523619611287BA7001C9661 /* Tests */; };
-		0523621C1128ACA2001C9661 /* PLSimulatorSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 0523F65E11269837004FB4EB /* PLSimulatorSDK.m */; };
-		052362471128B3EF001C9661 /* PLSimulatorSDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 052362461128B3EF001C9661 /* PLSimulatorSDKTests.m */; };
 		0523F61511269281004FB4EB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0523F61211269281004FB4EB /* main.m */; };
 		0523F61611269281004FB4EB /* LauncherAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0523F61411269281004FB4EB /* LauncherAppDelegate.m */; };
 		0523F61E11269298004FB4EB /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0523F61A11269298004FB4EB /* MainMenu.xib */; };
-		0523F65F11269837004FB4EB /* PLSimulatorSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 0523F65E11269837004FB4EB /* PLSimulatorSDK.m */; };
-		0523F66311269860004FB4EB /* PLSimulatorDiscovery.m in Sources */ = {isa = PBXBuildFile; fileRef = 0523F66211269860004FB4EB /* PLSimulatorDiscovery.m */; };
-		0523F67311269977004FB4EB /* PLSimulatorDiscoveryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0523F67211269977004FB4EB /* PLSimulatorDiscoveryTests.m */; };
 		0523F67D112699D0004FB4EB /* PLTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 0523F67C112699D0004FB4EB /* PLTestCase.m */; };
-		0523F69F1126A086004FB4EB /* PLSimulatorDiscovery.m in Sources */ = {isa = PBXBuildFile; fileRef = 0523F66211269860004FB4EB /* PLSimulatorDiscovery.m */; };
 		05CC8F721128B62F001912D5 /* PLBlocks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05CC8F711128B62F001912D5 /* PLBlocks.framework */; };
 		05CC8F731128B62F001912D5 /* PLBlocks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05CC8F711128B62F001912D5 /* PLBlocks.framework */; };
 		05CC8F791128B64C001912D5 /* PLBlocks.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 05CC8F711128B62F001912D5 /* PLBlocks.framework */; };
 		05CC8F7F1128B65E001912D5 /* PLBlocks.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 05CC8F711128B62F001912D5 /* PLBlocks.framework */; };
-		05CC90801128C321001912D5 /* rpm-vercomp.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CC907F1128C321001912D5 /* rpm-vercomp.m */; };
-		05CC90811128C321001912D5 /* rpm-vercomp.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CC907F1128C321001912D5 /* rpm-vercomp.m */; };
-		05CC90C21128C73E001912D5 /* PLSimulatorApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CC90C11128C73E001912D5 /* PLSimulatorApplication.m */; };
+		05CC910F1128C92F001912D5 /* PLSimulator.h in Headers */ = {isa = PBXBuildFile; fileRef = 05CC91001128C92F001912D5 /* PLSimulator.h */; };
+		05CC91101128C92F001912D5 /* PLSimulator.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CC91011128C92F001912D5 /* PLSimulator.m */; };
+		05CC91111128C92F001912D5 /* PLSimulatorApplication.h in Headers */ = {isa = PBXBuildFile; fileRef = 05CC91021128C92F001912D5 /* PLSimulatorApplication.h */; };
+		05CC91121128C92F001912D5 /* PLSimulatorApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CC91031128C92F001912D5 /* PLSimulatorApplication.m */; };
+		05CC91131128C92F001912D5 /* PLSimulatorDiscovery.h in Headers */ = {isa = PBXBuildFile; fileRef = 05CC91041128C92F001912D5 /* PLSimulatorDiscovery.h */; };
+		05CC91141128C92F001912D5 /* PLSimulatorDiscovery.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CC91051128C92F001912D5 /* PLSimulatorDiscovery.m */; };
+		05CC91161128C92F001912D5 /* PLSimulatorPlatform.h in Headers */ = {isa = PBXBuildFile; fileRef = 05CC91071128C92F001912D5 /* PLSimulatorPlatform.h */; };
+		05CC91171128C92F001912D5 /* PLSimulatorPlatform.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CC91081128C92F001912D5 /* PLSimulatorPlatform.m */; };
+		05CC91191128C92F001912D5 /* PLSimulatorSDK.h in Headers */ = {isa = PBXBuildFile; fileRef = 05CC910A1128C92F001912D5 /* PLSimulatorSDK.h */; };
+		05CC911A1128C92F001912D5 /* PLSimulatorSDK.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CC910B1128C92F001912D5 /* PLSimulatorSDK.m */; };
+		05CC911C1128C92F001912D5 /* rpm-vercomp.h in Headers */ = {isa = PBXBuildFile; fileRef = 05CC910D1128C92F001912D5 /* rpm-vercomp.h */; };
+		05CC911D1128C92F001912D5 /* rpm-vercomp.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CC910E1128C92F001912D5 /* rpm-vercomp.m */; };
+		05CC91321128C981001912D5 /* PLTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 0523F67C112699D0004FB4EB /* PLTestCase.m */; };
+		05CC91331128C987001912D5 /* PLSimulatorDiscoveryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CC91061128C92F001912D5 /* PLSimulatorDiscoveryTests.m */; };
+		05CC91341128C987001912D5 /* PLSimulatorPlatformTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CC91091128C92F001912D5 /* PLSimulatorPlatformTests.m */; };
+		05CC91351128C987001912D5 /* PLSimulatorSDKTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CC910C1128C92F001912D5 /* PLSimulatorSDKTests.m */; };
+		05CC91451128C9DA001912D5 /* PLSimulator.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 05CC90F21128C8C5001912D5 /* PLSimulator.framework */; };
+		05CC914B1128C9EA001912D5 /* PLSimulator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05CC90F21128C8C5001912D5 /* PLSimulator.framework */; };
+		05CC914D1128C9F0001912D5 /* PLSimulator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05CC90F21128C8C5001912D5 /* PLSimulator.framework */; };
+		05CC91521128C9F7001912D5 /* PLSimulator.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 05CC90F21128C8C5001912D5 /* PLSimulator.framework */; };
+		05CC91541128C9FA001912D5 /* PLSimulator.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 05CC90F21128C8C5001912D5 /* PLSimulator.framework */; };
+		05CC915D1128CA7D001912D5 /* PLBlocks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05CC8F711128B62F001912D5 /* PLBlocks.framework */; };
+		05CC916D1128CABC001912D5 /* PLBlocks.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 05CC8F711128B62F001912D5 /* PLBlocks.framework */; };
+		05CC916E1128CAC0001912D5 /* PLBlocks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05CC8F711128B62F001912D5 /* PLBlocks.framework */; };
+		05CC91721128CAD4001912D5 /* PLSimulator.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05CC90F21128C8C5001912D5 /* PLSimulator.framework */; };
+		05CC92111128D249001912D5 /* Tests in Resources */ = {isa = PBXBuildFile; fileRef = 05CC91FB1128D249001912D5 /* Tests */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		05CC91361128C98E001912D5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 05CC90F11128C8C5001912D5 /* PLSimulator */;
+			remoteInfo = PLSimulator;
+		};
+		05CC91481128C9E4001912D5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 05CC90F11128C8C5001912D5 /* PLSimulator */;
+			remoteInfo = PLSimulator;
+		};
+		05CC914F1128C9F3001912D5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 05CC90F11128C8C5001912D5 /* PLSimulator */;
+			remoteInfo = PLSimulator;
+		};
+		05CC91671128CAAC001912D5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 0523F66811269876004FB4EB /* Launcher Tests */;
+			remoteInfo = "Launcher Tests";
+		};
+		05CC91691128CAAD001912D5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 05CC912C1128C974001912D5 /* PLSimulator Tests */;
+			remoteInfo = "PLSimulator Tests";
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		05CC8F821128B67C001912D5 /* Copy Frameworks */ = {
@@ -40,6 +105,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				05CC91541128C9FA001912D5 /* PLSimulator.framework in Copy Frameworks */,
 				05CC8F7F1128B65E001912D5 /* PLBlocks.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
@@ -51,7 +117,20 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				05CC91521128C9F7001912D5 /* PLSimulator.framework in Copy Frameworks */,
 				05CC8F791128B64C001912D5 /* PLBlocks.framework in Copy Frameworks */,
+			);
+			name = "Copy Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		05CC91571128CA18001912D5 /* Copy Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				05CC916D1128CABC001912D5 /* PLBlocks.framework in Copy Frameworks */,
+				05CC91451128C9DA001912D5 /* PLSimulator.framework in Copy Frameworks */,
 			);
 			name = "Copy Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -59,13 +138,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		052360C6112874B3001C9661 /* PLSimulatorPlatform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLSimulatorPlatform.h; sourceTree = "<group>"; };
-		052360C7112874B3001C9661 /* PLSimulatorPlatform.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLSimulatorPlatform.m; sourceTree = "<group>"; };
-		052360CA1128762C001C9661 /* PLSimulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLSimulator.h; sourceTree = "<group>"; };
-		052360CB1128762C001C9661 /* PLSimulator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLSimulator.m; sourceTree = "<group>"; };
-		0523618B11287A2D001C9661 /* PLSimulatorPlatformTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLSimulatorPlatformTests.m; sourceTree = "<group>"; };
 		0523619611287BA7001C9661 /* Tests */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Tests; sourceTree = "<group>"; };
-		052362461128B3EF001C9661 /* PLSimulatorSDKTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLSimulatorSDKTests.m; sourceTree = "<group>"; };
 		0523F61211269281004FB4EB /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0523F61311269281004FB4EB /* LauncherAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LauncherAppDelegate.h; sourceTree = "<group>"; };
 		0523F61411269281004FB4EB /* LauncherAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LauncherAppDelegate.m; sourceTree = "<group>"; };
@@ -74,20 +147,31 @@
 		0523F61C11269298004FB4EB /* Launcher-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "Launcher-Info.plist"; sourceTree = "<group>"; };
 		0523F645112694C8004FB4EB /* iPhoneSimulatorRemoteClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iPhoneSimulatorRemoteClient.h; sourceTree = "<group>"; };
 		0523F646112694C8004FB4EB /* README.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = README.txt; sourceTree = "<group>"; };
-		0523F65D11269837004FB4EB /* PLSimulatorSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLSimulatorSDK.h; sourceTree = "<group>"; };
-		0523F65E11269837004FB4EB /* PLSimulatorSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLSimulatorSDK.m; sourceTree = "<group>"; };
-		0523F66111269860004FB4EB /* PLSimulatorDiscovery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLSimulatorDiscovery.h; sourceTree = "<group>"; };
-		0523F66211269860004FB4EB /* PLSimulatorDiscovery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLSimulatorDiscovery.m; sourceTree = "<group>"; };
 		0523F66911269876004FB4EB /* Launcher Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Launcher Tests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0523F66A11269876004FB4EB /* Launcher Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Launcher Tests-Info.plist"; sourceTree = "<group>"; };
-		0523F67211269977004FB4EB /* PLSimulatorDiscoveryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLSimulatorDiscoveryTests.m; sourceTree = "<group>"; };
 		0523F67B112699D0004FB4EB /* PLTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTestCase.h; sourceTree = "<group>"; };
 		0523F67C112699D0004FB4EB /* PLTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTestCase.m; sourceTree = "<group>"; };
 		05CC8F711128B62F001912D5 /* PLBlocks.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PLBlocks.framework; sourceTree = "<group>"; };
-		05CC907E1128C321001912D5 /* rpm-vercomp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "rpm-vercomp.h"; sourceTree = "<group>"; };
-		05CC907F1128C321001912D5 /* rpm-vercomp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "rpm-vercomp.m"; sourceTree = "<group>"; };
-		05CC90C01128C73E001912D5 /* PLSimulatorApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLSimulatorApplication.h; sourceTree = "<group>"; };
-		05CC90C11128C73E001912D5 /* PLSimulatorApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLSimulatorApplication.m; sourceTree = "<group>"; };
+		05CC90F21128C8C5001912D5 /* PLSimulator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PLSimulator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		05CC90FD1128C91A001912D5 /* PLSimulator-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "PLSimulator-Info.plist"; sourceTree = "<group>"; };
+		05CC91001128C92F001912D5 /* PLSimulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLSimulator.h; sourceTree = "<group>"; };
+		05CC91011128C92F001912D5 /* PLSimulator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLSimulator.m; sourceTree = "<group>"; };
+		05CC91021128C92F001912D5 /* PLSimulatorApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLSimulatorApplication.h; sourceTree = "<group>"; };
+		05CC91031128C92F001912D5 /* PLSimulatorApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLSimulatorApplication.m; sourceTree = "<group>"; };
+		05CC91041128C92F001912D5 /* PLSimulatorDiscovery.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLSimulatorDiscovery.h; sourceTree = "<group>"; };
+		05CC91051128C92F001912D5 /* PLSimulatorDiscovery.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLSimulatorDiscovery.m; sourceTree = "<group>"; };
+		05CC91061128C92F001912D5 /* PLSimulatorDiscoveryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLSimulatorDiscoveryTests.m; sourceTree = "<group>"; };
+		05CC91071128C92F001912D5 /* PLSimulatorPlatform.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLSimulatorPlatform.h; sourceTree = "<group>"; };
+		05CC91081128C92F001912D5 /* PLSimulatorPlatform.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLSimulatorPlatform.m; sourceTree = "<group>"; };
+		05CC91091128C92F001912D5 /* PLSimulatorPlatformTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLSimulatorPlatformTests.m; sourceTree = "<group>"; };
+		05CC910A1128C92F001912D5 /* PLSimulatorSDK.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLSimulatorSDK.h; sourceTree = "<group>"; };
+		05CC910B1128C92F001912D5 /* PLSimulatorSDK.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLSimulatorSDK.m; sourceTree = "<group>"; };
+		05CC910C1128C92F001912D5 /* PLSimulatorSDKTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLSimulatorSDKTests.m; sourceTree = "<group>"; };
+		05CC910D1128C92F001912D5 /* rpm-vercomp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "rpm-vercomp.h"; sourceTree = "<group>"; };
+		05CC910E1128C92F001912D5 /* rpm-vercomp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "rpm-vercomp.m"; sourceTree = "<group>"; };
+		05CC912D1128C974001912D5 /* PLSimulator Tests.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PLSimulator Tests.octest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		05CC913F1128C9A7001912D5 /* PLSimulator Tests-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "PLSimulator Tests-Info.plist"; sourceTree = "<group>"; };
+		05CC91FB1128D249001912D5 /* Tests */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Tests; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
@@ -100,7 +184,25 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05CC914D1128C9F0001912D5 /* PLSimulator.framework in Frameworks */,
 				05CC8F731128B62F001912D5 /* PLBlocks.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		05CC90F01128C8C5001912D5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05CC915D1128CA7D001912D5 /* PLBlocks.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		05CC912A1128C974001912D5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05CC91721128CAD4001912D5 /* PLSimulator.framework in Frameworks */,
+				05CC916E1128CAC0001912D5 /* PLBlocks.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,6 +210,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05CC914B1128C9EA001912D5 /* PLSimulator.framework in Frameworks */,
 				8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */,
 				05CC8F721128B62F001912D5 /* PLBlocks.framework in Frameworks */,
 			);
@@ -122,7 +225,6 @@
 				0523F61211269281004FB4EB /* main.m */,
 				0523F61311269281004FB4EB /* LauncherAppDelegate.h */,
 				0523F61411269281004FB4EB /* LauncherAppDelegate.m */,
-				0523F66011269845004FB4EB /* Simulator */,
 			);
 			path = Launcher;
 			sourceTree = "<group>";
@@ -157,28 +259,6 @@
 			path = iPhoneSimulatorRemoteClient;
 			sourceTree = "<group>";
 		};
-		0523F66011269845004FB4EB /* Simulator */ = {
-			isa = PBXGroup;
-			children = (
-				052360CA1128762C001C9661 /* PLSimulator.h */,
-				052360CB1128762C001C9661 /* PLSimulator.m */,
-				052360C6112874B3001C9661 /* PLSimulatorPlatform.h */,
-				052360C7112874B3001C9661 /* PLSimulatorPlatform.m */,
-				0523618B11287A2D001C9661 /* PLSimulatorPlatformTests.m */,
-				0523F65D11269837004FB4EB /* PLSimulatorSDK.h */,
-				0523F65E11269837004FB4EB /* PLSimulatorSDK.m */,
-				052362461128B3EF001C9661 /* PLSimulatorSDKTests.m */,
-				0523F66111269860004FB4EB /* PLSimulatorDiscovery.h */,
-				0523F66211269860004FB4EB /* PLSimulatorDiscovery.m */,
-				0523F67211269977004FB4EB /* PLSimulatorDiscoveryTests.m */,
-				05CC90C01128C73E001912D5 /* PLSimulatorApplication.h */,
-				05CC90C11128C73E001912D5 /* PLSimulatorApplication.m */,
-				05CC907E1128C321001912D5 /* rpm-vercomp.h */,
-				05CC907F1128C321001912D5 /* rpm-vercomp.m */,
-			);
-			name = Simulator;
-			sourceTree = "<group>";
-		};
 		0523F67A112699C6004FB4EB /* Test Support */ = {
 			isa = PBXGroup;
 			children = (
@@ -188,12 +268,46 @@
 			name = "Test Support";
 			sourceTree = "<group>";
 		};
-		080E96DDFE201D6D7F000001 /* Source */ = {
+		05CC90FC1128C91A001912D5 /* PLSimulator */ = {
+			isa = PBXGroup;
+			children = (
+				05CC91FB1128D249001912D5 /* Tests */,
+				05CC913F1128C9A7001912D5 /* PLSimulator Tests-Info.plist */,
+				05CC90FD1128C91A001912D5 /* PLSimulator-Info.plist */,
+			);
+			path = PLSimulator;
+			sourceTree = "<group>";
+		};
+		05CC90FF1128C92F001912D5 /* PLSimulator */ = {
+			isa = PBXGroup;
+			children = (
+				05CC91001128C92F001912D5 /* PLSimulator.h */,
+				05CC91011128C92F001912D5 /* PLSimulator.m */,
+				05CC91021128C92F001912D5 /* PLSimulatorApplication.h */,
+				05CC91031128C92F001912D5 /* PLSimulatorApplication.m */,
+				05CC91041128C92F001912D5 /* PLSimulatorDiscovery.h */,
+				05CC91051128C92F001912D5 /* PLSimulatorDiscovery.m */,
+				05CC91061128C92F001912D5 /* PLSimulatorDiscoveryTests.m */,
+				05CC91071128C92F001912D5 /* PLSimulatorPlatform.h */,
+				05CC91081128C92F001912D5 /* PLSimulatorPlatform.m */,
+				05CC91091128C92F001912D5 /* PLSimulatorPlatformTests.m */,
+				05CC910A1128C92F001912D5 /* PLSimulatorSDK.h */,
+				05CC910B1128C92F001912D5 /* PLSimulatorSDK.m */,
+				05CC910C1128C92F001912D5 /* PLSimulatorSDKTests.m */,
+				05CC910D1128C92F001912D5 /* rpm-vercomp.h */,
+				05CC910E1128C92F001912D5 /* rpm-vercomp.m */,
+			);
+			path = PLSimulator;
+			sourceTree = "<group>";
+		};
+		080E96DDFE201D6D7F000001 /* Sources */ = {
 			isa = PBXGroup;
 			children = (
 				0523F61111269281004FB4EB /* Launcher */,
+				05CC90FF1128C92F001912D5 /* PLSimulator */,
 				0523F67A112699C6004FB4EB /* Test Support */,
 			);
+			name = Sources;
 			path = Source;
 			sourceTree = "<group>";
 		};
@@ -220,6 +334,8 @@
 			children = (
 				8D1107320486CEB800E47090 /* Launcher.app */,
 				0523F66911269876004FB4EB /* Launcher Tests.octest */,
+				05CC90F21128C8C5001912D5 /* PLSimulator.framework */,
+				05CC912D1128C974001912D5 /* PLSimulator Tests.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -227,7 +343,7 @@
 		29B97314FDCFA39411CA2CEA /* SimLauncher */ = {
 			isa = PBXGroup;
 			children = (
-				080E96DDFE201D6D7F000001 /* Source */,
+				080E96DDFE201D6D7F000001 /* Sources */,
 				29B97317FDCFA39411CA2CEA /* Resources */,
 				29B97323FDCFA39411CA2CEA /* Frameworks */,
 				0523F643112694C8004FB4EB /* Dependencies */,
@@ -239,6 +355,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				05CC90FC1128C91A001912D5 /* PLSimulator */,
 				0523F61711269298004FB4EB /* Launcher */,
 			);
 			path = Resources;
@@ -255,6 +372,22 @@
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		05CC90ED1128C8C5001912D5 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05CC910F1128C92F001912D5 /* PLSimulator.h in Headers */,
+				05CC91111128C92F001912D5 /* PLSimulatorApplication.h in Headers */,
+				05CC91131128C92F001912D5 /* PLSimulatorDiscovery.h in Headers */,
+				05CC91161128C92F001912D5 /* PLSimulatorPlatform.h in Headers */,
+				05CC91191128C92F001912D5 /* PLSimulatorSDK.h in Headers */,
+				05CC911C1128C92F001912D5 /* rpm-vercomp.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
 		0523F66811269876004FB4EB /* Launcher Tests */ = {
 			isa = PBXNativeTarget;
@@ -269,10 +402,49 @@
 			buildRules = (
 			);
 			dependencies = (
+				05CC91501128C9F3001912D5 /* PBXTargetDependency */,
 			);
 			name = "Launcher Tests";
 			productName = "Launcher Tests";
 			productReference = 0523F66911269876004FB4EB /* Launcher Tests.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
+		05CC90F11128C8C5001912D5 /* PLSimulator */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 05CC90F61128C8C6001912D5 /* Build configuration list for PBXNativeTarget "PLSimulator" */;
+			buildPhases = (
+				05CC90ED1128C8C5001912D5 /* Headers */,
+				05CC90EE1128C8C5001912D5 /* Resources */,
+				05CC90EF1128C8C5001912D5 /* Sources */,
+				05CC90F01128C8C5001912D5 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PLSimulator;
+			productName = PLSimulator;
+			productReference = 05CC90F21128C8C5001912D5 /* PLSimulator.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		05CC912C1128C974001912D5 /* PLSimulator Tests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 05CC91311128C975001912D5 /* Build configuration list for PBXNativeTarget "PLSimulator Tests" */;
+			buildPhases = (
+				05CC91281128C974001912D5 /* Resources */,
+				05CC91571128CA18001912D5 /* Copy Frameworks */,
+				05CC91291128C974001912D5 /* Sources */,
+				05CC912A1128C974001912D5 /* Frameworks */,
+				05CC912B1128C974001912D5 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				05CC91371128C98E001912D5 /* PBXTargetDependency */,
+			);
+			name = "PLSimulator Tests";
+			productName = "PLSimulator Tests";
+			productReference = 05CC912D1128C974001912D5 /* PLSimulator Tests.octest */;
 			productType = "com.apple.product-type.bundle";
 		};
 		8D1107260486CEB800E47090 /* Launcher */ = {
@@ -287,6 +459,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				05CC91491128C9E4001912D5 /* PBXTargetDependency */,
 			);
 			name = Launcher;
 			productInstallPath = "$(HOME)/Applications";
@@ -307,7 +480,10 @@
 			projectRoot = "";
 			targets = (
 				8D1107260486CEB800E47090 /* Launcher */,
+				05CC90F11128C8C5001912D5 /* PLSimulator */,
+				05CC91641128CAA8001912D5 /* Tests */,
 				0523F66811269876004FB4EB /* Launcher Tests */,
+				05CC912C1128C974001912D5 /* PLSimulator Tests */,
 			);
 		};
 /* End PBXProject section */
@@ -318,6 +494,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				0523619811287BA7001C9661 /* Tests in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		05CC90EE1128C8C5001912D5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		05CC91281128C974001912D5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05CC92111128D249001912D5 /* Tests in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -346,6 +537,19 @@
 			shellPath = /bin/sh;
 			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
 		};
+		05CC912B1128C974001912D5 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\n# RunUnitTests sets this, so we need to add our own dependencies, otherwise we have trouble loading\n# secondary framework dependencies.\nexport DYLD_FRAMEWORK_PATH=\"${SOURCE_ROOT}/Dependencies\"\n\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -354,14 +558,30 @@
 			buildActionMask = 2147483647;
 			files = (
 				0523F67D112699D0004FB4EB /* PLTestCase.m in Sources */,
-				0523F69F1126A086004FB4EB /* PLSimulatorDiscovery.m in Sources */,
-				0523F67311269977004FB4EB /* PLSimulatorDiscoveryTests.m in Sources */,
-				052360C8112874B3001C9661 /* PLSimulatorPlatform.m in Sources */,
-				052360CC1128762C001C9661 /* PLSimulator.m in Sources */,
-				0523621C1128ACA2001C9661 /* PLSimulatorSDK.m in Sources */,
-				0523618C11287A2D001C9661 /* PLSimulatorPlatformTests.m in Sources */,
-				052362471128B3EF001C9661 /* PLSimulatorSDKTests.m in Sources */,
-				05CC90801128C321001912D5 /* rpm-vercomp.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		05CC90EF1128C8C5001912D5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05CC91101128C92F001912D5 /* PLSimulator.m in Sources */,
+				05CC91121128C92F001912D5 /* PLSimulatorApplication.m in Sources */,
+				05CC91141128C92F001912D5 /* PLSimulatorDiscovery.m in Sources */,
+				05CC91171128C92F001912D5 /* PLSimulatorPlatform.m in Sources */,
+				05CC911A1128C92F001912D5 /* PLSimulatorSDK.m in Sources */,
+				05CC911D1128C92F001912D5 /* rpm-vercomp.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		05CC91291128C974001912D5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				05CC91331128C987001912D5 /* PLSimulatorDiscoveryTests.m in Sources */,
+				05CC91341128C987001912D5 /* PLSimulatorPlatformTests.m in Sources */,
+				05CC91351128C987001912D5 /* PLSimulatorSDKTests.m in Sources */,
+				05CC91321128C981001912D5 /* PLTestCase.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -371,16 +591,38 @@
 			files = (
 				0523F61511269281004FB4EB /* main.m in Sources */,
 				0523F61611269281004FB4EB /* LauncherAppDelegate.m in Sources */,
-				0523F65F11269837004FB4EB /* PLSimulatorSDK.m in Sources */,
-				0523F66311269860004FB4EB /* PLSimulatorDiscovery.m in Sources */,
-				052360C9112874B3001C9661 /* PLSimulatorPlatform.m in Sources */,
-				052360CD1128762C001C9661 /* PLSimulator.m in Sources */,
-				05CC90811128C321001912D5 /* rpm-vercomp.m in Sources */,
-				05CC90C21128C73E001912D5 /* PLSimulatorApplication.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		05CC91371128C98E001912D5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 05CC90F11128C8C5001912D5 /* PLSimulator */;
+			targetProxy = 05CC91361128C98E001912D5 /* PBXContainerItemProxy */;
+		};
+		05CC91491128C9E4001912D5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 05CC90F11128C8C5001912D5 /* PLSimulator */;
+			targetProxy = 05CC91481128C9E4001912D5 /* PBXContainerItemProxy */;
+		};
+		05CC91501128C9F3001912D5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 05CC90F11128C8C5001912D5 /* PLSimulator */;
+			targetProxy = 05CC914F1128C9F3001912D5 /* PBXContainerItemProxy */;
+		};
+		05CC91681128CAAC001912D5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 0523F66811269876004FB4EB /* Launcher Tests */;
+			targetProxy = 05CC91671128CAAC001912D5 /* PBXContainerItemProxy */;
+		};
+		05CC916A1128CAAD001912D5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 05CC912C1128C974001912D5 /* PLSimulator Tests */;
+			targetProxy = 05CC91691128CAAD001912D5 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		0523F61811269298004FB4EB /* InfoPlist.strings */ = {
@@ -454,6 +696,141 @@
 				PREBINDING = NO;
 				PRODUCT_NAME = "Launcher Tests";
 				WRAPPER_EXTENSION = octest;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		05CC90F41128C8C6001912D5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Dependencies\"",
+				);
+				FRAMEWORK_VERSION = A;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INFOPLIST_FILE = "Resources/PLSimulator/PLSimulator-Info.plist";
+				INSTALL_PATH = "@loader_path/../Frameworks";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = PLSimulator;
+			};
+			name = Debug;
+		};
+		05CC90F51128C8C6001912D5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/Dependencies\"",
+				);
+				FRAMEWORK_VERSION = A;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_MODEL_TUNING = G5;
+				INFOPLIST_FILE = "Resources/PLSimulator/PLSimulator-Info.plist";
+				INSTALL_PATH = "@loader_path/../Frameworks";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Foundation,
+					"-framework",
+					AppKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = PLSimulator;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		05CC912F1128C975001912D5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = NO;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+					"\"$(SRCROOT)/Dependencies\"",
+				);
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_MODEL_TUNING = G5;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				INFOPLIST_FILE = "Resources/PLSimulator/PLSimulator Tests-Info.plist";
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Cocoa,
+					"-framework",
+					SenTestingKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = "PLSimulator Tests";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		05CC91301128C975001912D5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_LIBRARY_DIR)/Frameworks",
+					"\"$(SRCROOT)/Dependencies\"",
+				);
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_MODEL_TUNING = G5;
+				INFOPLIST_FILE = "Resources/PLSimulator/PLSimulator Tests-Info.plist";
+				INSTALL_PATH = "$(USER_LIBRARY_DIR)/Bundles";
+				OTHER_LDFLAGS = (
+					"-framework",
+					Cocoa,
+					"-framework",
+					SenTestingKit,
+				);
+				PREBINDING = NO;
+				PRODUCT_NAME = "PLSimulator Tests";
+				WRAPPER_EXTENSION = octest;
+				ZERO_LINK = NO;
+			};
+			name = Release;
+		};
+		05CC91651128CAA8001912D5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = NO;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				PRODUCT_NAME = Tests;
+			};
+			name = Debug;
+		};
+		05CC91661128CAA8001912D5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				GCC_ENABLE_FIX_AND_CONTINUE = NO;
+				PRODUCT_NAME = Tests;
 				ZERO_LINK = NO;
 			};
 			name = Release;
@@ -547,6 +924,33 @@
 			buildConfigurations = (
 				0523F66B11269876004FB4EB /* Debug */,
 				0523F66C11269876004FB4EB /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		05CC90F61128C8C6001912D5 /* Build configuration list for PBXNativeTarget "PLSimulator" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				05CC90F41128C8C6001912D5 /* Debug */,
+				05CC90F51128C8C6001912D5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		05CC91311128C975001912D5 /* Build configuration list for PBXNativeTarget "PLSimulator Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				05CC912F1128C975001912D5 /* Debug */,
+				05CC91301128C975001912D5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		05CC91771128CAF2001912D5 /* Build configuration list for PBXAggregateTarget "Tests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				05CC91651128CAA8001912D5 /* Debug */,
+				05CC91661128CAA8001912D5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
