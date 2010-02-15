@@ -29,6 +29,7 @@
 		05CC8F7F1128B65E001912D5 /* PLBlocks.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 05CC8F711128B62F001912D5 /* PLBlocks.framework */; };
 		05CC90801128C321001912D5 /* rpm-vercomp.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CC907F1128C321001912D5 /* rpm-vercomp.m */; };
 		05CC90811128C321001912D5 /* rpm-vercomp.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CC907F1128C321001912D5 /* rpm-vercomp.m */; };
+		05CC90C21128C73E001912D5 /* PLSimulatorApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 05CC90C11128C73E001912D5 /* PLSimulatorApplication.m */; };
 		8D11072F0486CEB800E47090 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */; };
 /* End PBXBuildFile section */
 
@@ -85,6 +86,8 @@
 		05CC8F711128B62F001912D5 /* PLBlocks.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PLBlocks.framework; sourceTree = "<group>"; };
 		05CC907E1128C321001912D5 /* rpm-vercomp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "rpm-vercomp.h"; sourceTree = "<group>"; };
 		05CC907F1128C321001912D5 /* rpm-vercomp.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "rpm-vercomp.m"; sourceTree = "<group>"; };
+		05CC90C01128C73E001912D5 /* PLSimulatorApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLSimulatorApplication.h; sourceTree = "<group>"; };
+		05CC90C11128C73E001912D5 /* PLSimulatorApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLSimulatorApplication.m; sourceTree = "<group>"; };
 		1058C7A1FEA54F0111CA2CBB /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = /System/Library/Frameworks/Cocoa.framework; sourceTree = "<absolute>"; };
 		13E42FB307B3F0F600E4EEF1 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = /System/Library/Frameworks/CoreData.framework; sourceTree = "<absolute>"; };
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
@@ -119,7 +122,7 @@
 				0523F61211269281004FB4EB /* main.m */,
 				0523F61311269281004FB4EB /* LauncherAppDelegate.h */,
 				0523F61411269281004FB4EB /* LauncherAppDelegate.m */,
-				0523F66011269845004FB4EB /* SDK Interface */,
+				0523F66011269845004FB4EB /* Simulator */,
 			);
 			path = Launcher;
 			sourceTree = "<group>";
@@ -154,7 +157,7 @@
 			path = iPhoneSimulatorRemoteClient;
 			sourceTree = "<group>";
 		};
-		0523F66011269845004FB4EB /* SDK Interface */ = {
+		0523F66011269845004FB4EB /* Simulator */ = {
 			isa = PBXGroup;
 			children = (
 				052360CA1128762C001C9661 /* PLSimulator.h */,
@@ -168,10 +171,12 @@
 				0523F66111269860004FB4EB /* PLSimulatorDiscovery.h */,
 				0523F66211269860004FB4EB /* PLSimulatorDiscovery.m */,
 				0523F67211269977004FB4EB /* PLSimulatorDiscoveryTests.m */,
+				05CC90C01128C73E001912D5 /* PLSimulatorApplication.h */,
+				05CC90C11128C73E001912D5 /* PLSimulatorApplication.m */,
 				05CC907E1128C321001912D5 /* rpm-vercomp.h */,
 				05CC907F1128C321001912D5 /* rpm-vercomp.m */,
 			);
-			name = "SDK Interface";
+			name = Simulator;
 			sourceTree = "<group>";
 		};
 		0523F67A112699C6004FB4EB /* Test Support */ = {
@@ -371,6 +376,7 @@
 				052360C9112874B3001C9661 /* PLSimulatorPlatform.m in Sources */,
 				052360CD1128762C001C9661 /* PLSimulator.m in Sources */,
 				05CC90811128C321001912D5 /* rpm-vercomp.m in Sources */,
+				05CC90C21128C73E001912D5 /* PLSimulatorApplication.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

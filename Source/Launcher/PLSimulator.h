@@ -95,7 +95,7 @@ void plsimulator_populate_nserror (NSError **error, PLSimulatorError code, NSStr
 #import "PLSimulatorSDK.h"
 #import "PLSimulatorPlatform.h"
 #import "PLSimulatorDiscovery.h"
-
+#import "PLSimulatorApplication.h"
 
 /**
  * @mainpage Plausible Simulator Client
