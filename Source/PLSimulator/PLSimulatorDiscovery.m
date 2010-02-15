@@ -45,15 +45,22 @@
 /**
  * Initialize a new query with the requested minumum simulator SDK version.
  *
- * @param version The required minumum simulator SDK version (3.0, 3.1.2, 3.2, etc).
+ * @param version The required minumum simulator SDK version (3.0, 3.1.2, 3.2, etc). May be nil, in which
+ * case no matching will be done on the version.
+ * @param sdkName Specify a canonical name for an SDK that must be included with the platform SDK (iphonesimulator3.1, etc).
+ * If nil, no verification of the canonical name will be done on SDKs contained in the platform SDK. 
  * @param deviceFamilies The set of requested device families. Platform SDKs that match any of these device
  * families will be returned. See \ref plsimulator_device_family Device Family Constants.
  */
-- (id) initWithMinimumVersion: (NSString *) version deviceFamilies: (NSSet *) deviceFamilies {
+- (id) initWithMinimumVersion: (NSString *) version 
+             canonicalSDKName: (NSString *) canonicalSDKName
+               deviceFamilies: (NSSet *) deviceFamilies 
+{
     if ((self = [super init]) == nil)
         return nil;
-    
+
     _version = [version copy];
+    _canonicalSDKName = canonicalSDKName;
     _deviceFamilies = deviceFamilies;
     _query = [NSMetadataQuery new];
 
@@ -98,6 +105,48 @@
  */
 @implementation PLSimulatorDiscovery (PrivateMethods)
 
+/**
+ * Comparison function. Compared two platforms by the latest version of their sub-SDKs.
+ * Used to determine which platform is likely the most stable, as most users will only
+ * have two SDKs installed -- the current, and a beta SDK.
+ */
+static NSInteger platform_compare_by_version (id obj1, id obj2, void *context) {
+    PLSimulatorPlatform *platform1 = obj1;
+    PLSimulatorPlatform *platform2 = obj2;
+    
+    /* Fetch the highest SDK version for each platform */
+    NSString *(^Version)(PLSimulatorPlatform *) = ^(PLSimulatorPlatform *p) {
+        NSString *last = nil;
+        for (PLSimulatorSDK *sdk in p.sdks) {
+            if (last == nil || rpm_vercomp([sdk.version UTF8String], [last UTF8String]) > 0)
+                last = sdk.version;
+        }
+
+        return last;
+    };
+    
+    NSString *ver1 = Version(platform1);
+    NSString *ver2 = Version(platform2);
+
+    /* Neither should be nil as we shouldn't be called on Platform SDKs that do not
+     * contain sub-SDKs, but if that occurs, provide a reasonable answer */
+    if (ver1 == nil && ver2 == nil)
+        return NSOrderedSame;
+    else if (ver1 == nil)
+        return NSOrderedAscending;
+    else if (ver2 == nil)
+        return NSOrderedDescending;
+
+    int res = rpm_vercomp([ver1 UTF8String], [ver2 UTF8String]);
+
+    if (res > 0)
+        return NSOrderedDescending;
+    if (res < 0)
+        return NSOrderedAscending;
+    else
+        return NSOrderedSame;
+}
+
 // NSMetadataQueryDidFinishGatheringNotification
 - (void) queryFinished: (NSNotification *) note {
     /* Received the full spotlight query result set. No longer running */
@@ -123,10 +172,23 @@
         /* Check the minimum version and device families */
         BOOL hasMinVersion = NO;
         BOOL hasDeviceFamily = NO;
+        BOOL hasExpectedSDK = NO;
+
+        /* Skip filters that are not required */
+        if (_version == nil)
+            hasMinVersion = YES;
+    
+        if (_canonicalSDKName == nil)
+            hasExpectedSDK = YES;
+
         for (PLSimulatorSDK *sdk in platform.sdks) {
             /* If greater than or equal to the minimum version, this platform SDK meets the requirements */
             if (rpm_vercomp([sdk.version UTF8String], [_version UTF8String]) >= 0)
                 hasMinVersion = YES;
+            
+            /* Also check for the canonical SDK name */
+            if ([_canonicalSDKName isEqualToString: sdk.canonicalName])
+                hasExpectedSDK = YES;
 
             /* If any our requested families are included, this platform SDK meets the requirements. */
             for (NSString *family in _deviceFamilies) {
@@ -137,14 +199,17 @@
             }
         }
 
-        if (!hasMinVersion || !hasDeviceFamily)
+        if (!hasMinVersion || !hasDeviceFamily || !hasExpectedSDK)
             continue;
 
         [platformSDKs addObject: platform];
     }
+
+    /* Sort by version, try to choose the most stable SDK of the available set. */
+    NSArray *sorted = [platformSDKs sortedArrayUsingFunction: platform_compare_by_version context: nil];
     
     /* Inform the delegate */
-    [_delegate simulatorDiscovery: self didFindMatchingSimulatorPlatforms: platformSDKs];
+    [_delegate simulatorDiscovery: self didFindMatchingSimulatorPlatforms: sorted];
 }
 
 @end

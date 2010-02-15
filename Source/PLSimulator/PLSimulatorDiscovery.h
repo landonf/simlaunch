@@ -43,7 +43,9 @@
  * Called by the PLSimulatorDiscovery instance upon query completion.
  *
  * @param discovery The sender.
- * @param platforms PLSimulatorPlatform instances that matched the query, or an empty array of no matches were found.
+ * @param platforms PLSimulatorPlatform instances that matched the query, or an empty array of no matches were found. The
+ * matches will be ordered according to preference -- the discovery implementation will attempt to find the Platform SDK with
+ * the oldest available version number that matches the minimum requirements.
  */
 - (void) simulatorDiscovery: (PLSimulatorDiscovery *) discovery didFindMatchingSimulatorPlatforms: (NSArray *) platforms;
 
@@ -51,8 +53,11 @@
 
 @interface PLSimulatorDiscovery : NSObject {
 @private
-    /** Requested minimum version. */
+    /** Requested minimum version. If nil, no minimum version is requested. */
     NSString *_version;
+    
+    /** Requested canonical SDK name. If nil, no specific named SDK is requested. */
+    NSString *_canonicalSDKName;
 
     /** Requested device families. See \ref plsimulator_device_family Device Family Constants */
     NSSet *_deviceFamilies;
@@ -67,7 +72,7 @@
     id<PLSimulatorDiscoveryDelegate> _delegate;
 }
 
-- (id) initWithMinimumVersion: (NSString *) version deviceFamilies: (NSSet *) deviceFamilies;
+- (id) initWithMinimumVersion: (NSString *) version canonicalSDKName: (NSString *) sdkName deviceFamilies: (NSSet *) deviceFamilies;
 
 - (void) startQuery;
 

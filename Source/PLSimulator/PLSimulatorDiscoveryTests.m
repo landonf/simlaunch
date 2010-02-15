@@ -41,7 +41,9 @@
 
 - (void) testQuery {
     NSSet *families = [NSSet setWithObject: PLSimulatorDeviceFamilyiPhone];
-    PLSimulatorDiscovery *query = [[PLSimulatorDiscovery alloc] initWithMinimumVersion: @"3.0" deviceFamilies: families];
+    PLSimulatorDiscovery *query = [[PLSimulatorDiscovery alloc] initWithMinimumVersion: @"3.0"
+                                                                      canonicalSDKName: nil
+                                                                        deviceFamilies: families];
     query.delegate = self;
     [query startQuery];
 

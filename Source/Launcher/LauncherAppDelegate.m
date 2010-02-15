@@ -27,7 +27,6 @@
  */
 
 #import "LauncherAppDelegate.h"
-#import "PLSimulator.h"
 
 /* Resource subdirectory for the embedded application */
 #define APP_DIR @"EmbeddedApp"
@@ -73,17 +72,18 @@
 
     /* Load the app meta-data */
     NSString *appPath = [appContainer stringByAppendingPathComponent: [appPaths objectAtIndex: 0]];
-    PLSimulatorApplication *app = [[PLSimulatorApplication alloc] initWithPath: appPath error: &error];
-    if (app == nil) {
+    _app = [[PLSimulatorApplication alloc] initWithPath: appPath error: &error];
+    if (_app == nil) {
         [[NSAlert alertWithError: error] runModal];
         [[NSApplication sharedApplication] terminate: self];
         return;
     }
 
-    /* Find the matching platform SDKs */
-    NSSet *families = [NSSet setWithObjects: PLSimulatorDeviceFamilyiPad, nil];
-    _discovery = [[PLSimulatorDiscovery alloc] initWithMinimumVersion: @"3.0"
-                                                       deviceFamilies: families];
+    /* Find the matching platform SDKs. We don't care about version, but do care about the SDK the 
+     * app was built with and the device families it requires/supports */
+    _discovery = [[PLSimulatorDiscovery alloc] initWithMinimumVersion: nil
+                                                     canonicalSDKName: _app.canonicalSDKName
+                                                       deviceFamilies: _app.deviceFamilies];
     _discovery.delegate = self;
     [_discovery startQuery];
     

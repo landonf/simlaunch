@@ -34,6 +34,9 @@
 @private
     /** Instance used to find the required simulator platform SDK */
     PLSimulatorDiscovery *_discovery;
+
+    /** Embedded app meta-data */
+    PLSimulatorApplication *_app;
 }
 
 @end
