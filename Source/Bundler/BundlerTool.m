@@ -65,13 +65,24 @@
     NSString *template = [bundle pathForResource: TEMPLATE_APP ofType: nil];
     assert(template != nil);
 
+    /* Map the device family type */
+    NSString *deviceArg = nil;
+    if ([deviceFamily isEqual: PLSimulatorDeviceFamilyiPad]) {
+        deviceArg = @"iPad";
+    } else if ([deviceFamily isEqual: PLSimulatorDeviceFamilyiPhone]) {
+        deviceArg = @"iPhone";
+    } else {
+        NSLog(@"Unsupported device family, defaulting to iPhone: %@", deviceFamily);
+        deviceArg = @"iPhone";
+    }
+
     /* Create the task */
     NSTask *task = [NSTask new];
     NSString *tool = [bundle pathForAuxiliaryExecutable: BUNDLE_TOOL];
     assert(tool != nil);
 
     [task setLaunchPath: tool];
-    [task setArguments: [NSArray arrayWithObjects: app.path, deviceFamily, template, nil]];
+    [task setArguments: [NSArray arrayWithObjects: app.path, deviceArg, template, nil]];
 
     /* Watch for completion */
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];

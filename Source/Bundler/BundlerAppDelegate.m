@@ -110,7 +110,7 @@
     _receivedDroppedFiles = YES;
     
     /* If the app supports multiple device families, request the preferred family from the user */
-    if ([app.deviceFamilies count] > 0) {
+    if ([app.deviceFamilies count] > 1) {
         /* Display the config UI */
         BundlerConfigWindowController *controller = [[BundlerConfigWindowController alloc] initWithSimulatorApp: (PLSimulatorApplication *) app];
         [controller setDelegate: self];
