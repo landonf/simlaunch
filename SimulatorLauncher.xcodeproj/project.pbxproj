@@ -35,6 +35,7 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		052259BA1129FE2E00A83450 /* Bundler.icns in Resources */ = {isa = PBXBuildFile; fileRef = 052259B91129FE2E00A83450 /* Bundler.icns */; };
 		0523619811287BA7001C9661 /* Tests in Resources */ = {isa = PBXBuildFile; fileRef = 0523619611287BA7001C9661 /* Tests */; };
 		0523F61511269281004FB4EB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0523F61211269281004FB4EB /* main.m */; };
 		0523F61611269281004FB4EB /* LauncherAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0523F61411269281004FB4EB /* LauncherAppDelegate.m */; };
@@ -145,14 +146,14 @@
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 05CC91641128CAA8001912D5 /* Tests */;
+			remoteGlobalIDString = 05CC91641128CAA8001912D5;
 			remoteInfo = Tests;
 		};
 		05CC975D11294843001912D5 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 29B97313FDCFA39411CA2CEA /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 05CC94D911290A74001912D5 /* Simulator Bundler */;
+			remoteGlobalIDString = 05CC94D911290A74001912D5;
 			remoteInfo = "Simulator Bundler";
 		};
 /* End PBXContainerItemProxy section */
@@ -220,6 +221,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		052259B91129FE2E00A83450 /* Bundler.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Bundler.icns; sourceTree = "<group>"; };
 		0523619611287BA7001C9661 /* Tests */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Tests; sourceTree = "<group>"; };
 		0523F61211269281004FB4EB /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0523F61311269281004FB4EB /* LauncherAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LauncherAppDelegate.h; sourceTree = "<group>"; };
@@ -460,6 +462,7 @@
 		05CC94FA11290B16001912D5 /* Bundler */ = {
 			isa = PBXGroup;
 			children = (
+				052259B91129FE2E00A83450 /* Bundler.icns */,
 				05CC94FB11290B16001912D5 /* Simulator Bundler-Info.plist */,
 				05CC950B11290BF5001912D5 /* MainMenu.xib */,
 				05CC95A011291990001912D5 /* AppConfig.xib */,
@@ -715,6 +718,7 @@
 				05CC94F111290ADF001912D5 /* Launcher.app in Resources */,
 				05CC950C11290BF5001912D5 /* MainMenu.xib in Resources */,
 				05CC95A111291990001912D5 /* AppConfig.xib in Resources */,
+				052259BA1129FE2E00A83450 /* Bundler.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1236,7 +1240,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				CURRENT_PROJECT_VERSION = "1.0-beta2";
+				CURRENT_PROJECT_VERSION = "1.0-beta3";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_GC = required;
 				GCC_OPTIMIZATION_LEVEL = 0;
@@ -1261,7 +1265,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_64_BIT)";
-				CURRENT_PROJECT_VERSION = "1.0-beta2";
+				CURRENT_PROJECT_VERSION = "1.0-beta3";
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_ENABLE_OBJC_GC = required;
 				GCC_VERSION = coop.plausible.blocks.compilers.gcc.4_2;
