@@ -157,7 +157,7 @@
     [session setDelegate: self];
     [session setSimulatedApplicationPID: [NSNumber numberWithInt: 35]];
     
-    if (![session requestStartWithConfig: config timeout: 10 error: &error]) {
+    if (![session requestStartWithConfig: config timeout: 30.0 error: &error]) {
         NSLog(@"Could not start simulator session: %@", error);
 
         NSString *text = NSLocalizedString(@"The iPhone Simulator could not be started. If another Simulator application "
