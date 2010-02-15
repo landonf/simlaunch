@@ -34,3 +34,5 @@ Binary releases of Simulator Launcher are also available from:
 
 - Landon Fuller
 - Erica Sadun
+
+The application's icon was graciously provided by Pete Zich.
