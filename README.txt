@@ -5,11 +5,13 @@ Simulator Launcher
 Simulator Launcher builds custom executables to automatically launch an
 embedded iPhone Simulator application using the correct iPhone SDK.
 
-To use, drag any iPhone Simulator binary onto the "Simulator Builder" application. This will create
-a new Mac OS X application that may be used to launch your own application from within Mac OSX. The
-new application's icon and name will be derived from your iPhone Simulator application.
+To use, drag any iPhone Simulator binary onto the "Simulator Builder"
+application. This will create a new Mac OS X application that bundles
+and launches your iPhone Simulator application from within Mac OS X. The
+new application's icon and name will be derived from your iPhone Simulator
+application.
 
-The launcher will:
+The built launcher will:
 - Detect all installed iPhone SDKs (such as the beta iPad SDK) using Spotlight,
   even if they're in non-standard locations
 - Automatically select the best available SDK for your application.
