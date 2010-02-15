@@ -8,7 +8,7 @@ PLBlocks.framework:
       http://code.google.com/p/plblocks/
 
     Version:
-      1.1-beta2 downloaded from http://code.google.com/p/plblocks
+      r129 built from http://code.google.com/p/plblocks
 
     License:
       MIT License
