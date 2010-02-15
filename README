@@ -10,7 +10,7 @@ The launcher will:
 - Automatically select the best available SDK for your application.
 - Install and launch your application in the appropriate Simulator.
 
-To use, place your iPhone/iPad application that has been built using a Simulator SDK in:
+To use, place your iPhone/iPad application in:
     Launcher.app/Contents/Resources/EmbeddedApp/
 
 You can also rename the Launcher.app, and provide a proper Icon.
@@ -22,4 +22,4 @@ The launcher should build and run on Mac OS X 10.5 and 10.6.
 Building also requires the PLBlocks 1.1-beta2 SDK to support blocks on 10.5:
     http://code.google.com/p/plblocks/
 
-We will also be providing pre-built binaries.
+Binary releases are also available from: http://github.com/landonf/simlaunch/downloads
