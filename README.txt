@@ -18,6 +18,8 @@ The built launcher will:
 - Install and launch your application in the appropriate Simulator.
 - Works with both iPhone and iPad simulator binaries.
 
+Watch the screencast here: http://www.youtube.com/watch?v=Jnm4Zj36shU
+
 == Building ==
 
 The project should build and run on Mac OS X 10.5 and 10.6. To build, run the disk image target:
