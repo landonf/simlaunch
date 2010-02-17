@@ -62,10 +62,16 @@
     /* Set the title */
     [[self window] setTitle: _app.displayName];
     
+
+
     /* Set the user message */
     NSString *msgFmt = NSLocalizedString(@"%@ is a universal application. What device would you like to simulate when it is launched?",
                                          @"App configuration message.");
     [_messageField setStringValue: [NSString stringWithFormat: msgFmt, _app.displayName]];
+    
+    /* Set the "choose at launch" message */
+    msgFmt = NSLocalizedString(@"Choose the device when %@ is launched.", @"App configuration dialog message");
+    [_selectAtLaunch setTitle: [NSString stringWithFormat: msgFmt, _app.displayName]];
 
     /* Add all supported device types */
     [_deviceFamilyButton removeAllItems];
@@ -83,5 +89,12 @@
     [_delegate bundlerConfig: self didSelectDeviceFamily: family];
 }
 
+- (IBAction) checkedSelectAtLaunch: (id) sender {
+    if ([_selectAtLaunch state] == NSOnState) {
+        [_deviceFamilyButton setEnabled: NO];
+    } else {
+        [_deviceFamilyButton setEnabled: YES];
+    }
+}
 
 @end

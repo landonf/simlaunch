@@ -58,6 +58,9 @@
 @private
     /** Device family button. */
     IBOutlet NSPopUpButton *_deviceFamilyButton;
+    
+    /** Select at launch checkbox. */
+    IBOutlet NSButton *_selectAtLaunch;
 
     /** User message */
     IBOutlet NSTextField *_messageField;
@@ -82,5 +85,6 @@
 
 - (IBAction) cancel: (id) sender;
 - (IBAction) createBundle: (id) sender;
+- (IBAction) checkedSelectAtLaunch: (id) sender;
 
 @end
