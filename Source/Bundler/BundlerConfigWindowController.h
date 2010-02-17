@@ -48,7 +48,7 @@
  * Called when the user selects a device family.
  *
  * @param config The sender.
- * @param family The selected PLSimulatorDeviceFamily.
+ * @param family The selected PLSimulatorDeviceFamily, or nil if no preset family was selected.
  */
 - (void) bundlerConfig: (BundlerConfigWindowController *) bundlerConfig didSelectDeviceFamily: (PLSimulatorDeviceFamily *) family;
 

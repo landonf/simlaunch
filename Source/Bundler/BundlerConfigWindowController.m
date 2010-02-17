@@ -85,7 +85,12 @@
 }
 
 - (IBAction) createBundle: (id) sender {
-    PLSimulatorDeviceFamily *family = [_deviceFamilies objectAtIndex: [_deviceFamilyButton indexOfSelectedItem]];
+    PLSimulatorDeviceFamily *family = nil;
+
+    /* Let the user select the device family at launch? */
+    if ([_selectAtLaunch state] != NSOnState)
+        family = [_deviceFamilies objectAtIndex: [_deviceFamilyButton indexOfSelectedItem]];
+
     [_delegate bundlerConfig: self didSelectDeviceFamily: family];
 }
 

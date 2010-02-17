@@ -56,17 +56,31 @@
  * Execute the bundler tool.
  *
  * @param app Application to bundle.
- * @param deviceFamily Device family to target.
+ * @param deviceFamily Device family to target. If nil, the family will not be modified in the resulting
+ * executable and users may choose a different device family at runtime.
  */
 - (void) executeWithSimulatorApp: (PLSimulatorApplication *) app deviceFamily: (PLSimulatorDeviceFamily *) deviceFamily block: (BundlerToolCompletedBlock) block {
     NSBundle *bundle = [NSBundle bundleForClass: [self class]];
 
+    /* Tool arguments */
+    NSMutableArray *args = [NSMutableArray array];
+    void (^Arg)(NSString *arg) = ^(NSString *arg) { [args addObject: arg]; };
+
+    /* Source path */
+    Arg(@"--source-app");
+    Arg(app.path);
+
     /* Fetch the template path */
     NSString *template = [bundle pathForResource: TEMPLATE_APP ofType: nil];
     assert(template != nil);
+    Arg(@"--template-app");
+    Arg(template);
 
     /* Map the device family type */
-    NSString *deviceArg = [[NSNumber numberWithInt: deviceFamily.deviceFamilyCode] stringValue];
+    if (deviceFamily != nil) {
+        Arg(@"--device-family");
+        Arg([[NSNumber numberWithInt: deviceFamily.deviceFamilyCode] stringValue]);
+    }
 
     /* Create the task */
     NSTask *task = [NSTask new];
@@ -74,7 +88,7 @@
     assert(tool != nil);
 
     [task setLaunchPath: tool];
-    [task setArguments: [NSArray arrayWithObjects: app.path, deviceArg, template, nil]];
+    [task setArguments: args];
 
     /* Watch for completion */
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];

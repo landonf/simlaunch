@@ -22,7 +22,7 @@ DESTINATION_WRITE_FAILED=5
 
 # Print Usage
 print_usage () {
-    echo "Usage: $0 <app> <device family> <template>"
+    echo "Usage: $0 [--help] [--source-app <app>] [--template-app <launcher>] [--device-family <family>]"
     echo "Supported device families:"
     echo "\tiPhone"
     echo "\tiPad"
@@ -107,36 +107,14 @@ populate_dest_path () {
 	local app_dirname=`dirname "${APP}"`
 	tar -C "${app_dirname}" -cf - `basename "${APP}"` | tar -C "${APP_DEST}/${EMBED_DIR}" -xf -
 	check_error "Could not populate embedded app destination directory" ${DESTINATION_WRITE_FAILED} 
-
-	# Set the device family for the application
-	if [ ${DEVICE_FAMILY} = "iPhone" ]; then
-		local family="1"
-	elif [ ${DEVICE_FAMILY} = "iPad" ]; then
-		local family="2"
-    else
-        # A literal device family value
-        local family="${DEVICE_FAMILY}"
-	fi
-
-	if [ ! -z "${family}" ]; then
-		local dest_plist="${APP_DEST}/${EMBED_DIR}/`basename "${APP}"`/Info.plist"
-		${PLIST_CMD} -c "Delete UIDeviceFamily" "${dest_plist}"
-		check_error "Failed to modify embedded application's plist" ${DESTINATION_WRITE_FAILED}
-
-		${PLIST_CMD} -c "Add UIDeviceFamily array" "${dest_plist}"
-		check_error "Failed to modify embedded application's plist" ${DESTINATION_WRITE_FAILED}
-
-		${PLIST_CMD} -c "Add UIDeviceFamily:0 string ${family}" "${dest_plist}"
-		check_error "Failed to modify embedded application's plist" ${DESTINATION_WRITE_FAILED}
-	fi
 }
 
 # Convert and insert the target application's icon and bundle identifier
 populate_meta_data () {
 	local wrapper_plist="${APP_DEST}/Contents/Info.plist"
 
-	# Set the bundle identifier
-	${PLIST_CMD} -c "Set :CFBundleIdentifier ${APP_BUNDLE_ID}" "${wrapper_plist}"
+	# Set the bundle identifier (original + .launchsim suffix)
+	${PLIST_CMD} -c "Set :CFBundleIdentifier ${APP_BUNDLE_ID}.launchsim" "${wrapper_plist}"
 	check_error "Failed to modify wrapper application's plist" ${DESTINATION_WRITE_FAILED}
 
 	# Convert the embedded application's icon
@@ -152,14 +130,62 @@ populate_meta_data () {
 		# Clean up
 		rm -f "${resampled}"
 	fi
+    
+    # Set the default device family
+    if [ ! -z "${DEVICE_FAMILY}" ]; then
+        if [ "${DEVICE_FAMILY}" = "iPhone" ]; then
+            local family="1"
+        elif [ "${DEVICE_FAMILY}" = "iPad" ]; then
+            local family="2"
+        else
+            # A literal device family value
+            local family="${DEVICE_FAMILY}"
+        fi
+
+        ${PLIST_CMD} -c "Add PLDefaultUIDeviceFamily string ${DEVICE_FAMILY}" "${wrapper_plist}"
+        check_error "Failed to set device family in application's plist" ${DESTINATION_WRITE_FAILED}
+    fi
 }
 
-# Parse command line
-APP="$1"
-DEVICE_FAMILY="$2"
-TEMPLATE_APP="$3"
+# Parse command line arguments
+while [ $# -gt 0 ]; do
+    case $1 in
+    --source-app)
+        shift
+        if [ ! -d "$1" ]; then
+            echo "No app found at ${1}."
+            exit 1
+        fi
+        APP="$1"
+        shift
+        ;;
+    --template-app)
+        shift
+        if [ ! -d "$1" ]; then
+            echo "No template app found at ${1}."
+            exit 1
+        fi
+        TEMPLATE_APP="$1"
+        shift
+        ;;
+    --device-family)
+        shift
+        DEVICE_FAMILY="$1"
+        shift
+        ;;
+    --help)
+        print_usage
+        exit 0
+        ;;
+    *)
+        echo "Unknown option $1" 1>&2
+        print_usage
+        exit ${USAGE_ERROR}
+    esac
+done
 
-if [ -z "${APP}" ] || [ -z "${DEVICE_FAMILY}" ] || [ -z "${TEMPLATE_APP}" ]; then
+if [ -z "${APP}" ] || [ -z "${TEMPLATE_APP}" ]; then
+    echo "Both --source-app and --template-app must be supplied"
     print_usage
     exit ${USAGE_ERROR}
 fi
