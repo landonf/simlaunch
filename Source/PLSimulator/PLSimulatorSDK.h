@@ -39,7 +39,7 @@
     /** Canonical name */
     NSString *_canonicalName;
 
-    /** Supported device families. Values will be one of the \ref plsimulator_device_family device family constants. */
+    /** Supported device families as a set of PLSimulatorDeviceFamily instances. */
     NSSet *_deviceFamilies;
 }
 
@@ -51,7 +51,7 @@
 /** SDK's canonical name. */
 @property(readonly) NSString *canonicalName;
 
-/** Supported device families. See \ref plsimulator_device_family Device Family Constants. */
+/** Set of PLSimulatorDeviceFamily types supported by this SDK. */
 @property(readonly) NSSet *deviceFamilies;
 
 @end

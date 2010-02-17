@@ -40,7 +40,7 @@
 @implementation PLSimulatorDiscoveryTests
 
 - (void) testQuery {
-    NSSet *families = [NSSet setWithObject: PLSimulatorDeviceFamilyiPhone];
+    NSSet *families = [NSSet setWithObject: [PLSimulatorDeviceFamily iphoneFamily]];
     PLSimulatorDiscovery *query = [[PLSimulatorDiscovery alloc] initWithMinimumVersion: @"3.0"
                                                                       canonicalSDKName: nil
                                                                         deviceFamilies: families];

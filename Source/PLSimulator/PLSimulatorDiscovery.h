@@ -59,7 +59,7 @@
     /** Requested canonical SDK name. If nil, no specific named SDK is requested. */
     NSString *_canonicalSDKName;
 
-    /** Requested device families. See \ref plsimulator_device_family Device Family Constants */
+    /** Requested device families as a set of PLSimulatorDeviceFamily instances. */
     NSSet *_deviceFamilies;
 
     /** Spotlight query used to find the SDK(s) */

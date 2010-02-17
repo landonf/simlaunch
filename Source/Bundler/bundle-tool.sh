@@ -113,8 +113,9 @@ populate_dest_path () {
 		local family="1"
 	elif [ ${DEVICE_FAMILY} = "iPad" ]; then
 		local family="2"
-	else
-		echo "Unexpected family type: ${DEVICE_FAMILY}"
+    else
+        # A literal device family value
+        local family="${DEVICE_FAMILY}"
 	fi
 
 	if [ ! -z "${family}" ]; then
@@ -161,11 +162,6 @@ TEMPLATE_APP="$3"
 if [ -z "${APP}" ] || [ -z "${DEVICE_FAMILY}" ] || [ -z "${TEMPLATE_APP}" ]; then
     print_usage
     exit ${USAGE_ERROR}
-fi
-
-if [ ${DEVICE_FAMILY} != "iPhone" ] && [ ${DEVICE_FAMILY} != "iPad" ]; then
-	echo "Unsupported family type: ${DEVICE_FAMILY}"
-	exit ${USAGE_ERROR}
 fi
 
 # Check file paths

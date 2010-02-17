@@ -58,7 +58,7 @@
  * @param app Application to bundle.
  * @param deviceFamily Device family to target.
  */
-- (void) executeWithSimulatorApp: (PLSimulatorApplication *) app deviceFamily: (NSString *) deviceFamily block: (BundlerToolCompletedBlock) block {
+- (void) executeWithSimulatorApp: (PLSimulatorApplication *) app deviceFamily: (PLSimulatorDeviceFamily *) deviceFamily block: (BundlerToolCompletedBlock) block {
     NSBundle *bundle = [NSBundle bundleForClass: [self class]];
 
     /* Fetch the template path */
@@ -66,15 +66,7 @@
     assert(template != nil);
 
     /* Map the device family type */
-    NSString *deviceArg = nil;
-    if ([deviceFamily isEqual: PLSimulatorDeviceFamilyiPad]) {
-        deviceArg = @"iPad";
-    } else if ([deviceFamily isEqual: PLSimulatorDeviceFamilyiPhone]) {
-        deviceArg = @"iPhone";
-    } else {
-        NSLog(@"Unsupported device family, defaulting to iPhone: %@", deviceFamily);
-        deviceArg = @"iPhone";
-    }
+    NSString *deviceArg = [[NSNumber numberWithInt: deviceFamily.deviceFamilyCode] stringValue];
 
     /* Create the task */
     NSTask *task = [NSTask new];

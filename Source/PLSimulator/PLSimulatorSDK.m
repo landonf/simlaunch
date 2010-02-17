@@ -163,7 +163,7 @@ enum {
 
         /* If no valid settings, assume that this is a <3.2 SDK and it supports the iPhone family */
         if (_deviceFamilies == nil || [_deviceFamilies count] == 0)
-            _deviceFamilies = [NSSet setWithObject: PLSimulatorDeviceFamilyiPhone];
+            _deviceFamilies = [NSSet setWithObject: [PLSimulatorDeviceFamily iphoneFamily]];
     }
 
     return self;

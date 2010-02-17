@@ -48,6 +48,12 @@
     
     _app = app;
 
+    /* Save the supported device families, sorting alphabetically */
+    NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey: @"localizedName" 
+                                                         ascending: YES 
+                                                          selector: @selector(localizedCompare:)];
+    _deviceFamilies = [[_app.deviceFamilies allObjects] sortedArrayUsingDescriptors: [NSArray arrayWithObject: sort]];
+    
     return self;
 }
 
@@ -61,26 +67,11 @@
                                          @"App configuration message.");
     [_messageField setStringValue: [NSString stringWithFormat: msgFmt, _app.displayName]];
 
-    
-    NSMutableDictionary *nameMap = [NSMutableDictionary dictionary];
-    _deviceNameMap = nameMap;
-
     /* Add all supported device types */
     [_deviceFamilyButton removeAllItems];
-    for (NSString *family in _app.deviceFamilies) {
-        if ([family isEqualTo: PLSimulatorDeviceFamilyiPad]) {
-            NSString *name = NSLocalizedString(@"iPad", @"iPad device name");
+    for (PLSimulatorDeviceFamily *family in _deviceFamilies)
+        [_deviceFamilyButton addItemWithTitle: family.localizedName];
 
-            [nameMap setObject: PLSimulatorDeviceFamilyiPad forKey: name];
-            [_deviceFamilyButton addItemWithTitle: name];
-
-        } else if ([family isEqualTo: PLSimulatorDeviceFamilyiPhone]) {
-            NSString *name = NSLocalizedString(@"iPhone", @"iPhone device name");
-            
-            [nameMap setObject: PLSimulatorDeviceFamilyiPhone forKey: name];
-            [_deviceFamilyButton addItemWithTitle: name];
-        }
-    }
 }
 
 - (IBAction) cancel: (id) sender {
@@ -88,7 +79,7 @@
 }
 
 - (IBAction) createBundle: (id) sender {
-    NSString *family = [_deviceNameMap objectForKey: [_deviceFamilyButton titleOfSelectedItem]];
+    PLSimulatorDeviceFamily *family = [_deviceFamilies objectAtIndex: [_deviceFamilyButton indexOfSelectedItem]];
     [_delegate bundlerConfig: self didSelectDeviceFamily: family];
 }
 

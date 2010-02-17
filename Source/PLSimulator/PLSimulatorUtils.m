@@ -36,26 +36,7 @@
 @implementation PLSimulatorUtils
 
 /**
- * Map an Apple UIDeviceFamily code to PLSimulatorDeviceFamily constant.
- *
- * @param deviceCode An NSString or NSNumber UIDeviceFamily value.
- * @return Returns a device family constant, or nil if the device code is unknown.
- */
-+ (NSString *) deviceFamilyForDeviceCode: (id) deviceCode {
-    /* Map the Apple family number to our family constants */
-    switch ([(NSString *)deviceCode intValue]) {
-        case DTiPhoneSimulatoriPhoneFamily:
-            return PLSimulatorDeviceFamilyiPhone;
-        case DTiPhoneSimulatoriPadFamily:
-            return PLSimulatorDeviceFamilyiPad;
-        default:
-            NSLog(@"Unsupported %@:%@ value type while parsing UIDeviceFamily value.", deviceCode, [deviceCode class]);
-            return nil;
-    }
-}
-
-/**
- * Map a set of Apple UIDeviceFamily codes to PLSimulatorDeviceFamily constants.
+ * Map a set of Apple UIDeviceFamily codes to PLSimulatorDeviceFamily instances.
  *
  * @param deviceCodes An array of NSString or NSNumber UIDeviceFamily values.
  */
@@ -72,9 +53,11 @@
         }
         
         /* Map the Apple family number to our family constants */
-        NSString *constant = [self deviceFamilyForDeviceCode: str];
-        if (constant != nil)
-            [deviceFamilies addObject: constant];
+        PLSimulatorDeviceFamily *family = [PLSimulatorDeviceFamily deviceFamilyForDeviceCode: [str intValue]];
+        if (family == nil)
+            NSLog(@"Unsupported %@:%@ value type while parsing UIDeviceFamily value.", str, [str class]);
+        else
+            [deviceFamilies addObject: family];
     }
     
     /* Save the populated set */

@@ -42,9 +42,6 @@
  * @defgroup constants Constants Reference
  */
 
-extern NSString *PLSimulatorDeviceFamilyiPhone;
-extern NSString *PLSimulatorDeviceFamilyiPad;
-
 /**
  * @defgroup internal Internal Documentation
  */
@@ -101,6 +98,7 @@ void plsimulator_populate_nserror (NSError **error, PLSimulatorError code, NSStr
 #import "PLSimulatorPlatform.h"
 #import "PLSimulatorDiscovery.h"
 #import "PLSimulatorApplication.h"
+#import "PLSimulatorDeviceFamily.h"
 
 /**
  * @mainpage Plausible Simulator Client

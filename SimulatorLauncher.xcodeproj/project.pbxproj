@@ -36,11 +36,13 @@
 
 /* Begin PBXBuildFile section */
 		052259BA1129FE2E00A83450 /* Bundler.icns in Resources */ = {isa = PBXBuildFile; fileRef = 052259B91129FE2E00A83450 /* Bundler.icns */; };
-		0523619811287BA7001C9661 /* Tests in Resources */ = {isa = PBXBuildFile; fileRef = 0523619611287BA7001C9661 /* Tests */; };
 		0523F61511269281004FB4EB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0523F61211269281004FB4EB /* main.m */; };
 		0523F61611269281004FB4EB /* LauncherAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0523F61411269281004FB4EB /* LauncherAppDelegate.m */; };
 		0523F61E11269298004FB4EB /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0523F61A11269298004FB4EB /* MainMenu.xib */; };
 		0523F67D112699D0004FB4EB /* PLTestCase.m in Sources */ = {isa = PBXBuildFile; fileRef = 0523F67C112699D0004FB4EB /* PLTestCase.m */; };
+		054C8119112B9D53006D87F6 /* PLSimulatorDeviceFamily.h in Headers */ = {isa = PBXBuildFile; fileRef = 054C8117112B9D53006D87F6 /* PLSimulatorDeviceFamily.h */; };
+		054C811A112B9D53006D87F6 /* PLSimulatorDeviceFamily.m in Sources */ = {isa = PBXBuildFile; fileRef = 054C8118112B9D53006D87F6 /* PLSimulatorDeviceFamily.m */; };
+		054C8120112B9D89006D87F6 /* PLSimulatorDeviceFamilyTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 054C811F112B9D89006D87F6 /* PLSimulatorDeviceFamilyTests.m */; };
 		05CC8F721128B62F001912D5 /* PLBlocks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05CC8F711128B62F001912D5 /* PLBlocks.framework */; };
 		05CC8F731128B62F001912D5 /* PLBlocks.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 05CC8F711128B62F001912D5 /* PLBlocks.framework */; };
 		05CC8F791128B64C001912D5 /* PLBlocks.framework in Copy Frameworks */ = {isa = PBXBuildFile; fileRef = 05CC8F711128B62F001912D5 /* PLBlocks.framework */; };
@@ -222,7 +224,6 @@
 
 /* Begin PBXFileReference section */
 		052259B91129FE2E00A83450 /* Bundler.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Bundler.icns; sourceTree = "<group>"; };
-		0523619611287BA7001C9661 /* Tests */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Tests; sourceTree = "<group>"; };
 		0523F61211269281004FB4EB /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0523F61311269281004FB4EB /* LauncherAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LauncherAppDelegate.h; sourceTree = "<group>"; };
 		0523F61411269281004FB4EB /* LauncherAppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LauncherAppDelegate.m; sourceTree = "<group>"; };
@@ -235,6 +236,10 @@
 		0523F66A11269876004FB4EB /* Launcher Tests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Launcher Tests-Info.plist"; sourceTree = "<group>"; };
 		0523F67B112699D0004FB4EB /* PLTestCase.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLTestCase.h; sourceTree = "<group>"; };
 		0523F67C112699D0004FB4EB /* PLTestCase.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLTestCase.m; sourceTree = "<group>"; };
+		054C8117112B9D53006D87F6 /* PLSimulatorDeviceFamily.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLSimulatorDeviceFamily.h; sourceTree = "<group>"; };
+		054C8118112B9D53006D87F6 /* PLSimulatorDeviceFamily.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLSimulatorDeviceFamily.m; sourceTree = "<group>"; };
+		054C811F112B9D89006D87F6 /* PLSimulatorDeviceFamilyTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLSimulatorDeviceFamilyTests.m; sourceTree = "<group>"; };
+		054C8121112B9E49006D87F6 /* classdump.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = classdump.h; sourceTree = "<group>"; };
 		05CC8F711128B62F001912D5 /* PLBlocks.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = PLBlocks.framework; sourceTree = "<group>"; };
 		05CC90F21128C8C5001912D5 /* PLSimulator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PLSimulator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		05CC90FD1128C91A001912D5 /* PLSimulator-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "PLSimulator-Info.plist"; sourceTree = "<group>"; };
@@ -348,7 +353,6 @@
 			isa = PBXGroup;
 			children = (
 				05CC93371128E3FD001912D5 /* EmbeddedApp */,
-				0523619611287BA7001C9661 /* Tests */,
 				0523F61811269298004FB4EB /* InfoPlist.strings */,
 				0523F61A11269298004FB4EB /* MainMenu.xib */,
 				0523F61C11269298004FB4EB /* Launcher-Info.plist */,
@@ -371,6 +375,7 @@
 			isa = PBXGroup;
 			children = (
 				0523F645112694C8004FB4EB /* iPhoneSimulatorRemoteClient.h */,
+				054C8121112B9E49006D87F6 /* classdump.h */,
 			);
 			path = iPhoneSimulatorRemoteClient;
 			sourceTree = "<group>";
@@ -418,6 +423,9 @@
 				05CC91041128C92F001912D5 /* PLSimulatorDiscovery.h */,
 				05CC91051128C92F001912D5 /* PLSimulatorDiscovery.m */,
 				05CC91061128C92F001912D5 /* PLSimulatorDiscoveryTests.m */,
+				054C8117112B9D53006D87F6 /* PLSimulatorDeviceFamily.h */,
+				054C8118112B9D53006D87F6 /* PLSimulatorDeviceFamily.m */,
+				054C811F112B9D89006D87F6 /* PLSimulatorDeviceFamilyTests.m */,
 				05CC910D1128C92F001912D5 /* rpm-vercomp.h */,
 				05CC910E1128C92F001912D5 /* rpm-vercomp.m */,
 			);
@@ -558,6 +566,7 @@
 				05CC91191128C92F001912D5 /* PLSimulatorSDK.h in Headers */,
 				05CC911C1128C92F001912D5 /* rpm-vercomp.h in Headers */,
 				05CC92601128DA11001912D5 /* PLSimulatorUtils.h in Headers */,
+				054C8119112B9D53006D87F6 /* PLSimulatorDeviceFamily.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -692,7 +701,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0523619811287BA7001C9661 /* Tests in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -811,6 +819,7 @@
 				05CC911A1128C92F001912D5 /* PLSimulatorSDK.m in Sources */,
 				05CC911D1128C92F001912D5 /* rpm-vercomp.m in Sources */,
 				05CC92611128DA11001912D5 /* PLSimulatorUtils.m in Sources */,
+				054C811A112B9D53006D87F6 /* PLSimulatorDeviceFamily.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -823,6 +832,7 @@
 				05CC91351128C987001912D5 /* PLSimulatorSDKTests.m in Sources */,
 				05CC91321128C981001912D5 /* PLTestCase.m in Sources */,
 				05CC92151128D38D001912D5 /* PLSimulatorApplicationTests.m in Sources */,
+				054C8120112B9D89006D87F6 /* PLSimulatorDeviceFamilyTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

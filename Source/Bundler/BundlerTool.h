@@ -44,6 +44,6 @@ typedef void (^BundlerToolCompletedBlock)(BOOL success);
     NSMapTable *_taskBlocks;
 }
 
-- (void) executeWithSimulatorApp: (PLSimulatorApplication *) app deviceFamily: (NSString *) deviceFamily block: (BundlerToolCompletedBlock) block;
+- (void) executeWithSimulatorApp: (PLSimulatorApplication *) app deviceFamily: (PLSimulatorDeviceFamily *) deviceFamily block: (BundlerToolCompletedBlock) block;
 
 @end

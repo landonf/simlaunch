@@ -39,7 +39,7 @@
 - (void) displayOpenPanel;
 
 - (void) openApplicationWithPath: (NSString *) path;
-- (void) executeBundlerWithSimulatorApp: (PLSimulatorApplication *) app deviceFamily: (NSString *) family;
+- (void) executeBundlerWithSimulatorApp: (PLSimulatorApplication *) app deviceFamily: (PLSimulatorDeviceFamily *) family;
 
 @end
 
@@ -79,7 +79,7 @@
 }
 
 // from BundlerConfigWindowControllerDelegate protocol
-- (void) bundlerConfig: (BundlerConfigWindowController *) bundlerConfig didSelectDeviceFamily: (NSString *) family {
+- (void) bundlerConfig: (BundlerConfigWindowController *) bundlerConfig didSelectDeviceFamily: (PLSimulatorDeviceFamily *) family {
     /* Start the bundler tool */
     [self executeBundlerWithSimulatorApp: bundlerConfig.application deviceFamily: family];
 
@@ -215,7 +215,7 @@
  * @param app Application to be bundled.
  * @param family Device family to use when launching the app.
  */
-- (void) executeBundlerWithSimulatorApp: (PLSimulatorApplication *) app deviceFamily: (NSString *) family {
+- (void) executeBundlerWithSimulatorApp: (PLSimulatorApplication *) app deviceFamily: (PLSimulatorDeviceFamily *) family {
     /* Mark active */
     [self addActiveTask];
 

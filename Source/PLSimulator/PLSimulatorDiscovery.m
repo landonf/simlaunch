@@ -49,8 +49,8 @@
  * case no matching will be done on the version.
  * @param sdkName Specify a canonical name for an SDK that must be included with the platform SDK (iphonesimulator3.1, etc).
  * If nil, no verification of the canonical name will be done on SDKs contained in the platform SDK. 
- * @param deviceFamilies The set of requested device families. Platform SDKs that match any of these device
- * families will be returned. See \ref plsimulator_device_family Device Family Constants.
+ * @param deviceFamilies The set of requested PLSimulatorDeviceFamily types. Platform SDKs that match any of these device
+ * families will be returned.
  */
 - (id) initWithMinimumVersion: (NSString *) version 
              canonicalSDKName: (NSString *) canonicalSDKName

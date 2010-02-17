@@ -50,7 +50,7 @@
  * @param config The sender.
  * @param family The selected PLSimulatorDeviceFamily.
  */
-- (void) bundlerConfig: (BundlerConfigWindowController *) bundlerConfig didSelectDeviceFamily: (NSString *) family;
+- (void) bundlerConfig: (BundlerConfigWindowController *) bundlerConfig didSelectDeviceFamily: (PLSimulatorDeviceFamily *) family;
 
 @end
 
@@ -65,8 +65,8 @@
     /** The app to configure. */
     PLSimulatorApplication *_app;
 
-    /** Maps the displayed device names to a PLSimulatorDeviceFamily constant. */
-    NSDictionary *_deviceNameMap;
+    /** Device families to be selected from. */
+    NSArray *_deviceFamilies;
 
     /** Delegate */
     id<BundlerConfigWindowControllerDelegate> _delegate;

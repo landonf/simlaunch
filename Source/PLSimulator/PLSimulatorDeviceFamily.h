@@ -28,12 +28,26 @@
 
 #import <Cocoa/Cocoa.h>
 
-#import "PLSimulator.h"
+@interface PLSimulatorDeviceFamily : NSWindowController {
+@private
+    /** Localized name. */
+    NSString *_localizedName;
 
-@interface PLSimulatorUtils : NSObject {
-
+    /** The device family value used by the Apple Developer tools. */
+    NSInteger _deviceFamilyCode;
 }
 
-+ (NSSet *) deviceFamiliesForDeviceCodes: (NSArray *) deviceCodes;
++ (PLSimulatorDeviceFamily *) deviceFamilyForDeviceCode: (NSInteger) deviceCode;
+
+
++ (PLSimulatorDeviceFamily *) iphoneFamily;
++ (PLSimulatorDeviceFamily *) ipadFamily;
+
+/** The device family's localized name. */
+@property(readonly) NSString *localizedName;
+
+/** The device family code used by the Apple Developer tools for both the UIDeviceFamily bundle key and the
+ * iPhoneSimulatorRemoteClient API. */
+@property(readonly) NSInteger deviceFamilyCode;
 
 @end
