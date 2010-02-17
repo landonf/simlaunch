@@ -45,6 +45,11 @@
 
     /** Active BundlerConfigWindowController instances. */
     NSMutableSet *_appConfigControllers;
+
+    /** If YES, the open panel is being displayed */
+    BOOL _openPanelActive;
 }
+
+- (IBAction) openFile: (id) sender;
 
 @end

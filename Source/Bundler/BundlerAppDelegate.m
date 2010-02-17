@@ -36,6 +36,9 @@
 - (void) addActiveTask;
 - (void) removeActiveTask;
 
+- (void) displayOpenPanel;
+
+- (void) openApplicationWithPath: (NSString *) path;
 - (void) executeBundlerWithSimulatorApp: (PLSimulatorApplication *) app deviceFamily: (NSString *) family;
 
 @end
@@ -49,83 +52,18 @@
 
 // from NSApplicationDelegate protocol
 - (void) applicationDidFinishLaunching: (NSNotification *) aNotification {
-    /* Since we're a droplet, if we don't receive any files we should exit */
-    if (!_receivedDroppedFiles) {
-        NSAlert *alert = [NSAlert new];
-        [alert setMessageText: NSLocalizedString(@"No files provided.", @"No files alert message text")];
-        [alert setInformativeText: NSLocalizedString(@"To bundle a simulator binary for distribution, drop it on the Simulator Bundler application.", 
-                                                     @"No files alert info text")];
-        [alert runModal];
-
-        [[NSApplication sharedApplication] terminate: self];
-    }
-}
-
-/**
- * Display a generic error alert and request program termination.
- * 
- * @param message Alert message.
- * @param info Informative text.
- */
-- (void) displayErrorWithMessage: (NSString *) message info: (NSString *) info {
-    NSAlert *alert = [NSAlert new];
-    [alert setMessageText: message];
-    [alert setInformativeText: info];
-    [alert runModal];
-    
-    [[NSApplication sharedApplication] terminate: self];
-}
-
-/**
- * Display a launch error alert and request program termination.
- * 
- * @param info Informative text.
- */
-- (void) displayBundlingError: (NSString *) info {
-    NSAlert *alert = [NSAlert new];
-    [alert setMessageText: NSLocalizedString(@"Could not bundle the application for distribution.", @"No files alert message text")];
-    [alert setInformativeText: info];
-    [alert runModal];
-
-    [[NSApplication sharedApplication] terminate: self];
+    /* Since we're a droplet, if no files were received we just display the open panel */
+    if (!_receivedDroppedFiles)
+        [self displayOpenPanel];
 }
 
 // from NSApplicationDelegate protocol
 - (BOOL) application: (NSApplication *) theApplication openFile: (NSString *) filename {
-    NSError *error;
-
-    /* Load the application info */
-    PLSimulatorApplication *app = [[PLSimulatorApplication alloc] initWithPath: filename error: &error];
-    if (app == nil) {
-        NSLog(@"Could not load simulator app info: %@", error);
-
-        /* Inform the user */
-        NSString *textFmt = NSLocalizedString(@"%@ does not appear to be a valid iPhone application.", @"Alert error info");
-        [self displayErrorWithMessage: NSLocalizedString(@"Could not read application property list.", @"Alert error message")
-                                 info: [NSString stringWithFormat: textFmt, [filename lastPathComponent]]];
-        return YES;
-    }
-
     /* Note that we received a file */
     _receivedDroppedFiles = YES;
-    
-    /* If the app supports multiple device families, request the preferred family from the user */
-    if ([app.deviceFamilies count] > 1) {
-        /* Display the config UI */
-        BundlerConfigWindowController *controller = [[BundlerConfigWindowController alloc] initWithSimulatorApp: (PLSimulatorApplication *) app];
-        [controller setDelegate: self];
-        [controller showWindow: self];
-        [[controller window] makeKeyWindow];
 
-        /* Save the controller reference */
-        [_appConfigControllers addObject: controller];
-    
-        /* Note that a task is active */
-        [self addActiveTask];
-    } else {
-        /* Otherwise, package the application immediately */
-        [self executeBundlerWithSimulatorApp: app deviceFamily: [app.deviceFamilies anyObject]];
-    }
+    /* Open the file */
+    [self openApplicationWithPath: filename];
 
     return YES;
 }
@@ -153,9 +91,105 @@
     [self removeActiveTask];
 }
 
+
+// Display a new file open panel
+- (IBAction) openFile: (id) sender {
+    [self displayOpenPanel];
+}
+
 @end
 
+/**
+ * @internal
+ */
 @implementation BundlerAppDelegate (PrivateMethods)
+
+/**
+ * Display a generic error alert and request program termination.
+ * 
+ * @param message Alert message.
+ * @param info Informative text.
+ */
+- (void) displayErrorWithMessage: (NSString *) message info: (NSString *) info {
+    NSAlert *alert = [NSAlert new];
+    [alert setMessageText: message];
+    [alert setInformativeText: info];
+    [alert runModal];
+    
+    [[NSApplication sharedApplication] terminate: self];
+}
+
+/**
+ * Display a launch error alert and request program termination.
+ * 
+ * @param info Informative text.
+ */
+- (void) displayBundlingError: (NSString *) info {
+    NSAlert *alert = [NSAlert new];
+    [alert setMessageText: NSLocalizedString(@"Could not bundle the application for distribution.", @"No files alert message text")];
+    [alert setInformativeText: info];
+    [alert runModal];
+    
+    [[NSApplication sharedApplication] terminate: self];
+}
+
+/**
+ * Display the open panel and allow the user to select application(s) to convert.
+ */
+- (void) displayOpenPanel {
+    /* Configure our panel */
+    NSOpenPanel *panel = [NSOpenPanel openPanel];    
+    [panel setAllowsMultipleSelection: YES];
+    
+    /* Run */
+    if ([panel runModalForTypes: [NSArray arrayWithObject: @"app"]] != NSOKButton) {
+        [[NSApplication sharedApplication] terminate: self];
+        return;
+    }
+    
+    /* Open selected applications */
+    for (NSURL *url in [panel URLs])
+        [self openApplicationWithPath: [url path]]; 
+}
+
+/**
+ * Open and attempt to bundle the provided application.
+ *
+ * @param path Path to the application.
+ */
+- (void) openApplicationWithPath: (NSString *) path {
+    NSError *error;
+    
+    /* Load the application info */
+    PLSimulatorApplication *app = [[PLSimulatorApplication alloc] initWithPath: path error: &error];
+    if (app == nil) {
+        NSLog(@"Could not load simulator app info: %@", error);
+        
+        /* Inform the user */
+        NSString *textFmt = NSLocalizedString(@"%@ does not appear to be a valid iPhone application.", @"Alert error info");
+        [self displayErrorWithMessage: NSLocalizedString(@"Could not read application property list.", @"Alert error message")
+                                 info: [NSString stringWithFormat: textFmt, [path lastPathComponent]]];
+        return;
+    }
+    
+    /* If the app supports multiple device families, request the preferred family from the user */
+    if ([app.deviceFamilies count] > 1) {
+        /* Display the config UI */
+        BundlerConfigWindowController *controller = [[BundlerConfigWindowController alloc] initWithSimulatorApp: (PLSimulatorApplication *) app];
+        [controller setDelegate: self];
+        [controller showWindow: self];
+        [[controller window] makeKeyWindow];
+        
+        /* Save the controller reference */
+        [_appConfigControllers addObject: controller];
+        
+        /* Note that a task is active */
+        [self addActiveTask];
+    } else {
+        /* Otherwise, package the application immediately */
+        [self executeBundlerWithSimulatorApp: app deviceFamily: [app.deviceFamilies anyObject]];
+    }    
+}
 
 /**
  * Increment count of active tasks.
@@ -165,15 +199,22 @@
 }
 
 /**
- * Decrement count of active tasks. If the active task value hits 0, the application will terminate.
+ * Decrement count of active tasks. If the active task value hits 0 and we were opened as a droplet,
+ * the application will terminate.
  */
 - (void) removeActiveTask {
     _activeTasks--;
-    if (_activeTasks == 0)
+    if (_activeTasks == 0 && _receivedDroppedFiles)
         [[NSApplication sharedApplication] terminate: self];
 }
 
 
+/**
+ * Execute the bundler tool.
+ *
+ * @param app Application to be bundled.
+ * @param family Device family to use when launching the app.
+ */
 - (void) executeBundlerWithSimulatorApp: (PLSimulatorApplication *) app deviceFamily: (NSString *) family {
     /* Mark active */
     [self addActiveTask];
