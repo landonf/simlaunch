@@ -138,9 +138,6 @@
     [config setSimulatedApplicationLaunchEnvironment: [NSDictionary dictionary]];
 
     if ([config respondsToSelector: @selector(setSimulatedDeviceFamily:)]) {
-        NSLog(@"APP: %@", _app.deviceFamilies);
-        NSLog(@"SDK: %@", sdk.deviceFamilies);
-
         /* Prefer iPad over iPhone, but only if we know it will work. */
         // TODO: Make configurable.
         if (sdk != nil &&
