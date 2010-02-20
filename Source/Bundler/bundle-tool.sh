@@ -123,8 +123,13 @@ populate_meta_data () {
 		check_error "Could not create temporary file for Icon resampling" ${DESTINATION_WRITE_FAILED}
 
 		# Convert the icon. If we were really cool, we'd support applying the same effects that Apple
-		# does.
-		/usr/bin/sips --resampleWidth 128 -s format icns "${APP_ICON}" --out "${APP_DEST}/${ICNS_FILE}"
+		# does. Use ImageMagick if available.
+		local convert=`which convert`
+		if [ ! -z "$convert" ]; then
+			$convert "${APP_ICON}" -resample 128x128 "${APP_DEST}/${ICNS_FILE}"
+		else
+			/usr/bin/sips --resampleWidth 128 -s format icns "${APP_ICON}" --out "${APP_DEST}/${ICNS_FILE}"
+		fi
 		check_error "Failed to convert application icon" ${DESTINATION_WRITE_FAILED}
 
 		# Clean up
