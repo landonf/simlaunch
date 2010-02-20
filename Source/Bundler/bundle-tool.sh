@@ -55,12 +55,12 @@ parse_plist () {
 	APP_NAME=`${PLIST_CMD} -c "Print CFBundleDisplayName" "${PLIST}"`
 	APP_BUNDLE_ID=`${PLIST_CMD} -c "Print CFBundleIdentifier" "${PLIST}"`
 	APP_ICON=`${PLIST_CMD} -c "Print CFBundleIconFile" "${PLIST}"`
-	
+
 	if [ -z "${APP_NAME}" ]; then
 		echo "${APP} is missing a valid CFBundleDisplayName"
 		exit ${SOURCE_APP_INVALID}
 	fi
-	
+
 	if [ -z "${APP_BUNDLE_ID}" ]; then
 		echo "${APP} is missing a valid CFBundleIdentifier"
 		exit ${SOURCE_APP_INVALID}
@@ -105,8 +105,8 @@ populate_dest_path () {
 	mkdir -p "${APP_DEST}/${EMBED_DIR}"
 	check_error "Could not create embedded app destination directory" ${DESTINATION_WRITE_FAILED}
 	local app_dirname=`dirname "${APP}"`
-	tar -C "${app_dirname}" -cf - `basename "${APP}"` | tar -C "${APP_DEST}/${EMBED_DIR}" -xf -
-	check_error "Could not populate embedded app destination directory" ${DESTINATION_WRITE_FAILED} 
+	tar -C "${app_dirname}" -cf - "`basename \"${APP}\"`" | tar -C "${APP_DEST}/${EMBED_DIR}" -xf -
+	check_error "Could not populate embedded app destination directory" ${DESTINATION_WRITE_FAILED}
 }
 
 # Convert and insert the target application's icon and bundle identifier
@@ -121,7 +121,7 @@ populate_meta_data () {
 	if [ -f "${APP_ICON}" ]; then
 		local resampled=`mktemp /tmp/${tempfoo}.XXXXXX`
 		check_error "Could not create temporary file for Icon resampling" ${DESTINATION_WRITE_FAILED}
-		
+
 		# Convert the icon. If we were really cool, we'd support applying the same effects that Apple
 		# does.
 		/usr/bin/sips --resampleWidth 128 -s format icns "${APP_ICON}" --out "${APP_DEST}/${ICNS_FILE}"
@@ -130,7 +130,7 @@ populate_meta_data () {
 		# Clean up
 		rm -f "${resampled}"
 	fi
-    
+
     # Set the default device family
     if [ ! -z "${DEVICE_FAMILY}" ]; then
         if [ "${DEVICE_FAMILY}" = "iPhone" ]; then
