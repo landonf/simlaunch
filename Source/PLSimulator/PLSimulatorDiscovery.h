@@ -51,7 +51,7 @@
 
 @end
 
-@interface PLSimulatorDiscovery : NSObject {
+@interface PLSimulatorDiscovery : NSObject<NSMetadataQueryDelegate> {
 @private
     /** Requested minimum version. If nil, no minimum version is requested. */
     NSString *_version;

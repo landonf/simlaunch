@@ -36,6 +36,7 @@
 
 /* Canonical SDK Name */
 #define SDKNameKey @"DTSDKName"
+#define CFBundleDisplayName @"CFBundleDisplayName"
 
 /**
  * Provides access to a Simulator application's meta-data.
@@ -134,7 +135,7 @@
     };
 
     /* Get the application's display name. */
-    if (!Get((id)kCFBundleNameKey, &_displayName, [NSString class], YES))
+    if (!Get((id)CFBundleDisplayName, &_displayName, [NSString class], YES))
         return nil;
 
     /* Get the canonical name of the SDK that this app was built with. */
