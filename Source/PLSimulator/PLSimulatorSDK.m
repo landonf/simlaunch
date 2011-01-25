@@ -140,7 +140,7 @@ enum {
         if (required) {
             NSString *desc = NSLocalizedString(@"The provided SDK's SDKSettings property list schema is missing required %@ key.",
                                                @"Missing/non-directory SDK path");
-            [NSString stringWithFormat: desc, key];
+            desc = [NSString stringWithFormat: desc, key];
             plsimulator_populate_nserror(outError, PLSimulatorErrorInvalidSDK, desc, nil);
         }
 

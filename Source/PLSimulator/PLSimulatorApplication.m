@@ -129,7 +129,7 @@
         if (required) {
             NSString *desc = NSLocalizedString(@"The application's Info.plist is missing required %@ key.",
                                                @"Unsupported application plist");
-            [NSString stringWithFormat: desc, key];
+            desc = [NSString stringWithFormat: desc, key];
             plsimulator_populate_nserror(outError, PLSimulatorErrorInvalidApplication, desc, nil);
         }
         
