@@ -36,6 +36,8 @@
 
 /* Canonical SDK Name */
 #define SDKNameKey @"DTSDKName"
+
+/* Display name key */
 #define CFBundleDisplayName @"CFBundleDisplayName"
 
 /**
