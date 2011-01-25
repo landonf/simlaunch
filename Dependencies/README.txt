@@ -1,21 +1,5 @@
 This directory contains shared source and binary dependencies.
 
-PLBlocks.framework:
-    Description:
-      Plausible Blocks (PLBlocks) provides a drop-in runtime and toolchain for using
-      blocks in iPhone 2.2+ and Mac OS X 10.5 applications.
-
-      http://code.google.com/p/plblocks/
-
-    Version:
-      r129 built from http://code.google.com/p/plblocks
-
-    License:
-      MIT License
-
-    Modifications:
-      No modifications.
-
 iPhoneSimulatorRemoteClient:
     Description:
       Headers for the private iPhoneSimulatorRemoteClient framework
