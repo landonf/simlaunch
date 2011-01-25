@@ -43,19 +43,19 @@
 + (NSSet *) deviceFamiliesForDeviceCodes: (NSArray *) deviceCodes {
     NSMutableSet *deviceFamilies = [NSMutableSet setWithCapacity: [deviceCodes count]];
 
-    for (NSString *str in deviceCodes) {
+    for (id code in deviceCodes) {
         /* Try to handle string/number confusion. The current plist uses strings, but it's
          * clearly a numeric constant. We assume that if it responds to intValue, it will
          * work as either a NSNumber or NSString */
-        if (![str isKindOfClass: [NSString class]] && [str isKindOfClass: [NSNumber class]]) {
-            NSLog(@"Unsupported %@ value type while parsing UIDeviceFamily settings: %@", str, deviceCodes);
+        if (![code respondsToSelector:@selector(intValue)]) {
+            NSLog(@"Unsupported %@ value type while parsing UIDeviceFamily settings: %@", code, deviceCodes);
             continue;
         }
         
         /* Map the Apple family number to our family constants */
-        PLSimulatorDeviceFamily *family = [PLSimulatorDeviceFamily deviceFamilyForDeviceCode: [str intValue]];
+        PLSimulatorDeviceFamily *family = [PLSimulatorDeviceFamily deviceFamilyForDeviceCode: [code intValue]];
         if (family == nil)
-            NSLog(@"Unsupported %@:%@ value type while parsing UIDeviceFamily value.", str, [str class]);
+            NSLog(@"Unsupported %@:%@ value type while parsing UIDeviceFamily value.", code, [code class]);
         else
             [deviceFamilies addObject: family];
     }
