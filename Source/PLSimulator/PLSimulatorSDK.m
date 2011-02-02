@@ -43,6 +43,7 @@
 
 /* Device Families */
 #define DevicesKey @"UIDeviceFamily"
+#define AltDevicesKey @"DefaultProperties.SUPPORTED_DEVICE_FAMILIES"
 
 /* Canonical name */
 #define CanonicalNameKey @"CanonicalName"
@@ -132,7 +133,7 @@ enum {
 
     /* Block to fetch a key from the plist */
     BOOL (^Get) (NSString *, id *, Class cls, BOOL) = ^(NSString *key, id *value, Class cls, BOOL required) {
-        *value = [plist objectForKey: key];
+        *value = [plist valueForKeyPath: key];
         if (*value != nil && (cls == nil || [*value isKindOfClass: cls]))
             return YES;
     
@@ -159,11 +160,13 @@ enum {
         NSArray *devices;
         if (Get(DevicesKey, &devices, [NSArray class], NO)) {
             _deviceFamilies = [PLSimulatorUtils deviceFamiliesForDeviceCodes: devices];
+        } else if (Get(AltDevicesKey, &devices, [NSArray class], NO)) {
+            _deviceFamilies = [PLSimulatorUtils deviceFamiliesForDeviceCodes: devices];
         }
 
         /* If no valid settings, assume that this is a <3.2 SDK and it supports the iPhone family */
         if (_deviceFamilies == nil || [_deviceFamilies count] == 0)
-            _deviceFamilies = [NSSet setWithObject: [PLSimulatorDeviceFamily iphoneFamily]];
+            _deviceFamilies = [NSSet setWithObject: [PLSimulatorDeviceFamily iphoneFamily]] ;
     }
 
     return self;
