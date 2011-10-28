@@ -83,7 +83,7 @@ enum {
 
     /* Save the SDK path */
     _path = path;
-    
+
     /* Verify that the path exists */
     NSFileManager *fm = [NSFileManager new];
     {
@@ -122,11 +122,11 @@ enum {
         /* We expect a dictionary */
         if (![plistInstance isKindOfClass: [NSDictionary class]]) {
             NSString *desc = NSLocalizedString(@"The provided SDK SDKSettings property list uses an unsupported data schema.",
-                                               @"Missing/non-directory SDK path");        
+                                               @"Missing/non-directory SDK path");
             plsimulator_populate_nserror(outError, PLSimulatorErrorInvalidSDK, desc, nil);
             return nil;
         }
-        
+
         plist = plistInstance;
     }
 
@@ -135,7 +135,7 @@ enum {
         *value = [plist objectForKey: key];
         if (*value != nil && (cls == nil || [*value isKindOfClass: cls]))
             return YES;
-    
+
         /* Populate the error */
         if (required) {
             NSString *desc = NSLocalizedString(@"The provided SDK's SDKSettings property list schema is missing required %@ key.",

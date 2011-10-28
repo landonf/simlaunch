@@ -42,9 +42,9 @@
 
     /* Display a fatal configuration error modaly */
     void (^ConfigError)(NSString *) = ^(NSString *text) {
-        NSAlert *alert = [NSAlert alertWithMessageText: @"The launcher has not been correctly configured." 
+        NSAlert *alert = [NSAlert alertWithMessageText: @"The launcher has not been correctly configured."
                                          defaultButton: @"Quit"
-                                       alternateButton: nil 
+                                       alternateButton: nil
                                            otherButton: nil
                              informativeTextWithFormat: text];
         [alert runModal];
@@ -80,23 +80,23 @@
         return;
     }
 
-    /* Find the matching platform SDKs. We don't care about version, but do care about the SDK the 
+    /* Find the matching platform SDKs. We don't care about version, but do care about the SDK the
      * app was built with and the device families it requires/supports */
     _discovery = [[PLSimulatorDiscovery alloc] initWithMinimumVersion: nil
                                                      canonicalSDKName: _app.canonicalSDKName
                                                        deviceFamilies: _app.deviceFamilies];
     _discovery.delegate = self;
     [_discovery startQuery];
-    
+
 }
 
 // from PLSimulatorDiscoveryDelegate protocol
 - (void) simulatorDiscovery: (PLSimulatorDiscovery *) discovery didFindMatchingSimulatorPlatforms: (NSArray *) platforms {
     /* No platforms found */
     if ([platforms count] == 0) {
-        NSString *infoFmt = NSLocalizedString(@"The iPhone SDK required by the application could not be found. Please install the %@ SDK and try again.", 
+        NSString *infoFmt = NSLocalizedString(@"The iPhone SDK required by the application could not be found. Please install the %@ SDK and try again.",
                                               @"App SDK not found");
-    
+
         NSAlert *alert = [NSAlert alertWithMessageText: NSLocalizedString(@"Required iPhone SDK not found.", @"SDK not found")
                                          defaultButton: NSLocalizedString(@"Quit", @"Quit button")
                                        alternateButton: nil

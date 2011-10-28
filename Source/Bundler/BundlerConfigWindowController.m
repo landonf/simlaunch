@@ -45,15 +45,15 @@
 - (id) initWithSimulatorApp: (PLSimulatorApplication *) app {
     if ((self = [super initWithWindowNibName: @"AppConfig"]) == nil)
         return nil;
-    
+
     _app = app;
 
     /* Save the supported device families, sorting alphabetically */
-    NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey: @"localizedName" 
-                                                         ascending: YES 
+    NSSortDescriptor *sort = [[NSSortDescriptor alloc] initWithKey: @"localizedName"
+                                                         ascending: YES
                                                           selector: @selector(localizedCompare:)];
     _deviceFamilies = [[_app.deviceFamilies allObjects] sortedArrayUsingDescriptors: [NSArray arrayWithObject: sort]];
-    
+
     return self;
 }
 
@@ -61,14 +61,14 @@
 - (void) windowDidLoad {
     /* Set the title */
     [[self window] setTitle: _app.displayName];
-    
+
 
 
     /* Set the user message */
     NSString *msgFmt = NSLocalizedString(@"%@ is a universal application. What device would you like to simulate when it is launched?",
                                          @"App configuration message.");
     [_messageField setStringValue: [NSString stringWithFormat: msgFmt, _app.displayName]];
-    
+
     /* Set the "choose at launch" message */
     msgFmt = NSLocalizedString(@"Choose the device when %@ is launched.", @"App configuration dialog message");
     [_selectAtLaunch setTitle: [NSString stringWithFormat: msgFmt, _app.displayName]];

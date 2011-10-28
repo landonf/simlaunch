@@ -51,7 +51,7 @@
 - (id) initWithPlatform: (PLSimulatorPlatform *) platform app: (PLSimulatorApplication *) app {
     if ((self = [super init]) == nil)
         return nil;
-    
+
     _platform = platform;
     _app = app;
 
@@ -60,7 +60,7 @@
 
 /**
  * Display a launch error alert and request program termination.
- * 
+ *
  * @param text Informative text.
  */
 - (void) displayLaunchError: (NSString *) text {
@@ -68,7 +68,7 @@
     [alert setMessageText: NSLocalizedString(@"Could not launch the iPad/iPhone application.", @"Launch failure alert title")];
     [alert setInformativeText: text];
     [alert runModal];
-    
+
     [[NSApplication sharedApplication] terminate: self];
 }
 
@@ -82,11 +82,11 @@
     DTiPhoneSimulatorSessionConfig *config;
     DTiPhoneSimulatorSession *session;
     NSError *error;
-    
+
     /* Load the framework */
     if (![_platform loadClientFramework: &error]) {
         NSLog(@"Failed to load iPhoneSimulatorRemoteClient framework: %@", error);
-        [self displayLaunchError: NSLocalizedString(@"A failure occured loading the iPhoneSimulatorRemoteClient private framework.", 
+        [self displayLaunchError: NSLocalizedString(@"A failure occured loading the iPhoneSimulatorRemoteClient private framework.",
                                                     @"Failed to load private framework alert text")];
     }
 
@@ -94,8 +94,8 @@
     appSpec = [C(DTiPhoneSimulatorApplicationSpecifier) specifierWithApplicationPath: _app.path];
     if (appSpec == nil) {
         NSLog(@"Could not load application specification for %@\n", _app.path);
-    
-        NSString *text = NSLocalizedString(@"The iPhone application specification could not be loaded. This launcher may be misconfigured.", 
+
+        NSString *text = NSLocalizedString(@"The iPhone application specification could not be loaded. This launcher may be misconfigured.",
                                            @"App load failure");
         [self displayLaunchError: text];
         return;
@@ -125,15 +125,15 @@
     } else {
         sdkRoot = [C(DTiPhoneSimulatorSystemRoot) defaultRoot];
     }
-    
+
     NSLog(@"SDK Root: %@\n", sdkRoot);
-    
+
     /* Set up the session configuration */
     config = [[C(DTiPhoneSimulatorSessionConfig) alloc] init];
     [config setApplicationToSimulateOnStart: appSpec];
     [config setSimulatedSystemRoot: sdkRoot];
     [config setSimulatedApplicationShouldWaitForDebugger: NO];
-    
+
     [config setSimulatedApplicationLaunchArgs: [NSArray array]];
     [config setSimulatedApplicationLaunchEnvironment: [NSDictionary dictionary]];
 
@@ -141,27 +141,27 @@
         /* Prefer iPad over iPhone, but only if we know it will work. */
         // TODO: Make configurable.
         if (sdk != nil &&
-            [_app.deviceFamilies containsObject: [PLSimulatorDeviceFamily ipadFamily]] && 
-            [sdk.deviceFamilies containsObject: [PLSimulatorDeviceFamily ipadFamily]]) 
+            [_app.deviceFamilies containsObject: [PLSimulatorDeviceFamily ipadFamily]] &&
+            [sdk.deviceFamilies containsObject: [PLSimulatorDeviceFamily ipadFamily]])
         {
-            [config setSimulatedDeviceFamily: [NSNumber numberWithInt: DTiPhoneSimulatoriPadFamily]]; 
+            [config setSimulatedDeviceFamily: [NSNumber numberWithInt: DTiPhoneSimulatoriPadFamily]];
         } else {
             [config setSimulatedDeviceFamily: [NSNumber numberWithInt: DTiPhoneSimulatoriPhoneFamily]];
         }
     }
-    
+
     [config setLocalizedClientName: @"SimLauncher"];
-    
+
     /* Start the session */
     session = [[[C(DTiPhoneSimulatorSession) alloc] init] autorelease];
     [session setDelegate: self];
     [session setSimulatedApplicationPID: [NSNumber numberWithInt: 35]];
-    
+
     if (![session requestStartWithConfig: config timeout: 30.0 error: &error]) {
         NSLog(@"Could not start simulator session: %@", error);
 
         NSString *text = NSLocalizedString(@"The iPhone Simulator could not be started. If another Simulator application "
-                                           "is currently running, please close the Simulator and try again.", 
+                                           "is currently running, please close the Simulator and try again.",
                                            @"Simulator error alert info");
         [self displayLaunchError: text];
     }
@@ -190,7 +190,7 @@
     /* Otherwise, an error occured. Inform the user. */
     NSLog(@"Simulator session did not start: %@", error);
     NSString *text = NSLocalizedString(@"The iPhone Simulator could not be started. If another Simulator application "
-                                       "is currently running, please close the Simulator and try again.", 
+                                       "is currently running, please close the Simulator and try again.",
                                        @"Simulator error alert info");
     [self displayLaunchError: text];
 }

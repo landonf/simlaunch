@@ -18,7 +18,7 @@
  * 3. Neither the name of Apple Computer, Inc. nor the names of its
  *    contributors may be used to endorse or promote products derived from
  *    this software without specific prior written permission.
- * 
+ *
  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
@@ -50,11 +50,11 @@
 int rpm_vercomp (const char *versionA, const char *versionB) {
 	const char *ptrA, *ptrB;
 	const char *eptrA, *eptrB;
-    
+
 	/* if versions equal, return zero */
 	if(!strcmp(versionA, versionB))
 		return 0;
-    
+
 	ptrA = versionA;
 	ptrB = versionB;
 	while (*ptrA != '\0' && *ptrB != '\0') {
@@ -63,10 +63,10 @@ int rpm_vercomp (const char *versionA, const char *versionB) {
 			ptrA++;
 		while (*ptrB != '\0' && !isalnum(*ptrB))
 			ptrB++;
-        
+
 		eptrA = ptrA;
 		eptrB = ptrB;
-        
+
 		/*
 		 * Somewhat arbitrary rules as per RPM's implementation.
 		 * This code could be more clever, but we're aiming
@@ -76,7 +76,7 @@ int rpm_vercomp (const char *versionA, const char *versionB) {
 		 * versionA's segment IS a digit segment, return 1.
 		 * (Added for redhat compatibility. See redhat bugzilla
 		 * #50977 for details)
-		 *	
+		 *
 		 * Otherwise, if the segments are of different types,
 		 * return -1
 		 */
@@ -84,16 +84,16 @@ int rpm_vercomp (const char *versionA, const char *versionB) {
 			if (isdigit(*ptrA))
 				return 1;
 		}
-        
+
 		if ((isdigit(*ptrA) && isalpha(*ptrB)) || (isalpha(*ptrA) && isdigit(*ptrB)))
 			return -1;
-        
+
 		/* Find the first segment composed of entirely alphabetical
 		 * or numeric members */
 		if (isalpha(*ptrA)) {
 			while (*eptrA != '\0' && isalpha(*eptrA))
 				eptrA++;
-            
+
 			while (*eptrB != '\0' && isalpha(*eptrB))
 				eptrB++;
 		} else {
@@ -106,7 +106,7 @@ int rpm_vercomp (const char *versionA, const char *versionB) {
 				countB++;
 				eptrB++;
 			}
-            
+
 			/* skip leading '0' characters */
 			while (ptrA != eptrA && *ptrA == '0') {
 				ptrA++;
@@ -116,11 +116,11 @@ int rpm_vercomp (const char *versionA, const char *versionB) {
 				ptrB++;
 				countB--;
 			}
-            
+
 			/* If A is longer than B, return 1 */
 			if (countA > countB)
 				return 1;
-            
+
 			/* If B is longer than A, return -1 */
 			if (countB > countA)
 				return -1;
@@ -132,18 +132,18 @@ int rpm_vercomp (const char *versionA, const char *versionB) {
 		}
 		if (ptrA != eptrA && ptrB != eptrB)
 			return *ptrA - *ptrB;
-        
+
 		ptrA = eptrA;
 		ptrB = eptrB;
 	}
-    
+
 	/* If both pointers are null, all alphanumeric
 	 * characters were identical and only seperating
 	 * characters differed. According to RPM, these
 	 * version strings are equal */
 	if (*ptrA == '\0' && *ptrB == '\0')
 		return 0;
-    
+
 	/* If A has unchecked characters, return 1
 	 * Otherwise, if B has remaining unchecked characters,
 	 * return -1 */

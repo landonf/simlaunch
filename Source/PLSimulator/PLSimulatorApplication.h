@@ -52,10 +52,10 @@
 /** Application path */
 @property(readonly) NSString *path;
 
-/** Return the canonical name of the SDK used to build this application. */ 
+/** Return the canonical name of the SDK used to build this application. */
 @property(readonly) NSString *canonicalSDKName;
 
-/** 
+/**
  * Return the set of PLSimulatorDeviceFamily values supported by this application.
  */
 @property(readonly) NSSet *deviceFamilies;

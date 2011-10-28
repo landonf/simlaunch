@@ -71,7 +71,7 @@ static BOOL isBundleLoaded = NO;
         plsimulator_populate_nserror(outError, PLSimulatorErrorUnknown, @"Unexpected error", nil);
         return nil;
     }
-    
+
     _path = path;
 
     /* Verify that the path exists */
@@ -89,7 +89,7 @@ static BOOL isBundleLoaded = NO;
     NSError *error;
     NSString *sdkDir = [_path stringByAppendingPathComponent: PLATFORM_SUBSDK_PATH];
     NSArray *sdkPaths = [fm contentsOfDirectoryAtPath: sdkDir error: &error];
-    
+
     if (sdkPaths == nil) {
         NSString *desc = NSLocalizedString(@"The provided Platform SDK does not contain any SDKs",
                                            @"Missing/non-directory SDK sub-path");
@@ -125,7 +125,7 @@ static BOOL isBundleLoaded = NO;
  * @return Returns YES on success, or NO on failure.
  *
  * @warning Only one instance of the iPhoneSimulatorRemoteClient framework may be loaded across the entire lifetime
- * of the process. Attempting to load the framework again will trigger a PLSimulatorException. 
+ * of the process. Attempting to load the framework again will trigger a PLSimulatorException.
  */
 - (BOOL) loadClientFramework: (NSError **) outError {
     /* Verify that it is not loaded */

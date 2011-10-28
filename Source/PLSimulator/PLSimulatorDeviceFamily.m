@@ -76,7 +76,7 @@ static PLSimulatorDeviceFamily *iPadSingleton = nil;
     switch ((DTiPhoneSimulatorFamily) deviceCode) {
         case DTiPhoneSimulatoriPhoneFamily:
             return [self iphoneFamily];
-        case DTiPhoneSimulatoriPadFamily: 
+        case DTiPhoneSimulatoriPadFamily:
             return [self ipadFamily];
     }
 
@@ -105,7 +105,7 @@ static PLSimulatorDeviceFamily *iPadSingleton = nil;
 
     if (anObject == nil)
         return NO;
-    
+
     if (![anObject isKindOfClass: [self class]])
         return NO;
 

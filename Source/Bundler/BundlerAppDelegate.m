@@ -85,7 +85,7 @@
 
     /* Hide the window */
     [[bundlerConfig window] close];
-    
+
     /* Remove bundler from the active list, and decrement the active task count */
     [_appConfigControllers removeObject: bundlerConfig];
     [self removeActiveTask];
@@ -106,7 +106,7 @@
 
 /**
  * Display a generic error alert and request program termination.
- * 
+ *
  * @param message Alert message.
  * @param info Informative text.
  */
@@ -115,13 +115,13 @@
     [alert setMessageText: message];
     [alert setInformativeText: info];
     [alert runModal];
-    
+
     [[NSApplication sharedApplication] terminate: self];
 }
 
 /**
  * Display a launch error alert and request program termination.
- * 
+ *
  * @param info Informative text.
  */
 - (void) displayBundlingError: (NSString *) info {
@@ -129,7 +129,7 @@
     [alert setMessageText: NSLocalizedString(@"Could not bundle the application for distribution.", @"No files alert message text")];
     [alert setInformativeText: info];
     [alert runModal];
-    
+
     [[NSApplication sharedApplication] terminate: self];
 }
 
@@ -138,18 +138,18 @@
  */
 - (void) displayOpenPanel {
     /* Configure our panel */
-    NSOpenPanel *panel = [NSOpenPanel openPanel];    
+    NSOpenPanel *panel = [NSOpenPanel openPanel];
     [panel setAllowsMultipleSelection: YES];
-    
+
     /* Run */
     if ([panel runModalForTypes: [NSArray arrayWithObject: @"app"]] != NSOKButton) {
         [[NSApplication sharedApplication] terminate: self];
         return;
     }
-    
+
     /* Open selected applications */
     for (NSURL *url in [panel URLs])
-        [self openApplicationWithPath: [url path]]; 
+        [self openApplicationWithPath: [url path]];
 }
 
 /**
@@ -159,19 +159,19 @@
  */
 - (void) openApplicationWithPath: (NSString *) path {
     NSError *error;
-    
+
     /* Load the application info */
     PLSimulatorApplication *app = [[PLSimulatorApplication alloc] initWithPath: path error: &error];
     if (app == nil) {
         NSLog(@"Could not load simulator app info: %@", error);
-        
+
         /* Inform the user */
         NSString *textFmt = NSLocalizedString(@"%@ does not appear to be a valid iPhone application.", @"Alert error info");
         [self displayErrorWithMessage: NSLocalizedString(@"Could not read application property list.", @"Alert error message")
                                  info: [NSString stringWithFormat: textFmt, [path lastPathComponent]]];
         return;
     }
-    
+
     /* If the app supports multiple device families, request the preferred family from the user */
     if ([app.deviceFamilies count] > 1) {
         /* Display the config UI */
@@ -179,16 +179,16 @@
         [controller setDelegate: self];
         [controller showWindow: self];
         [[controller window] makeKeyWindow];
-        
+
         /* Save the controller reference */
         [_appConfigControllers addObject: controller];
-        
+
         /* Note that a task is active */
         [self addActiveTask];
     } else {
         /* Otherwise, package the application immediately */
         [self executeBundlerWithSimulatorApp: app deviceFamily: [app.deviceFamilies anyObject]];
-    }    
+    }
 }
 
 /**

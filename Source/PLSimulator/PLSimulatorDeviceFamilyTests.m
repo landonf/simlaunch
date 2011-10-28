@@ -39,12 +39,12 @@
 @implementation PLSimulatorDeviceFamilyTests
 
 - (void) testDeviceFamilyForCode {
-    STAssertEqualObjects([PLSimulatorDeviceFamily iphoneFamily], 
-                         [PLSimulatorDeviceFamily deviceFamilyForDeviceCode: DTiPhoneSimulatoriPhoneFamily], 
+    STAssertEqualObjects([PLSimulatorDeviceFamily iphoneFamily],
+                         [PLSimulatorDeviceFamily deviceFamilyForDeviceCode: DTiPhoneSimulatoriPhoneFamily],
                          @"Should be equal");
-    
-    STAssertEqualObjects([PLSimulatorDeviceFamily ipadFamily], 
-                         [PLSimulatorDeviceFamily deviceFamilyForDeviceCode: DTiPhoneSimulatoriPadFamily], 
+
+    STAssertEqualObjects([PLSimulatorDeviceFamily ipadFamily],
+                         [PLSimulatorDeviceFamily deviceFamilyForDeviceCode: DTiPhoneSimulatoriPadFamily],
                          @"Should be equal");
 }
 

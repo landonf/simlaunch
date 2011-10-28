@@ -35,7 +35,7 @@
 
 /**
  * The PLSimulatorDiscoveryDelegate defines the methods used to receive provides simulator discovery
- * results from a PLSimulatorDiscoveryDelegate object. 
+ * results from a PLSimulatorDiscoveryDelegate object.
  */
 @protocol PLSimulatorDiscoveryDelegate <NSObject>
 
@@ -55,7 +55,7 @@
 @private
     /** Requested minimum version. If nil, no minimum version is requested. */
     NSString *_version;
-    
+
     /** Requested canonical SDK name. If nil, no specific named SDK is requested. */
     NSString *_canonicalSDKName;
 
