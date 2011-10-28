@@ -74,17 +74,17 @@ extern NSString *PLSimulatorErrorDomain;
 typedef enum {
     /** No error occured (Success). */
     PLSimulatorErrorNone = 0,
-    
+
     /** An unknown error has occured. If this code is received, it is a bug, and should be reported. */
     PLSimulatorErrorUnknown = 1,
-    
+
     /** An Mach or POSIX operating system error has occured. The underlying NSError cause may be fetched from the userInfo
      * dictionary using the NSUnderlyingErrorKey key. */
     PLSimulatorErrorOperatingSystem = 2,
 
     /** The provided path is not a valid SDK. */
     PLSimulatorErrorInvalidSDK = 3,
-    
+
     /** The provided path is not a valid simulator application. */
     PLSimulatorErrorInvalidApplication = 3
 } PLSimulatorError;

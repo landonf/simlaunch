@@ -51,7 +51,7 @@
             NSLog(@"Unsupported %@ value type while parsing UIDeviceFamily settings: %@", code, deviceCodes);
             continue;
         }
-        
+
         /* Map the Apple family number to our family constants */
         PLSimulatorDeviceFamily *family = [PLSimulatorDeviceFamily deviceFamilyForDeviceCode: [code intValue]];
         if (family == nil)
@@ -59,7 +59,7 @@
         else
             [deviceFamilies addObject: family];
     }
-    
+
     /* Save the populated set */
     return deviceFamilies;
 }

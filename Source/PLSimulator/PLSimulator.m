@@ -28,7 +28,7 @@
 
 #import "PLSimulator.h"
 
-/** 
+/**
  * Generic Plausible Simulator Exception
  * @ingroup exceptions
  */
@@ -40,7 +40,7 @@ NSString *PLSimulatorErrorDomain = @"PLSimulatorErrorDomain";
 
 /**
  * @internal
- 
+
  * Return a new NSError instance using the provided information.
  *
  * @param code The error code corresponding to this error.
@@ -49,22 +49,22 @@ NSString *PLSimulatorErrorDomain = @"PLSimulatorErrorDomain";
  */
 NSError *plsimulator_nserror (PLSimulatorError code, NSString *description, NSError *cause) {
     NSMutableDictionary *userInfo;
-    
+
     /* Create the userInfo dictionary */
     userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
                 description, NSLocalizedDescriptionKey,
                 nil
                 ];
-    
+
     if (cause != nil)
         [userInfo setObject: cause forKey: NSUnderlyingErrorKey];
-    
+
     return [NSError errorWithDomain: PLSimulatorErrorDomain code: code userInfo: userInfo];
 }
 
 /**
  * @internal
- 
+
  * Populate an NSError instance with the provided information.
  *
  * @param error Error instance to populate. If NULL, this method returns
@@ -76,6 +76,6 @@ NSError *plsimulator_nserror (PLSimulatorError code, NSString *description, NSEr
 void plsimulator_populate_nserror (NSError **error, PLSimulatorError code, NSString *description, NSError *cause) {
     if (error == NULL)
         return;
-    
+
     *error = plsimulator_nserror(code, description, cause);
 }

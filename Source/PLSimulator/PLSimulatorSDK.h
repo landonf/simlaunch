@@ -35,7 +35,7 @@
 
     /** SDK version */
     NSString *_version;
-    
+
     /** Canonical name */
     NSString *_canonicalName;
 

@@ -57,7 +57,7 @@
 - (void) spinRunloopWithTimeout: (NSTimeInterval) timeout predicate: (BOOL (^)()) predicate {
     /* Determine the date at which timeout will occur */
     NSDate *future = [NSDate dateWithTimeIntervalSinceNow: timeout];
-    
+
     /* Run until the predicate is YES or the timout is reached */
     while (predicate() == NO && [[NSDate date] earlierDate: future] != future)
         CFRunLoopRunInMode(kCFRunLoopDefaultMode, 0, YES);

@@ -68,10 +68,10 @@
         plsimulator_populate_nserror(outError, PLSimulatorErrorUnknown, @"Unexpected error", nil);
         return nil;
     }
-    
+
     /* Save the application path */
     _path = path;
-    
+
     /* Verify that the path exists */
     NSFileManager *fm = [NSFileManager new];
     {
@@ -83,48 +83,48 @@
             return nil;
         }
     }
-    
+
     /* Load the application Info.plist */
     NSDictionary *plist;
     {
         NSString *plistPath = [_path stringByAppendingPathComponent: @"Info.plist"];
         NSData *plistData = [NSData dataWithContentsOfMappedFile: plistPath];
         NSString *errorDesc;
-        
+
         /* Try to read the plist data */
         id plistInstance = [NSPropertyListSerialization propertyListFromData: plistData
                                                             mutabilityOption: NSPropertyListImmutable
                                                                       format: NULL
                                                             errorDescription: &errorDesc];
-        
+
         /* Invalid format */
         if (plistInstance == nil) {
             NSString *desc = NSLocalizedString(@"The application does not contain a valid property list.",
                                                @"Invalid application plist");
             NSLog(@"Error loading SDK path '%@': %@", _path, errorDesc);
-            
+
             plsimulator_populate_nserror(outError, PLSimulatorErrorInvalidApplication, desc, nil);
             return nil;
         }
-        
+
         /* We expect a dictionary */
         if (![plistInstance isKindOfClass: [NSDictionary class]]) {
             NSString *desc = NSLocalizedString(@"The application's property list uses unsupported data schema.",
-                                               @"Unsupported application plist");        
+                                               @"Unsupported application plist");
             plsimulator_populate_nserror(outError, PLSimulatorErrorInvalidApplication, desc, nil);
             return nil;
         }
-        
+
         plist = plistInstance;
     }
-    
-    
+
+
     /* Block to fetch a key from the plist */
     BOOL (^Get) (NSString *, id *, Class cls, BOOL) = ^(NSString *key, id *value, Class cls, BOOL required) {
         *value = [plist objectForKey: key];
         if (*value != nil && (cls == nil || [*value isKindOfClass: cls]))
             return YES;
-        
+
         /* Populate the error */
         if (required) {
             NSString *desc = NSLocalizedString(@"The application's Info.plist is missing required %@ key.",
@@ -132,7 +132,7 @@
             desc = [NSString stringWithFormat: desc, key];
             plsimulator_populate_nserror(outError, PLSimulatorErrorInvalidApplication, desc, nil);
         }
-        
+
         return NO;
     };
 
@@ -150,7 +150,7 @@
         if (Get(DevicesKey, &devices, [NSArray class], NO)) {
             _deviceFamilies = [PLSimulatorUtils deviceFamiliesForDeviceCodes: devices];
         }
-        
+
         /* If no valid settings, assume that this is a <3.2 application and it supports the iPhone family */
         if (_deviceFamilies == nil || [_deviceFamilies count] == 0)
             _deviceFamilies = [NSSet setWithObject: [PLSimulatorDeviceFamily iphoneFamily]];

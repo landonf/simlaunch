@@ -46,7 +46,7 @@
 - (id) init {
     if ((self = [super init]) == nil)
         return nil;
-    
+
     _taskBlocks = [NSMapTable mapTableWithStrongToStrongObjects];
 
     return self;
@@ -92,9 +92,9 @@
 
     /* Watch for completion */
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-    [nc addObserver: self 
+    [nc addObserver: self
            selector: @selector(taskCompleted:)
-               name: NSTaskDidTerminateNotification 
+               name: NSTaskDidTerminateNotification
              object: task];
 
     [_taskBlocks setObject: [block copy] forKey: task];
@@ -108,14 +108,14 @@
 
 @implementation BundlerTool (PrivateMethods)
 
-// NSTaskDidTerminateNotification 
+// NSTaskDidTerminateNotification
 - (void) taskCompleted: (NSNotification *) notification {
     NSTask *task = [notification object];
 
     /* Disable listening */
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc removeObserver: self name: NSTaskDidTerminateNotification object: task];
-    
+
     /* Check for error */
     // TODO - Improve error reporting by defining additional error codes.
     BOOL succeeded = YES;

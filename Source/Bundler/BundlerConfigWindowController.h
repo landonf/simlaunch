@@ -58,7 +58,7 @@
 @private
     /** Device family button. */
     IBOutlet NSPopUpButton *_deviceFamilyButton;
-    
+
     /** Select at launch checkbox. */
     IBOutlet NSButton *_selectAtLaunch;
 
