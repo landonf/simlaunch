@@ -30,6 +30,9 @@
 #import <mach-o/arch.h>
 
 @interface PLExecutableBinary : NSObject {
+    /** The image path */
+    NSString *_path;
+    
     /** CPU type. */
     cpu_type_t _cpu_type;
 
@@ -43,8 +46,10 @@
     NSArray *_libraries;
 }
 
-+ (id) binaryWithData: (NSData *) data error: (NSError **) outError;
-- (id) initWithData: (NSData *) data error: (NSError **) outError;
++ (id) binaryWithPath: (NSString *) path data: (NSData *) data error: (NSError **) outError;
+- (id) initWithPath: (NSString *) path data: (NSData *) data error: (NSError **) outError;
+
+- (NSArray *) absoluteRpaths;
 
 /** CPU type of this binary */
 @property(nonatomic, readonly) cpu_type_t cpu_type;

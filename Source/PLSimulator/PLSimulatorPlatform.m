@@ -55,18 +55,20 @@ static BOOL isBundleLoaded = NO;
 @implementation PLSimulatorPlatform
 
 @synthesize path = _path;
+@synthesize xcodePath = _xcodePath;
 @synthesize sdks = _sdks;
 
 /**
  * Initialize with the provided simulator platform SDK path.
  *
  * @param path Simulator platform SDK path (eg, /Developer/Platforms/iPhoneSimulator.platform)
+ * @param xcodePath The path to the enclosing Xcode.app bundle, or nil if this platform was not found within an application bundle.
  * @param error If an error occurs, upon return contains an NSError object that describes the problem.
  *
  * @return Returns an initialized PLSimulatorPlatform instance, or nil if the simulator meta-data can not
  * be parsed or the path appears to not be a valid platform SDK.
  */
-- (id) initWithPath: (NSString *) path error: (NSError **) outError {
+- (id) initWithPath: (NSString *) path xcodePath: (NSString *) xcodePath error: (NSError **) outError {
     if ((self = [super init]) == nil) {
         // Shouldn't happen
         plsimulator_populate_nserror(outError, PLSimulatorErrorUnknown, @"Unexpected error", nil);
@@ -74,6 +76,7 @@ static BOOL isBundleLoaded = NO;
     }
     
     _path = path;
+    _xcodePath = [xcodePath retain];
 
     /* Verify that the path exists */
     NSFileManager *fm = [NSFileManager new];
@@ -119,6 +122,13 @@ static BOOL isBundleLoaded = NO;
     return self;
 }
 
+- (void) dealloc {
+    [_path release];
+    [_xcodePath release];
+    [_sdks release];
+    [_remoteClient release];
+}
+
 /**
  * Attempt to load Apple's iPhoneSimulatorRemoteClient framework from this platform SDK.
  *
@@ -132,6 +142,30 @@ static BOOL isBundleLoaded = NO;
     /* Verify that it is not loaded */
     if (isBundleLoaded)
         [NSException raise: PLSimulatorException format: @"Attempted to load the iPhoneSimulatorRemoteClient twice"];
+    
+    /* Attempt to load absolute LC_RPATH values from the Xcode binary corresponding to this platform instance, if
+     * available. */
+    NSArray *rpaths = nil;
+    if (_xcodePath != nil) {
+        NSBundle *xcodeBundle = [NSBundle bundleWithPath: _xcodePath];
+        if (xcodeBundle != nil) {
+            NSError *error;
+            PLUniversalBinary *ub = [PLUniversalBinary binaryWithPath: [xcodeBundle executablePath] error: &error];
+
+            if (ub != nil) {
+                PLExecutableBinary *xcodeBinary = [ub executableMatchingCurrentArchitecture];
+                if (xcodeBinary != nil) {
+                    rpaths = [xcodeBinary absoluteRpaths];
+                }
+            } else {
+                NSLog(@"Failed to load Xcode binary: %@", error);
+            }
+            
+            /* In addition to automatic @rpath support, we need to add 'OtherFrameworks', which Xcode does not include
+             * by default */
+            rpaths = [rpaths arrayByAddingObject: [_xcodePath stringByAppendingPathComponent: @"Contents/OtherFrameworks"]];
+        }
+    }
 
     /* Determine the path */
     NSString *path = [_path stringByAppendingPathComponent: REMOTE_CLIENT_FRAMEWORK];
@@ -143,7 +177,7 @@ static BOOL isBundleLoaded = NO;
     if (ub == nil)
         return false;
 
-    return [ub loadLibrary: outError];
+    return [ub loadLibraryWithRPaths: rpaths error: outError];
 }
 
 

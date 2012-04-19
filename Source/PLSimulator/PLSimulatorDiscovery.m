@@ -185,11 +185,16 @@ static NSInteger platform_compare_by_version (id obj1, id obj2, void *context) {
         path = [[item valueForAttribute: (NSString *) kMDItemPath] stringByResolvingSymlinksInPath];
         
         /* Extract the simulator path from within the Xcode.app bundle, if appropriate */
+        NSString *xcodePath = nil;
         if ([[item valueForAttribute: (NSString *) kMDItemCFBundleIdentifier] isEqual: XCODE_BUNDLE_ID]) {
+            /* Save the Xcode path */
+            xcodePath = path;
+            
+            /* Derive the .platform path */
             path = [path stringByAppendingPathComponent: XCODE_BUNDLE_PLATFORM_PATH];
         }
         
-        platform = [[PLSimulatorPlatform alloc] initWithPath: path error: &error];
+        platform = [[PLSimulatorPlatform alloc] initWithPath: path xcodePath: xcodePath error: &error];
         if (platform == nil) {
             NSLog(@"Skipping platform discovery result '%@', failed to load platform SDK meta-data: %@", path, error);
             continue;

@@ -95,8 +95,9 @@
     NSFileManager *fm = [NSFileManager new];
     BOOL isDir;
     if (![fm fileExistsAtPath: _path isDirectory: &isDir] || isDir == YES) {
-        NSString *desc = NSLocalizedString(@"The provided library path does not exist or is a directory.",
+        NSString *descFmt = NSLocalizedString(@"The provided library path '%@' does not exist or is a directory.",
                                            @"Missing/non-directory library path");
+        NSString *desc = [NSString stringWithFormat: descFmt, _path];
         plsimulator_populate_nserror(outError, PLSimulatorErrorInvalidBinary, desc, nil);
         
         [self release];
@@ -205,7 +206,7 @@
     
     for (NSData *data in executableData) {
         NSError *error;
-        PLExecutableBinary *binary = [PLExecutableBinary binaryWithData: data error: &error];
+        PLExecutableBinary *binary = [PLExecutableBinary binaryWithPath: _path data: data error: &error];
         if (binary == nil) {
             NSLog(@"Skipping invalid member of universal binary: %@", error);
             continue;
@@ -227,6 +228,45 @@
 }
 
 /**
+ * Return the executable that best matches the current architecture, or nil if none is found.
+ */
+- (PLExecutableBinary *) executableMatchingCurrentArchitecture {    
+    /* Determine the Mach-O architecture for the host process */
+    Dl_info info;
+    const void *main = dlsym(RTLD_DEFAULT, "main");
+    if (dladdr(main, &info) == 0) {
+        /* Should never happen */
+        NSLog(@"Unexpected error fetching main() symbol info");
+        return nil;
+    }
+    
+    /* Parse out the binary info
+     * XXX - Note the use of a bogus length field. We assume that since the image is mapped, it won't contain invalid length data */
+    NSError *error;
+    PLExecutableBinary *mainBinary = [PLExecutableBinary binaryWithPath: [NSString stringWithUTF8String: info.dli_fname]
+                                                                   data: [NSData dataWithBytesNoCopy: info.dli_fbase length: 100 * 1024 * 1024 freeWhenDone: NO]
+                                                                  error: &error];
+    if (mainBinary == nil) {
+        /* Should never happen */
+        NSLog(@"Unexpected error parsing main() binary info: %@", error);
+        return nil;
+    }
+
+    PLExecutableBinary *matchedExec = nil;
+    for (PLExecutableBinary *exec in self.executables) {
+        if (exec.cpu_type == mainBinary.cpu_type) {
+            if (matchedExec == nil) {
+                matchedExec = exec;
+            } else if (exec.cpu_subtype == mainBinary.cpu_subtype) {
+                matchedExec = exec;
+            }
+        }
+    }
+    
+    return matchedExec;
+}
+
+/**
  * Load the binary represented by the receiver using dlopen().
  *
  * TODO: Document @rpath behavior.
@@ -234,43 +274,42 @@
  * @param error If an error occurs, upon return contains an NSError object that describes the problem.
  * @return Returns YES on success, or NO on failure.
  */
-- (BOOL) loadLibrary: (NSError **) outError {
-    const NXArchInfo *archInfo = NXGetLocalArchInfo();
-
-    PLExecutableBinary *matchedExec = nil;
-    for (PLExecutableBinary *exec in self.executables) {
-        if (exec.cpu_type == archInfo->cputype) {
-            if (matchedExec == nil) {
-                matchedExec = exec;
-            } else if (exec.cpu_subtype == archInfo->cpusubtype) {
-                matchedExec = exec;
-            }
-        }
-    }
+- (BOOL) loadLibraryWithRPaths: (NSArray *) rpaths error: (NSError **) outError {
+    NSFileManager *fm = [[[NSFileManager alloc] init] autorelease];
     
-    if (matchedExec == nil) {
+    PLExecutableBinary *exec = [self executableMatchingCurrentArchitecture];
+    if (exec == nil) {
         NSString *desc = NSLocalizedString(@"This binary is not supported by the current architecture.", @"Invalid binary");
         plsimulator_populate_nserror(outError, PLSimulatorErrorInvalidBinary, desc, nil);        
         return NO;
     }
 
     /* Recursively link @rpath-requiring libraries */
-    for (NSString *dylib in matchedExec.dylibPaths) {
-        if ([dylib rangeOfString: @"@rpath/"].location != NSNotFound) {
-            // XXX - Implement real search paths
-            dylib = [dylib stringByReplacingOccurrencesOfString: @"@rpath/" withString: @"/Applications/Xcode.app/Contents/OtherFrameworks/"];
-            
-        }
+    if (rpaths != nil) {
+        for (NSString *dylib in exec.dylibPaths) {
+            /* If @rpath is used, search our path space */
+            if ([dylib rangeOfString: @"@rpath/"].location != NSNotFound) {
+                /* Find a matching @rpath */
+                for (NSString *rpath in rpaths) {
+                    NSString *newPath = [dylib stringByReplacingOccurrencesOfString: @"@rpath" 
+                                                                         withString: rpath];
+                    if ([fm fileExistsAtPath: newPath]) {
+                        dylib = newPath;
+                        break;
+                    }
+                }
+            }
 
-        /* Load the target */
-        PLUniversalBinary *linkTarget = [PLUniversalBinary binaryWithPath: dylib error: outError];
-        if (linkTarget == nil)
-            return NO;
-        
-        if (![linkTarget loadLibrary: outError])
-            return NO;
+            /* Load the target */
+            PLUniversalBinary *linkTarget = [PLUniversalBinary binaryWithPath: dylib error: outError];
+            if (linkTarget == nil)
+                return NO;
+            
+            if (![linkTarget loadLibraryWithRPaths: nil error: outError])
+                return NO;
+        }
     }
-    
+
     /* Perform our own link */
     if (dlopen([_path fileSystemRepresentation], RTLD_GLOBAL) == NULL) {
         NSString *descFmt = NSLocalizedString(@"Failed to load library: %s.", @"Invalid binary");

@@ -42,6 +42,8 @@
 
     STAssertEquals([[binary executables] count], (NSUInteger)2, @"Two executables should have been found");
     
+    PLExecutableBinary *exec = [binary executableMatchingCurrentArchitecture];
+    STAssertTrue(exec != nil, @"Executable matching current architecture was not found");
 }
 
 @end

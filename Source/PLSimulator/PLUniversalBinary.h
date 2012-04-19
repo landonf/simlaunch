@@ -43,11 +43,13 @@
 
 - (id) initWithPath: (NSString *) path error: (NSError **) outError;
 
+- (PLExecutableBinary *) executableMatchingCurrentArchitecture;
+
 /** All valid Mach-O executables found within the binary, as an ordered array of PLExecutableBinary instances. The array
  * will be ordered to match the in-file ordering. */
 @property(nonatomic, readonly) NSArray *executables;
 
-- (BOOL) loadLibrary: (NSError **) outError;
+- (BOOL) loadLibraryWithRPaths: (NSArray *) rpaths error: (NSError **) outError;
 
 
 @end

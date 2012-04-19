@@ -32,6 +32,9 @@
 
 @interface PLSimulatorPlatform : NSObject {
 @private
+    /** The path to the enclosing Xcode.app bundle, or nil if this platform was not found within an application bundle. */
+    NSString *_xcodePath;
+
     /** Platform SDK path. */
     NSString *_path;
 
@@ -42,9 +45,12 @@
     NSBundle *_remoteClient;
 }
 
-- (id) initWithPath: (NSString *) path error: (NSError **) outError;
+- (id) initWithPath: (NSString *) path xcodePath: (NSString *) xcodePath error: (NSError **) outError;
 
 - (BOOL) loadClientFramework: (NSError **) outError;
+
+/** The path to the enclosing Xcode.app bundle, or nil if this platform was not found within an application bundle. */
+@property(readonly) NSString *xcodePath;
 
 /** The full path to the platform SDK. */
 @property(readonly) NSString *path;

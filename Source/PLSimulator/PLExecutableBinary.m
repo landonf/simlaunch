@@ -67,28 +67,32 @@ static uint32_t macho_nswap32(uint32_t input) {
 /**
  * Create and initialize a new instance with the provided Mach-O @a data.
  *
+ * @param path The binary path for this image, used to handle image-relative DYLD_DYLIB references.
  * @param data A buffer containing a full Mach-O binary.
  * @param outError If an error occurs, upon return contains an NSError object that describes the problem.
  *
  * @return Returns an initialized PLExecutableBinary instance, or nil if binary can not
  * be parsed.
  */
-+ (id) binaryWithData: (NSData *) data error: (NSError **) outError {
-    return [[[self alloc] initWithData: data error: outError] autorelease];
++ (id) binaryWithPath: (NSString *) path data: (NSData *) data error: (NSError **) outError {
+    return [[[self alloc] initWithPath: path data: data error: outError] autorelease];
 }
 
 /**
  * Initialize a new instance with the provided Mach-O @a data.
  *
+ * @param path The binary path for this image, used to handle image-relative DYLD_DYLIB references.
  * @param data A buffer containing a full Mach-O binary.
  * @param outError If an error occurs, upon return contains an NSError object that describes the problem.
  *
  * @return Returns an initialized PLExecutableBinary instance, or nil if binary can not
  * be parsed.
  */
-- (id) initWithData: (NSData *) data error: (NSError **) outError {
+- (id) initWithPath: (NSString *) path data: (NSData *) data error: (NSError **) outError {
     if ((self = [super init]) == nil)
         return nil;
+    
+    _path = [path retain];
     
     /* Configure parser */
     macho_input_t input;
@@ -211,7 +215,7 @@ static uint32_t macho_nswap32(uint32_t input) {
                 }
                 
                 NSString *path = [[[NSString alloc] initWithBytes: pathptr
-                                                           length: pathlen
+                                                           length: strnlen(pathptr, pathlen)
                                                          encoding: NSUTF8StringEncoding] autorelease];
                 [rpaths addObject: path];
                 break;
@@ -238,7 +242,7 @@ static uint32_t macho_nswap32(uint32_t input) {
                 }
                 
                 NSString *name = [[[NSString alloc] initWithBytes: nameptr
-                                                           length: namelen
+                                                           length: strnlen(nameptr, namelen)
                                                          encoding: NSUTF8StringEncoding] autorelease];
                 [dylibs addObject: name];
 
@@ -262,7 +266,59 @@ static uint32_t macho_nswap32(uint32_t input) {
     return self;
 }
 
+/**
+ * Return the array of the receiver's defined LC_RPATH values, replacing @executable_path and @loader_path
+ * with the real executable path.
+ */
+- (NSArray *) absoluteRpaths {
+    /* Formulate the correct @rpath candidates from the Xcode bundle, if available */
+    NSMutableArray *absolutePaths = [NSMutableArray array];
+    for (NSString *rpath in _rpaths) {
+        NSMutableArray *pathComponents = [[[rpath pathComponents] mutableCopy] autorelease];
+        NSMutableArray *result = [NSMutableArray arrayWithCapacity: [pathComponents count]];
+        
+        /* Replace all special dylib paths */
+        for (NSString *component in pathComponents) {
+            if ([component isEqualToString: @"@executable_path"] || [component isEqualToString: @"@loader_path"]) {
+                [result addObjectsFromArray: [_path pathComponents]];
+            } else {
+                [result addObject: component];
+            }
+        }
+
+        /* Strip out '..' paths. These are used to reference paths above the image path. */
+        pathComponents = result;
+        result = [NSMutableArray arrayWithCapacity: [pathComponents count]];
+        while ([pathComponents count] > 0) {
+            /* Pop the first component */
+            NSString *top = [pathComponents objectAtIndex: 0];
+            [pathComponents removeObjectAtIndex: 0];
+
+            if ([top isEqualToString: @".."]) {
+                /* Handle backtracking (assuming there is data to backtrack) */
+                if ([result count] < 2)
+                    continue;
+                
+                [result removeLastObject];
+                [result removeLastObject];
+
+            } else if ([top isEqualToString: @"."]) {
+                /* Skip empty nodes */
+                
+            } else {
+                /* Otherwise, add standard paths to the target */
+                [result addObject: top];
+            }
+        }
+
+        [absolutePaths addObject: [NSString pathWithComponents: result]];
+    }
+    
+    return absolutePaths;
+}
+
 - (void) dealloc {
+    [_path release];
     [_rpaths release];
     [_libraries release];
 
