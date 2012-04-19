@@ -28,6 +28,12 @@
 
 #import "PLSimulatorDiscovery.h"
 
+/* The Xcode.app bundle identifier */
+#define XCODE_BUNDLE_ID @"com.apple.dt.Xcode"
+
+/* The path to the iPhoneSimulator platform bundle within the Xcode.app bundle */
+#define XCODE_BUNDLE_PLATFORM_PATH @"Contents/Developer/Platforms/iPhoneSimulator.platform"
+
 @interface PLSimulatorDiscovery (PrivateMethods)
 - (void) queryFinished: (NSNotification *) notification;
 @end
@@ -64,13 +70,26 @@
     _deviceFamilies = deviceFamilies;
     _query = [NSMetadataQuery new];
 
-    /* Set up a query for all iPhoneSimulator platform directories. We use kMDItemDisplayName rather than
+    /* Predicate for all iPhoneSimulator platform directories. We use kMDItemDisplayName rather than
      * the more correct kMDItemFSName for performance reasons -- */
-    NSArray *predicates = [NSArray arrayWithObjects:
-                           [NSPredicate predicateWithFormat: @"kMDItemDisplayName == 'iPhoneSimulator.platform'"],
-                           [NSPredicate predicateWithFormat: @"kMDItemContentTypeTree == 'public.directory'"],
-                           nil];
-    [_query setPredicate: [NSCompoundPredicate andPredicateWithSubpredicates: predicates]];
+    NSArray *platformPredicates = [NSArray arrayWithObjects:
+                                   [NSPredicate predicateWithFormat: @"kMDItemDisplayName == 'iPhoneSimulator.platform'"],
+                                   [NSPredicate predicateWithFormat: @"kMDItemContentTypeTree == 'public.directory'"],
+                                   nil];
+    NSPredicate *platformPredicate = [NSCompoundPredicate andPredicateWithSubpredicates: platformPredicates];
+
+
+    /* Predicate for the Xcode.app bundle, for later versions of Xcode that bundle the iPhoneSimulator.platform
+     * internally */
+    NSArray *xcodePredicates = [NSArray arrayWithObjects:
+                                [NSPredicate predicateWithFormat: @"kMDItemCFBundleIdentifier == '" XCODE_BUNDLE_ID "'"],
+                                [NSPredicate predicateWithFormat: @"kMDItemContentType == 'com.apple.application-bundle'"],
+                                nil];
+    NSPredicate *xcodePredicate = [NSCompoundPredicate andPredicateWithSubpredicates: xcodePredicates];
+    
+    NSPredicate *predicate = [NSCompoundPredicate orPredicateWithSubpredicates: [NSArray arrayWithObjects:
+                                                                                 platformPredicate, xcodePredicate, nil]];
+    [_query setPredicate: predicate];
 
     /* We want to search the root volume for the developer tools. */
     NSURL *root = [NSURL fileURLWithPath: @"/" isDirectory: YES];
@@ -151,6 +170,7 @@ static NSInteger platform_compare_by_version (id obj1, id obj2, void *context) {
 - (void) queryFinished: (NSNotification *) note {
     /* Received the full spotlight query result set. No longer running */
     _running = NO;
+    
 
     /* Convert the items into PLSimulatorPlatform instances, filtering out results that don't match the minimum version
      * and supported device families. */
@@ -163,6 +183,12 @@ static NSInteger platform_compare_by_version (id obj1, id obj2, void *context) {
         NSError *error;
 
         path = [[item valueForAttribute: (NSString *) kMDItemPath] stringByResolvingSymlinksInPath];
+        
+        /* Extract the simulator path from within the Xcode.app bundle, if appropriate */
+        if ([[item valueForAttribute: (NSString *) kMDItemCFBundleIdentifier] isEqual: XCODE_BUNDLE_ID]) {
+            path = [path stringByAppendingPathComponent: XCODE_BUNDLE_PLATFORM_PATH];
+        }
+        
         platform = [[PLSimulatorPlatform alloc] initWithPath: path error: &error];
         if (platform == nil) {
             NSLog(@"Skipping platform discovery result '%@', failed to load platform SDK meta-data: %@", path, error);
