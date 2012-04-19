@@ -51,7 +51,7 @@ NSError *plsimulator_nserror (PLSimulatorError code, NSString *description, NSEr
     NSMutableDictionary *userInfo;
     
     /* Create the userInfo dictionary */
-    userInfo = [NSDictionary dictionaryWithObjectsAndKeys:
+    userInfo = [NSMutableDictionary dictionaryWithObjectsAndKeys:
                 description, NSLocalizedDescriptionKey,
                 nil
                 ];
