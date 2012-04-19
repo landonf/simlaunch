@@ -33,6 +33,8 @@
 #import "PLSimulator.h"
 #import "PLMachO.h"
 
+#import <dlfcn.h>
+
 #import <inttypes.h>
 
 #import <unistd.h>
@@ -222,6 +224,61 @@
     [_executables release];
 
     [super dealloc];
+}
+
+/**
+ * Load the binary represented by the receiver using dlopen().
+ *
+ * TODO: Document @rpath behavior.
+ *
+ * @param error If an error occurs, upon return contains an NSError object that describes the problem.
+ * @return Returns YES on success, or NO on failure.
+ */
+- (BOOL) loadLibrary: (NSError **) outError {
+    const NXArchInfo *archInfo = NXGetLocalArchInfo();
+
+    PLExecutableBinary *matchedExec = nil;
+    for (PLExecutableBinary *exec in self.executables) {
+        if (exec.cpu_type == archInfo->cputype) {
+            if (matchedExec == nil) {
+                matchedExec = exec;
+            } else if (exec.cpu_subtype == archInfo->cpusubtype) {
+                matchedExec = exec;
+            }
+        }
+    }
+    
+    if (matchedExec == nil) {
+        NSString *desc = NSLocalizedString(@"This binary is not supported by the current architecture.", @"Invalid binary");
+        plsimulator_populate_nserror(outError, PLSimulatorErrorInvalidBinary, desc, nil);        
+        return NO;
+    }
+
+    /* Recursively link @rpath-requiring libraries */
+    for (NSString *dylib in matchedExec.dylibPaths) {
+        if ([dylib rangeOfString: @"@rpath/"].location != NSNotFound) {
+            // XXX - Implement real search paths
+            dylib = [dylib stringByReplacingOccurrencesOfString: @"@rpath/" withString: @"/Applications/Xcode.app/Contents/OtherFrameworks/"];
+            
+        }
+
+        /* Load the target */
+        PLUniversalBinary *linkTarget = [PLUniversalBinary binaryWithPath: dylib error: outError];
+        if (linkTarget == nil)
+            return NO;
+        
+        if (![linkTarget loadLibrary: outError])
+            return NO;
+    }
+    
+    /* Perform our own link */
+    if (dlopen([_path fileSystemRepresentation], RTLD_GLOBAL) == NULL) {
+        NSString *descFmt = NSLocalizedString(@"Failed to load library: %s.", @"Invalid binary");
+        NSString *desc = [NSString stringWithFormat: descFmt, dlerror()];
+        plsimulator_populate_nserror(outError, PLSimulatorErrorInvalidBinary, desc, nil);   
+    }
+
+    return YES;
 }
 
 @end

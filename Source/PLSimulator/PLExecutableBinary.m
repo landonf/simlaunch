@@ -49,6 +49,11 @@
  */
 @implementation PLExecutableBinary
 
+@synthesize cpu_type = _cpu_type;
+@synthesize cpu_subtype = _cpu_subtype;
+@synthesize rpaths = _rpaths;
+@synthesize dylibPaths = _dylibPaths;
+
 /* Some byteswap wrappers */
 static uint32_t macho_swap32 (uint32_t input) {
     return OSSwapInt32(input);
@@ -56,13 +61,6 @@ static uint32_t macho_swap32 (uint32_t input) {
 
 static uint32_t macho_nswap32(uint32_t input) {
     return input;
-}
-
-/* return a human readable formatted version number. the result must be free()'d. */
-static char *macho_format_dylib_version (uint32_t version) {
-    char *result;
-    asprintf(&result, "%"PRIu32".%"PRIu32".%"PRIu32, (version >> 16) & 0xFF, (version >> 8) & 0xFF, version & 0xFF);
-    return result;
 }
 
 
@@ -158,20 +156,38 @@ static char *macho_format_dylib_version (uint32_t version) {
             return nil;
         }
     }
+
+    /* Save the CPU subtypes */
+    _cpu_type = header->cputype;
+    _cpu_subtype = header->cpusubtype;
     
     /* Parse the Mach-O load commands */
     const struct load_command *cmd = pl_macho_offset(&input, header, header_size, sizeof(struct load_command));
-    if (cmd == NULL)
-        return false;
+    if (cmd == NULL) {
+        NSString *desc = NSLocalizedString(@"Could not fetch Mach-O load command.", @"Invalid binary");
+        plsimulator_populate_nserror(outError, PLSimulatorErrorInvalidBinary, desc, nil);        
+        [self release];
+        return nil;
+    }
     uint32_t ncmds = swap32(header->ncmds);
     
     /* Iterate over the load commands */
+    NSMutableArray *rpaths = [NSMutableArray array];
+    _rpaths = [rpaths retain];
+
+    NSMutableArray *dylibs = [NSMutableArray array];
+    _dylibPaths = [dylibs retain];
+    
     for (uint32_t i = 0; i < ncmds; i++) {
         /* Load the full command */
         uint32_t cmdsize = swap32(cmd->cmdsize);
         cmd = pl_macho_read(&input, cmd, cmdsize);
-        if (cmd == NULL)
-            return false;
+        if (cmd == NULL) {
+            NSString *desc = NSLocalizedString(@"Could not read Mach-O load command.", @"Invalid binary");
+            plsimulator_populate_nserror(outError, PLSimulatorErrorInvalidBinary, desc, nil);        
+            [self release];
+            return nil;
+        }
         
         /* Handle known types */
         uint32_t cmd_type = swap32(cmd->cmd);
@@ -179,72 +195,53 @@ static char *macho_format_dylib_version (uint32_t version) {
             case LC_RPATH: {
                 /* Fetch the path */
                 if (cmdsize < sizeof(struct rpath_command)) {
-                    // TODO
-                    // warnx("Incorrect cmd size");
-                    return false;
+                    NSString *desc = NSLocalizedString(@"LC_RPATH has an invalid size", @"Invalid binary");
+                    plsimulator_populate_nserror(outError, PLSimulatorErrorInvalidBinary, desc, nil);        
+                    [self release];
+                    return nil;
                 }
                 
                 size_t pathlen = cmdsize - sizeof(struct rpath_command);
                 const void *pathptr = pl_macho_offset(&input, cmd, sizeof(struct rpath_command), pathlen);
-                if (pathptr == NULL)
-                    return false;
+                if (pathptr == NULL) {
+                    NSString *desc = NSLocalizedString(@"Could not read path name from LC_RPATH", @"Invalid binary");
+                    plsimulator_populate_nserror(outError, PLSimulatorErrorInvalidBinary, desc, nil);        
+                    [self release];
+                    return nil;
+                }
                 
-                char *path = malloc(pathlen);
-                strlcpy(path, pathptr, pathlen);
-                fprintf(stderr, "[rpath] path=%s\n", path);
-                free(path);
+                NSString *path = [[[NSString alloc] initWithBytes: pathptr
+                                                           length: pathlen
+                                                         encoding: NSUTF8StringEncoding] autorelease];
+                [rpaths addObject: path];
                 break;
             }
                 
-            case LC_ID_DYLIB:
-            case LC_LOAD_WEAK_DYLIB:
-            case LC_REEXPORT_DYLIB:
             case LC_LOAD_DYLIB: {
-                const struct dylib_command *dylib_cmd = (const struct dylib_command *) cmd;
+                // const struct dylib_command *dylib_cmd = (const struct dylib_command *) cmd;
                 
                 /* Extract the install name */
                 if (cmdsize < sizeof(struct dylib_command)) {
-                    // TODO
-                    // warnx("Incorrect name size");
-                    return false;
+                    NSString *desc = NSLocalizedString(@"LC_LOAD_DYLIB has invalid size", @"Invalid binary");
+                    plsimulator_populate_nserror(outError, PLSimulatorErrorInvalidBinary, desc, nil);        
+                    [self release];
+                    return nil;
                 }
                 
                 size_t namelen = cmdsize - sizeof(struct dylib_command);
                 const void *nameptr = pl_macho_offset(&input, cmd, sizeof(struct dylib_command), namelen);
-                if (nameptr == NULL)
-                    return false;
-                
-                char *name = malloc(namelen);
-                strlcpy(name, nameptr, namelen);
-                
-                /* Print the dylib info */
-                char *current_version = macho_format_dylib_version(swap32(dylib_cmd->dylib.current_version));
-                char *compat_version = macho_format_dylib_version(swap32(dylib_cmd->dylib.compatibility_version));
-                
-                switch (cmd_type) {
-                    case LC_ID_DYLIB:
-                        fprintf(stderr, "[dylib] ");
-                        break;
-                    case LC_LOAD_WEAK_DYLIB:
-                        fprintf(stderr, "[weak] ");
-                        break;
-                    case LC_LOAD_DYLIB:
-                        fprintf(stderr, "[load] ");
-                        break;
-                    case LC_REEXPORT_DYLIB:
-                        fprintf(stderr, "[reexport] ");
-                        break;
-                    default:
-                        fprintf(stderr, "[%"PRIx32"] ", cmd_type);
-                        break;
+                if (nameptr == NULL) {
+                    NSString *desc = NSLocalizedString(@"Could not read path name from LC_LOAD_DYLIB", @"Invalid binary");
+                    plsimulator_populate_nserror(outError, PLSimulatorErrorInvalidBinary, desc, nil);        
+                    [self release];
+                    return nil;
                 }
                 
-                /* This is a dyld library identifier */
-                fprintf(stderr, "install_name=%s (compatibility_version=%s, version=%s)\n", name, compat_version, current_version);
-                
-                free(name);
-                free(current_version);
-                free(compat_version);
+                NSString *name = [[[NSString alloc] initWithBytes: nameptr
+                                                           length: namelen
+                                                         encoding: NSUTF8StringEncoding] autorelease];
+                [dylibs addObject: name];
+
                 break;
             }
                 
@@ -254,11 +251,22 @@ static char *macho_format_dylib_version (uint32_t version) {
         
         /* Load the next command */
         cmd = pl_macho_offset(&input, cmd, cmdsize, sizeof(struct load_command));
-        if (cmd == NULL)
-            return false;
+        if (cmd == NULL) {
+            NSString *desc = NSLocalizedString(@"Could not fetch next Mach-O load command.", @"Invalid binary");
+            plsimulator_populate_nserror(outError, PLSimulatorErrorInvalidBinary, desc, nil);        
+            [self release];
+            return nil;
+        }
     }
 
     return self;
+}
+
+- (void) dealloc {
+    [_rpaths release];
+    [_libraries release];
+
+    [super dealloc];
 }
 
 @end

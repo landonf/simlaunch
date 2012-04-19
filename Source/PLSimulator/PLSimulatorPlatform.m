@@ -29,6 +29,7 @@
 #import "PLSimulatorPlatform.h"
 
 #import "PLSimulator.h"
+#import "PLUniversalBinary.h"
 
 /**
  * Global variable used to track if the iPhoneSimulatorRemoteClient has already been loaded by any instance of this class.
@@ -136,10 +137,13 @@ static BOOL isBundleLoaded = NO;
     NSString *path = [_path stringByAppendingPathComponent: REMOTE_CLIENT_FRAMEWORK];
     _remoteClient = [NSBundle bundleWithPath: path];
 
-    /* Attempt to load */
-    BOOL success = [_remoteClient loadAndReturnError: outError];
-    isBundleLoaded = success;
-    return success;
+    /* Load the bundle */
+    NSString *libraryPath = [_remoteClient executablePath];
+    PLUniversalBinary *ub = [PLUniversalBinary binaryWithPath: libraryPath error: outError];
+    if (ub == nil)
+        return false;
+
+    return [ub loadLibrary: outError];
 }
 
 

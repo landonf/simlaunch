@@ -35,9 +35,27 @@
 
     /** CPU subtype */
     cpu_subtype_t _cpu_subtype;
+    
+    /** Defined rpaths */
+    NSArray *_rpaths;
+    
+    /** Library references. */
+    NSArray *_libraries;
 }
 
 + (id) binaryWithData: (NSData *) data error: (NSError **) outError;
 - (id) initWithData: (NSData *) data error: (NSError **) outError;
+
+/** CPU type of this binary */
+@property(nonatomic, readonly) cpu_type_t cpu_type;
+
+/** CPU subtype of this binary */
+@property(nonatomic, readonly) cpu_type_t cpu_subtype;
+
+/** LC_RPATH paths defined by this binary */
+@property(nonatomic, readonly) NSArray *rpaths;
+
+/** LC_LOAD_DYLIB paths defined by this binary */
+@property(nonatomic, readonly) NSArray *dylibPaths;
 
 @end

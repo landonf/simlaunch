@@ -47,4 +47,7 @@
  * will be ordered to match the in-file ordering. */
 @property(nonatomic, readonly) NSArray *executables;
 
+- (BOOL) loadLibrary: (NSError **) outError;
+
+
 @end
