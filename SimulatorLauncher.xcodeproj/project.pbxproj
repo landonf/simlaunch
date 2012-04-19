@@ -35,9 +35,13 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
-		0519EF79154075FB00AD2B48 /* PLSimulatorLibraryLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 0519EF77154075FB00AD2B48 /* PLSimulatorLibraryLoader.h */; };
-		0519EF7A154075FB00AD2B48 /* PLSimulatorLibraryLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 0519EF78154075FB00AD2B48 /* PLSimulatorLibraryLoader.m */; };
-		0519EF7D1540779200AD2B48 /* PLSimulatorLibraryLoaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0519EF7C1540779200AD2B48 /* PLSimulatorLibraryLoaderTests.m */; };
+		0519EF79154075FB00AD2B48 /* PLExecutableBinary.h in Headers */ = {isa = PBXBuildFile; fileRef = 0519EF77154075FB00AD2B48 /* PLExecutableBinary.h */; };
+		0519EF7A154075FB00AD2B48 /* PLExecutableBinary.m in Sources */ = {isa = PBXBuildFile; fileRef = 0519EF78154075FB00AD2B48 /* PLExecutableBinary.m */; };
+		0519EF7D1540779200AD2B48 /* PLExecutableBinaryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0519EF7C1540779200AD2B48 /* PLExecutableBinaryTests.m */; };
+		0519EF8015407BAE00AD2B48 /* PLUniversalBinary.h in Headers */ = {isa = PBXBuildFile; fileRef = 0519EF7E15407BAD00AD2B48 /* PLUniversalBinary.h */; };
+		0519EF8115407BAE00AD2B48 /* PLUniversalBinary.m in Sources */ = {isa = PBXBuildFile; fileRef = 0519EF7F15407BAE00AD2B48 /* PLUniversalBinary.m */; };
+		0519EF8415407F2B00AD2B48 /* PLUniversalBinaryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0519EF8315407F2B00AD2B48 /* PLUniversalBinaryTests.m */; };
+		0519EF87154081A000AD2B48 /* PLMachO.m in Sources */ = {isa = PBXBuildFile; fileRef = 0519EF86154081A000AD2B48 /* PLMachO.m */; };
 		052259BA1129FE2E00A83450 /* Bundler.icns in Resources */ = {isa = PBXBuildFile; fileRef = 052259B91129FE2E00A83450 /* Bundler.icns */; };
 		0523F61511269281004FB4EB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0523F61211269281004FB4EB /* main.m */; };
 		0523F61611269281004FB4EB /* LauncherAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0523F61411269281004FB4EB /* LauncherAppDelegate.m */; };
@@ -213,9 +217,14 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		0519EF77154075FB00AD2B48 /* PLSimulatorLibraryLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLSimulatorLibraryLoader.h; sourceTree = "<group>"; };
-		0519EF78154075FB00AD2B48 /* PLSimulatorLibraryLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLSimulatorLibraryLoader.m; sourceTree = "<group>"; };
-		0519EF7C1540779200AD2B48 /* PLSimulatorLibraryLoaderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLSimulatorLibraryLoaderTests.m; sourceTree = "<group>"; };
+		0519EF77154075FB00AD2B48 /* PLExecutableBinary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLExecutableBinary.h; sourceTree = "<group>"; };
+		0519EF78154075FB00AD2B48 /* PLExecutableBinary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLExecutableBinary.m; sourceTree = "<group>"; };
+		0519EF7C1540779200AD2B48 /* PLExecutableBinaryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLExecutableBinaryTests.m; sourceTree = "<group>"; };
+		0519EF7E15407BAD00AD2B48 /* PLUniversalBinary.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLUniversalBinary.h; sourceTree = "<group>"; };
+		0519EF7F15407BAE00AD2B48 /* PLUniversalBinary.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLUniversalBinary.m; sourceTree = "<group>"; };
+		0519EF8315407F2B00AD2B48 /* PLUniversalBinaryTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLUniversalBinaryTests.m; sourceTree = "<group>"; };
+		0519EF851540817600AD2B48 /* PLMachO.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PLMachO.h; sourceTree = "<group>"; };
+		0519EF86154081A000AD2B48 /* PLMachO.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLMachO.m; sourceTree = "<group>"; };
 		052259B91129FE2E00A83450 /* Bundler.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Bundler.icns; sourceTree = "<group>"; };
 		0523F61211269281004FB4EB /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0523F61311269281004FB4EB /* LauncherAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LauncherAppDelegate.h; sourceTree = "<group>"; };
@@ -327,9 +336,14 @@
 		0519EF76154075CD00AD2B48 /* Bundle Loader */ = {
 			isa = PBXGroup;
 			children = (
-				0519EF77154075FB00AD2B48 /* PLSimulatorLibraryLoader.h */,
-				0519EF78154075FB00AD2B48 /* PLSimulatorLibraryLoader.m */,
-				0519EF7C1540779200AD2B48 /* PLSimulatorLibraryLoaderTests.m */,
+				0519EF7E15407BAD00AD2B48 /* PLUniversalBinary.h */,
+				0519EF7F15407BAE00AD2B48 /* PLUniversalBinary.m */,
+				0519EF8315407F2B00AD2B48 /* PLUniversalBinaryTests.m */,
+				0519EF77154075FB00AD2B48 /* PLExecutableBinary.h */,
+				0519EF78154075FB00AD2B48 /* PLExecutableBinary.m */,
+				0519EF7C1540779200AD2B48 /* PLExecutableBinaryTests.m */,
+				0519EF851540817600AD2B48 /* PLMachO.h */,
+				0519EF86154081A000AD2B48 /* PLMachO.m */,
 			);
 			name = "Bundle Loader";
 			sourceTree = "<group>";
@@ -564,7 +578,8 @@
 				05CC911C1128C92F001912D5 /* rpm-vercomp.h in Headers */,
 				05CC92601128DA11001912D5 /* PLSimulatorUtils.h in Headers */,
 				054C8119112B9D53006D87F6 /* PLSimulatorDeviceFamily.h in Headers */,
-				0519EF79154075FB00AD2B48 /* PLSimulatorLibraryLoader.h in Headers */,
+				0519EF79154075FB00AD2B48 /* PLExecutableBinary.h in Headers */,
+				0519EF8015407BAE00AD2B48 /* PLUniversalBinary.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -828,7 +843,9 @@
 				05CC911D1128C92F001912D5 /* rpm-vercomp.m in Sources */,
 				05CC92611128DA11001912D5 /* PLSimulatorUtils.m in Sources */,
 				054C811A112B9D53006D87F6 /* PLSimulatorDeviceFamily.m in Sources */,
-				0519EF7A154075FB00AD2B48 /* PLSimulatorLibraryLoader.m in Sources */,
+				0519EF7A154075FB00AD2B48 /* PLExecutableBinary.m in Sources */,
+				0519EF8115407BAE00AD2B48 /* PLUniversalBinary.m in Sources */,
+				0519EF87154081A000AD2B48 /* PLMachO.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -842,7 +859,8 @@
 				05CC91321128C981001912D5 /* PLTestCase.m in Sources */,
 				05CC92151128D38D001912D5 /* PLSimulatorApplicationTests.m in Sources */,
 				054C8120112B9D89006D87F6 /* PLSimulatorDeviceFamilyTests.m in Sources */,
-				0519EF7D1540779200AD2B48 /* PLSimulatorLibraryLoaderTests.m in Sources */,
+				0519EF7D1540779200AD2B48 /* PLExecutableBinaryTests.m in Sources */,
+				0519EF8415407F2B00AD2B48 /* PLUniversalBinaryTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

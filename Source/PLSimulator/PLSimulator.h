@@ -86,7 +86,10 @@ typedef enum {
     PLSimulatorErrorInvalidSDK = 3,
     
     /** The provided path is not a valid simulator application. */
-    PLSimulatorErrorInvalidApplication = 3
+    PLSimulatorErrorInvalidApplication = 4,
+    
+    /** The provided path is not a valid Mach-O binary */
+    PLSimulatorErrorInvalidBinary = 5
 } PLSimulatorError;
 
 
