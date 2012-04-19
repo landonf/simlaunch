@@ -35,6 +35,9 @@
 /* End PBXAggregateTarget section */
 
 /* Begin PBXBuildFile section */
+		0519EF79154075FB00AD2B48 /* PLSimulatorLibraryLoader.h in Headers */ = {isa = PBXBuildFile; fileRef = 0519EF77154075FB00AD2B48 /* PLSimulatorLibraryLoader.h */; };
+		0519EF7A154075FB00AD2B48 /* PLSimulatorLibraryLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 0519EF78154075FB00AD2B48 /* PLSimulatorLibraryLoader.m */; };
+		0519EF7D1540779200AD2B48 /* PLSimulatorLibraryLoaderTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 0519EF7C1540779200AD2B48 /* PLSimulatorLibraryLoaderTests.m */; };
 		052259BA1129FE2E00A83450 /* Bundler.icns in Resources */ = {isa = PBXBuildFile; fileRef = 052259B91129FE2E00A83450 /* Bundler.icns */; };
 		0523F61511269281004FB4EB /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 0523F61211269281004FB4EB /* main.m */; };
 		0523F61611269281004FB4EB /* LauncherAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 0523F61411269281004FB4EB /* LauncherAppDelegate.m */; };
@@ -210,6 +213,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0519EF77154075FB00AD2B48 /* PLSimulatorLibraryLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLSimulatorLibraryLoader.h; sourceTree = "<group>"; };
+		0519EF78154075FB00AD2B48 /* PLSimulatorLibraryLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLSimulatorLibraryLoader.m; sourceTree = "<group>"; };
+		0519EF7C1540779200AD2B48 /* PLSimulatorLibraryLoaderTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLSimulatorLibraryLoaderTests.m; sourceTree = "<group>"; };
 		052259B91129FE2E00A83450 /* Bundler.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Bundler.icns; sourceTree = "<group>"; };
 		0523F61211269281004FB4EB /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		0523F61311269281004FB4EB /* LauncherAppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LauncherAppDelegate.h; sourceTree = "<group>"; };
@@ -318,6 +324,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0519EF76154075CD00AD2B48 /* Bundle Loader */ = {
+			isa = PBXGroup;
+			children = (
+				0519EF77154075FB00AD2B48 /* PLSimulatorLibraryLoader.h */,
+				0519EF78154075FB00AD2B48 /* PLSimulatorLibraryLoader.m */,
+				0519EF7C1540779200AD2B48 /* PLSimulatorLibraryLoaderTests.m */,
+			);
+			name = "Bundle Loader";
+			sourceTree = "<group>";
+		};
 		0523F61111269281004FB4EB /* Launcher */ = {
 			isa = PBXGroup;
 			children = (
@@ -389,6 +405,7 @@
 				05CC92321128D453001912D5 /* Platform */,
 				05CC92331128D47C001912D5 /* SDK */,
 				05CC92341128D493001912D5 /* Application */,
+				0519EF76154075CD00AD2B48 /* Bundle Loader */,
 			);
 			name = "PLSimulator Framework";
 			path = PLSimulator;
@@ -547,6 +564,7 @@
 				05CC911C1128C92F001912D5 /* rpm-vercomp.h in Headers */,
 				05CC92601128DA11001912D5 /* PLSimulatorUtils.h in Headers */,
 				054C8119112B9D53006D87F6 /* PLSimulatorDeviceFamily.h in Headers */,
+				0519EF79154075FB00AD2B48 /* PLSimulatorLibraryLoader.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -810,6 +828,7 @@
 				05CC911D1128C92F001912D5 /* rpm-vercomp.m in Sources */,
 				05CC92611128DA11001912D5 /* PLSimulatorUtils.m in Sources */,
 				054C811A112B9D53006D87F6 /* PLSimulatorDeviceFamily.m in Sources */,
+				0519EF7A154075FB00AD2B48 /* PLSimulatorLibraryLoader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -823,6 +842,7 @@
 				05CC91321128C981001912D5 /* PLTestCase.m in Sources */,
 				05CC92151128D38D001912D5 /* PLSimulatorApplicationTests.m in Sources */,
 				054C8120112B9D89006D87F6 /* PLSimulatorDeviceFamilyTests.m in Sources */,
+				0519EF7D1540779200AD2B48 /* PLSimulatorLibraryLoaderTests.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
