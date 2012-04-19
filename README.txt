@@ -22,15 +22,11 @@ Watch the screencast here: http://www.youtube.com/watch?v=Jnm4Zj36shU
 
 == Building ==
 
-The project should build and run on Mac OS X 10.5 and 10.6. To build, run the disk image target:
+The project should build and run on Mac OS X 10.6 and 10.7. To build, run the disk image target:
     xcodebuild -configuration Release -target "Disk Image"
-
-Building requires the PLBlocks 1.1-beta2 SDK to support blocks on 10.5:
-    http://code.google.com/p/plblocks/
 
 Binary releases of Simulator Launcher are also available from:
     http://github.com/landonf/simlaunch/downloads
-
 
 == Authors ==
 
