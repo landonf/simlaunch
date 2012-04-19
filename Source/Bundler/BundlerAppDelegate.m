@@ -140,9 +140,10 @@
     /* Configure our panel */
     NSOpenPanel *panel = [NSOpenPanel openPanel];    
     [panel setAllowsMultipleSelection: YES];
-    
+    [panel setAllowedFileTypes: [NSArray arrayWithObject: @"app"]];
+
     /* Run */
-    if ([panel runModalForTypes: [NSArray arrayWithObject: @"app"]] != NSOKButton) {
+    if ([panel runModal] != NSOKButton) {
         [[NSApplication sharedApplication] terminate: self];
         return;
     }
