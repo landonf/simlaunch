@@ -41,8 +41,14 @@
 /* SDK Version */
 #define VersionKey @"Version"
 
-/* Device Families */
+/* Device Families (pre-4.0 configuration) */
 #define DevicesKey @"UIDeviceFamily"
+
+/* Default Properties (4.0+ configuration) */
+#define DefaultPropertiesKey @"DefaultProperties"
+
+/* Supported Device Families (4.0+ configuration) */
+#define SupportedDeviceFamiliesKey @"SUPPORTED_DEVICE_FAMILIES"
 
 /* Canonical name */
 #define CanonicalNameKey @"CanonicalName"
@@ -131,8 +137,12 @@ enum {
     }
 
     /* Block to fetch a key from the plist */
-    BOOL (^Get) (NSString *, id *, Class cls, BOOL) = ^(NSString *key, id *value, Class cls, BOOL required) {
+    BOOL (^Get) (NSString *, id *, Class cls, BOOL, BOOL);
+    Get = ^(NSString *key, id *value, Class cls, BOOL required, BOOL retained) {
         *value = [plist objectForKey: key];
+        if (retained)
+            [*value retain];
+
         if (*value != nil && (cls == nil || [*value isKindOfClass: cls]))
             return YES;
     
@@ -148,22 +158,31 @@ enum {
     };
 
     /* Fetch required values */
-    if (!Get(VersionKey, &_version, [NSString class], YES))
+    if (!Get(VersionKey, &_version, [NSString class], YES, YES))
         return nil;
 
-    if (!Get(CanonicalNameKey, &_canonicalName, [NSString class], YES))
+    if (!Get(CanonicalNameKey, &_canonicalName, [NSString class], YES, YES))
         return nil;
 
     /* Get the list of supported devices */
     {
         NSArray *devices;
-        if (Get(DevicesKey, &devices, [NSArray class], NO)) {
+        NSDictionary *defaultProperties;
+        
+        if (Get(DevicesKey, &devices, [NSArray class], NO, NO)) {
             _deviceFamilies = [PLSimulatorUtils deviceFamiliesForDeviceCodes: devices];
+        } else if (Get(DefaultPropertiesKey, &defaultProperties, [NSDictionary class], NO, NO)) {
+            /* Use the meta-data format introduced in iOS 4.0 */
+            devices = [defaultProperties objectForKey: SupportedDeviceFamiliesKey];
+            if (devices != nil && [devices isKindOfClass: [NSArray class]]) {
+                _deviceFamilies = [PLSimulatorUtils deviceFamiliesForDeviceCodes: devices];
+            }
         }
 
         /* If no valid settings, assume that this is a <3.2 SDK and it supports the iPhone family */
-        if (_deviceFamilies == nil || [_deviceFamilies count] == 0)
+        if (_deviceFamilies == nil || [_deviceFamilies count] == 0) {
             _deviceFamilies = [NSSet setWithObject: [PLSimulatorDeviceFamily iphoneFamily]];
+        }
     }
 
     return self;
