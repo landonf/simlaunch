@@ -119,9 +119,13 @@
     }
     
     
-    /* Block to fetch a key from the plist */
-    BOOL (^Get) (NSString *, id *, Class cls, BOOL) = ^(NSString *key, id *value, Class cls, BOOL required) {
+    /* Block to fetch a retained key from the plist */
+    BOOL (^Get) (NSString *, id *, Class cls, BOOL, BOOL) = ^(NSString *key, id *value, Class cls, BOOL required, BOOL retained) {
         *value = [plist objectForKey: key];
+
+        if (retained)
+            [*value retain];
+
         if (*value != nil && (cls == nil || [*value isKindOfClass: cls]))
             return YES;
         
@@ -136,18 +140,25 @@
         return NO;
     };
 
-    /* Get the application's display name. */
-    if (!Get((id)CFBundleDisplayName, &_displayName, [NSString class], YES))
-        return nil;
+    /* Try to fetch the application's display name. */
+    if (!Get((id)CFBundleDisplayName, &_displayName, [NSString class], NO, YES)) {
+        _displayName = [[[path lastPathComponent] stringByDeletingPathExtension] retain];
+        if (_displayName == nil) {
+            NSString *desc = NSLocalizedString(@"The application's Info.plist is missing CFBundleDisplayName key and a "
+                                               @"valid name could not be determined from the application path.",
+                                               @"Unsupported application plist");
+            plsimulator_populate_nserror(outError, PLSimulatorErrorInvalidApplication, desc, nil);
+        }
+    }
 
     /* Get the canonical name of the SDK that this app was built with. */
-    if (!Get(SDKNameKey, &_canonicalSDKName, [NSString class], YES))
+    if (!Get(SDKNameKey, &_canonicalSDKName, [NSString class], YES, YES))
         return nil;
 
     /* Get the list of supported devices */
     {
         NSArray *devices;
-        if (Get(DevicesKey, &devices, [NSArray class], NO)) {
+        if (Get(DevicesKey, &devices, [NSArray class], NO, NO)) {
             _deviceFamilies = [PLSimulatorUtils deviceFamiliesForDeviceCodes: devices];
         }
         
@@ -157,6 +168,15 @@
     }
 
     return self;
+}
+
+- (void) dealloc {
+    [_displayName release];
+    [_path release];
+    [_canonicalSDKName release];
+    [_deviceFamilies release];
+
+    [super dealloc];
 }
 
 @end
