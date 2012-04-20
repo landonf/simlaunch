@@ -38,9 +38,14 @@
 
     /** Application to be launched. */
     PLSimulatorApplication *_app;
+
+    /** The device family to use by default, or nil if none specified. */
+    PLSimulatorDeviceFamily *_defaultDeviceFamily;
 }
 
-- (id) initWithPlatform: (PLSimulatorPlatform *) platform app: (PLSimulatorApplication *) app;
+- (id) initWithPlatform: (PLSimulatorPlatform *) platform
+                    app: (PLSimulatorApplication *) app 
+    defaultDeviceFamily: (PLSimulatorDeviceFamily *) defaultDeviceFamily;
 
 - (void) launch;
 

@@ -35,6 +35,9 @@
 /* Full application-relative path to the embeddedapp dir */
 #define FULL_APP_DIR @"Contents/Resources/" APP_DIR
 
+/* Default device family to use */
+#define DefaultDeviceKey @"PLDefaultUIDeviceFamily"
+
 @implementation LauncherAppDelegate
 
 - (void) applicationDidFinishLaunching: (NSNotification *) aNotification {
@@ -50,6 +53,14 @@
         [alert runModal];
         [[NSApplication sharedApplication] terminate: self];
     };
+    
+    /* Read the default device family */
+    NSString *defaultDeviceCode = [[[NSBundle mainBundle] infoDictionary] objectForKey: DefaultDeviceKey];
+    if (defaultDeviceCode != nil && [defaultDeviceCode respondsToSelector: @selector(intValue)]) {
+        _defaultDeviceFamily = [[PLSimulatorDeviceFamily deviceFamilyForDeviceCode: [defaultDeviceCode intValue]] retain];
+        if (_defaultDeviceFamily == nil)
+            NSLog(@"Failed to parse %@ value: %@", DefaultDeviceKey, defaultDeviceCode);
+    }
 
     /* Find the embedded application dir */
     NSString *appContainer = [[NSBundle mainBundle] pathForResource: APP_DIR ofType: nil];
@@ -108,7 +119,9 @@
     }
 
     /* Launch with the discovery-preferred platform */
-    LauncherSimClient *client = [[LauncherSimClient alloc] initWithPlatform: [platforms objectAtIndex: 0] app: _app];
+    LauncherSimClient *client = [[LauncherSimClient alloc] initWithPlatform: [platforms objectAtIndex: 0] 
+                                                                        app: _app
+                                                        defaultDeviceFamily: _defaultDeviceFamily];
     [client launch];
 }
 

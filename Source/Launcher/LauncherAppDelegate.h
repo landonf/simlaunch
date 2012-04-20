@@ -37,6 +37,9 @@
 
     /** Embedded app meta-data */
     PLSimulatorApplication *_app;
+
+    /** Default device family, or nil if none. */
+    PLSimulatorDeviceFamily *_defaultDeviceFamily;
 }
 
 @end

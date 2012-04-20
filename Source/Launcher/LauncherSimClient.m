@@ -47,13 +47,18 @@
  *
  * @param platform Platform to use for launching.
  * @param app Application to be launched.
+ * @param defaultDeviceFamily The device family to use by default, or nil if none specified.
  */
-- (id) initWithPlatform: (PLSimulatorPlatform *) platform app: (PLSimulatorApplication *) app {
+- (id) initWithPlatform: (PLSimulatorPlatform *) platform
+                    app: (PLSimulatorApplication *) app 
+    defaultDeviceFamily: (PLSimulatorDeviceFamily *) defaultDeviceFamily
+{
     if ((self = [super init]) == nil)
         return nil;
     
     _platform = platform;
     _app = app;
+    _defaultDeviceFamily = defaultDeviceFamily;
 
     return self;
 }
@@ -138,9 +143,10 @@
     [config setSimulatedApplicationLaunchEnvironment: [NSDictionary dictionary]];
 
     if ([config respondsToSelector: @selector(setSimulatedDeviceFamily:)]) {
-        /* Prefer iPad over iPhone, but only if we know it will work. */
-        // TODO: Make configurable.
-        if (sdk != nil &&
+        /* Use the requested default, if supported. Otherwise, prefer iPad over iPhone, but only if supported */
+        if (sdk != nil && _defaultDeviceFamily != nil && [sdk.deviceFamilies containsObject: _defaultDeviceFamily]) {
+            [config setSimulatedDeviceFamily: [NSNumber numberWithInt: _defaultDeviceFamily.deviceFamilyCode]]; 
+        } else if (sdk != nil &&
             [_app.deviceFamilies containsObject: [PLSimulatorDeviceFamily ipadFamily]] && 
             [sdk.deviceFamilies containsObject: [PLSimulatorDeviceFamily ipadFamily]]) 
         {
