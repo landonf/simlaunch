@@ -230,8 +230,10 @@ static NSInteger platform_compare_by_version (id obj1, id obj2, void *context) {
             }
         }
 
-        if (!hasMinVersion || !hasDeviceFamily || !hasExpectedSDK)
+        if (!hasMinVersion || !hasDeviceFamily || !hasExpectedSDK) {
+            NSLog(@"Skipping platform discovery result '%@', does not match requirements (mv=%hhu, df=%hhu, es=%hhu)", path, hasMinVersion, hasDeviceFamily, hasExpectedSDK);
             continue;
+        }
 
         [platformSDKs addObject: platform];
     }
