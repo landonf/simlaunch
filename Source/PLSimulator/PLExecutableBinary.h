@@ -43,7 +43,7 @@
     NSArray *_rpaths;
     
     /** Library references. */
-    NSArray *_libraries;
+    NSArray *_dylibPaths;
 }
 
 + (id) binaryWithPath: (NSString *) path data: (NSData *) data error: (NSError **) outError;

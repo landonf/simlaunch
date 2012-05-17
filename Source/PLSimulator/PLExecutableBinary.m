@@ -320,7 +320,7 @@ static uint32_t macho_nswap32(uint32_t input) {
 - (void) dealloc {
     [_path release];
     [_rpaths release];
-    [_libraries release];
+    [_dylibPaths release];
 
     [super dealloc];
 }
