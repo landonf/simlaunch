@@ -230,34 +230,43 @@
 /**
  * Return the executable that best matches the current architecture, or nil if none is found.
  */
-- (PLExecutableBinary *) executableMatchingCurrentArchitecture {    
+- (PLExecutableBinary *) executableMatchingCurrentArchitecture {
+    cpu_type_t cpuType;
+    cpu_subtype_t cpuSubType;
+
+    const NXArchInfo *archInfo = nil;
+
     /* Determine the Mach-O architecture for the host process */
     Dl_info info;
     const void *main = dlsym(RTLD_DEFAULT, "main");
     if (dladdr(main, &info) == 0) {
-        /* Should never happen */
-        NSLog(@"Unexpected error fetching main() symbol info");
-        return nil;
-    }
-    
-    /* Parse out the binary info
-     * XXX - Note the use of a bogus length field. We assume that since the image is mapped, it won't contain invalid length data */
-    NSError *error;
-    PLExecutableBinary *mainBinary = [PLExecutableBinary binaryWithPath: [NSString stringWithUTF8String: info.dli_fname]
-                                                                   data: [NSData dataWithBytesNoCopy: info.dli_fbase length: 100 * 1024 * 1024 freeWhenDone: NO]
-                                                                  error: &error];
-    if (mainBinary == nil) {
-        /* Should never happen */
-        NSLog(@"Unexpected error parsing main() binary info: %@", error);
-        return nil;
+        // don't know why but running on Snow Leopard cannot find main symbol at runtime.
+        // fallback to NXArchInfo implementation.
+        archInfo   = NXGetLocalArchInfo();
+        cpuType    = archInfo->cputype;
+        cpuSubType = archInfo->cpusubtype;
+    } else {
+        /* Parse out the binary info
+         * XXX - Note the use of a bogus length field. We assume that since the image is mapped, it won't contain invalid length data */
+        NSError *error;
+        PLExecutableBinary *mainBinary = [PLExecutableBinary binaryWithPath: [NSString stringWithUTF8String: info.dli_fname]
+                                                                       data: [NSData dataWithBytesNoCopy: info.dli_fbase length: 100 * 1024 * 1024 freeWhenDone: NO]
+                                                                      error: &error];
+        if (mainBinary == nil) {
+            /* Should never happen */
+            NSLog(@"Unexpected error parsing main() binary info: %@", error);
+            return nil;
+        }
+        cpuType    = mainBinary.cpu_type;
+        cpuSubType = mainBinary.cpu_subtype;
     }
 
     PLExecutableBinary *matchedExec = nil;
     for (PLExecutableBinary *exec in self.executables) {
-        if (exec.cpu_type == mainBinary.cpu_type) {
+        if (exec.cpu_type == cpuType) {
             if (matchedExec == nil) {
                 matchedExec = exec;
-            } else if (exec.cpu_subtype == mainBinary.cpu_subtype) {
+            } else if (exec.cpu_subtype == cpuSubType) {
                 matchedExec = exec;
             }
         }
