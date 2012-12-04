@@ -120,7 +120,7 @@ static PLSimulatorDeviceFamily *iPadSingleton = nil;
 
 // from NSObject protocol
 - (NSString *) description {
-    return [NSString stringWithFormat: @"%@ - %@ (UIDeviceFamily=%d)", [self class], self.localizedName, self.deviceFamilyCode];
+    return [NSString stringWithFormat: @"%@ - %@ (UIDeviceFamily=%ld)", [self class], self.localizedName, (long) self.deviceFamilyCode];
 }
 
 @end

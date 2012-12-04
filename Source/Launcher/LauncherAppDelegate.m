@@ -49,7 +49,7 @@
                                          defaultButton: @"Quit"
                                        alternateButton: nil 
                                            otherButton: nil
-                             informativeTextWithFormat: text];
+                             informativeTextWithFormat: @"%@", text];
         [alert runModal];
         [[NSApplication sharedApplication] terminate: self];
     };
