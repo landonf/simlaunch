@@ -1,4 +1,4 @@
-#import "classdump.h"
+#import "DVTiPhoneSimulatorRemoteClient.h"
 
 /** Device family constants  */
 typedef enum {

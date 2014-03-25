@@ -241,7 +241,6 @@
 		054C8117112B9D53006D87F6 /* PLSimulatorDeviceFamily.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLSimulatorDeviceFamily.h; sourceTree = "<group>"; };
 		054C8118112B9D53006D87F6 /* PLSimulatorDeviceFamily.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLSimulatorDeviceFamily.m; sourceTree = "<group>"; };
 		054C811F112B9D89006D87F6 /* PLSimulatorDeviceFamilyTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PLSimulatorDeviceFamilyTests.m; sourceTree = "<group>"; };
-		054C8121112B9E49006D87F6 /* classdump.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = classdump.h; sourceTree = "<group>"; };
 		05CC90F21128C8C5001912D5 /* PLSimulator.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = PLSimulator.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		05CC90FD1128C91A001912D5 /* PLSimulator-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "PLSimulator-Info.plist"; sourceTree = "<group>"; };
 		05CC91001128C92F001912D5 /* PLSimulator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PLSimulator.h; sourceTree = "<group>"; };
@@ -286,6 +285,7 @@
 		29B97324FDCFA39411CA2CEA /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = /System/Library/Frameworks/AppKit.framework; sourceTree = "<absolute>"; };
 		29B97325FDCFA39411CA2CEA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = /System/Library/Frameworks/Foundation.framework; sourceTree = "<absolute>"; };
 		8D1107320486CEB800E47090 /* Launcher.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Launcher.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		FDE954B418E0C008006BEDAB /* DVTiPhoneSimulatorRemoteClient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DVTiPhoneSimulatorRemoteClient.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -385,7 +385,7 @@
 			isa = PBXGroup;
 			children = (
 				0523F645112694C8004FB4EB /* iPhoneSimulatorRemoteClient.h */,
-				054C8121112B9E49006D87F6 /* classdump.h */,
+				FDE954B418E0C008006BEDAB /* DVTiPhoneSimulatorRemoteClient.h */,
 			);
 			path = iPhoneSimulatorRemoteClient;
 			sourceTree = "<group>";
