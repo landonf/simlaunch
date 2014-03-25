@@ -74,9 +74,9 @@ static BOOL isBundleLoaded = NO;
         plsimulator_populate_nserror(outError, PLSimulatorErrorUnknown, @"Unexpected error", nil);
         return nil;
     }
-    
+
     _path = path;
-    _xcodePath = [xcodePath retain];
+    _xcodePath = xcodePath;
 
     /* Verify that the path exists */
     NSFileManager *fm = [NSFileManager new];
@@ -122,12 +122,6 @@ static BOOL isBundleLoaded = NO;
     return self;
 }
 
-- (void) dealloc {
-    [_path release];
-    [_xcodePath release];
-    [_sdks release];
-    [_remoteClient release];
-}
 
 /**
  * Attempt to load Apple's iPhoneSimulatorRemoteClient framework from this platform SDK.

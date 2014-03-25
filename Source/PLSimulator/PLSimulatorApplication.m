@@ -123,8 +123,6 @@
     BOOL (^Get) (NSString *, id *, Class cls, BOOL, BOOL) = ^(NSString *key, id *value, Class cls, BOOL required, BOOL retained) {
         *value = [plist objectForKey: key];
 
-        if (retained)
-            [*value retain];
 
         if (*value != nil && (cls == nil || [*value isKindOfClass: cls]))
             return YES;
@@ -140,9 +138,11 @@
         return NO;
     };
 
+
+    NSString *displayName = nil;
     /* Try to fetch the application's display name. */
-    if (!Get((id)CFBundleDisplayName, &_displayName, [NSString class], NO, YES)) {
-        _displayName = [[[path lastPathComponent] stringByDeletingPathExtension] retain];
+    if (!Get((id)CFBundleDisplayName, &displayName, [NSString class], NO, YES)) {
+        _displayName = [[path lastPathComponent] stringByDeletingPathExtension];
         if (_displayName == nil) {
             NSString *desc = NSLocalizedString(@"The application's Info.plist is missing CFBundleDisplayName key and a "
                                                @"valid name could not be determined from the application path.",
@@ -150,10 +150,14 @@
             plsimulator_populate_nserror(outError, PLSimulatorErrorInvalidApplication, desc, nil);
         }
     }
+    _displayName = displayName;
 
+    NSString *canonicalSDKName = nil;
     /* Get the canonical name of the SDK that this app was built with. */
-    if (!Get(SDKNameKey, &_canonicalSDKName, [NSString class], YES, YES))
+    if (!Get(SDKNameKey, &canonicalSDKName, [NSString class], YES, YES))
         return nil;
+
+    _canonicalSDKName = canonicalSDKName;
 
     /* Get the list of supported devices */
     {
@@ -170,13 +174,5 @@
     return self;
 }
 
-- (void) dealloc {
-    [_displayName release];
-    [_path release];
-    [_canonicalSDKName release];
-    [_deviceFamilies release];
-
-    [super dealloc];
-}
 
 @end

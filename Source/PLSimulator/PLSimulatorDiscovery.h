@@ -69,7 +69,7 @@
     BOOL _running;
 
     /** Delegate */
-    id<PLSimulatorDiscoveryDelegate> _delegate;
+    id<PLSimulatorDiscoveryDelegate> __strong _delegate;
 }
 
 - (id) initWithMinimumVersion: (NSString *) version canonicalSDKName: (NSString *) sdkName deviceFamilies: (NSSet *) deviceFamilies;
@@ -77,6 +77,6 @@
 - (void) startQuery;
 
 /** Search delegate. */
-@property(assign) id<PLSimulatorDiscoveryDelegate> delegate;
+@property(strong) id<PLSimulatorDiscoveryDelegate> delegate;
 
 @end

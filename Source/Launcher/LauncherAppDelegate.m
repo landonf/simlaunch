@@ -57,7 +57,7 @@
     /* Read the default device family */
     NSString *defaultDeviceCode = [[[NSBundle mainBundle] infoDictionary] objectForKey: DefaultDeviceKey];
     if (defaultDeviceCode != nil && [defaultDeviceCode respondsToSelector: @selector(intValue)]) {
-        _defaultDeviceFamily = [[PLSimulatorDeviceFamily deviceFamilyForDeviceCode: [defaultDeviceCode intValue]] retain];
+        _defaultDeviceFamily = [PLSimulatorDeviceFamily deviceFamilyForDeviceCode: [defaultDeviceCode intValue]];
         if (_defaultDeviceFamily == nil)
             NSLog(@"Failed to parse %@ value: %@", DefaultDeviceKey, defaultDeviceCode);
     }

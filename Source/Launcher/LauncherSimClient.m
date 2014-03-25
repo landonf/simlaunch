@@ -159,7 +159,7 @@
     [config setLocalizedClientName: @"SimLauncher"];
     
     /* Start the session */
-    session = [[[C(DTiPhoneSimulatorSession) alloc] init] autorelease];
+    session = [[C(DTiPhoneSimulatorSession) alloc] init];
     [session setDelegate: self];
     [session setSimulatedApplicationPID: [NSNumber numberWithInt: 35]];
     

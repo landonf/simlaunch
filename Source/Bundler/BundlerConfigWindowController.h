@@ -72,7 +72,7 @@
     NSArray *_deviceFamilies;
 
     /** Delegate */
-    id<BundlerConfigWindowControllerDelegate> _delegate;
+    id<BundlerConfigWindowControllerDelegate> __strong _delegate;
 }
 
 - (id) initWithSimulatorApp: (PLSimulatorApplication *) app;
@@ -81,7 +81,7 @@
 @property(readonly) PLSimulatorApplication *application;
 
 /** Controller delegate. */
-@property(assign) id<BundlerConfigWindowControllerDelegate> delegate;
+@property(strong) id<BundlerConfigWindowControllerDelegate> delegate;
 
 - (IBAction) cancel: (id) sender;
 - (IBAction) createBundle: (id) sender;

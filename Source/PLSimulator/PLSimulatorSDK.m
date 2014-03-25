@@ -140,8 +140,6 @@ enum {
     BOOL (^Get) (NSString *, id *, Class cls, BOOL, BOOL);
     Get = ^(NSString *key, id *value, Class cls, BOOL required, BOOL retained) {
         *value = [plist objectForKey: key];
-        if (retained)
-            [*value retain];
 
         if (*value != nil && (cls == nil || [*value isKindOfClass: cls]))
             return YES;
@@ -157,12 +155,16 @@ enum {
         return NO;
     };
 
+    NSString *version = nil;
     /* Fetch required values */
-    if (!Get(VersionKey, &_version, [NSString class], YES, YES))
+    if (!Get(VersionKey, &version, [NSString class], YES, YES))
         return nil;
+    _version = version;
 
-    if (!Get(CanonicalNameKey, &_canonicalName, [NSString class], YES, YES))
+    NSString *canonicalName = nil;
+    if (!Get(CanonicalNameKey, &canonicalName, [NSString class], YES, YES))
         return nil;
+    _canonicalName = canonicalName;
 
     /* Get the list of supported devices */
     {

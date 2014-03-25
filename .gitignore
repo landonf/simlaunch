@@ -1,2 +1,4 @@
 *.pbxuser
 *.perspectivev3
+xcuserdata
+*.xccheckout
