@@ -69,7 +69,7 @@
  * be parsed.
  */
 + (id) binaryWithPath: (NSString *) path error: (NSError **) outError {
-    return [[[self alloc] initWithPath: path error: outError] autorelease];
+    return [[self alloc] initWithPath: path error: outError];
 }
 
 /**
@@ -89,7 +89,7 @@
         return nil;
     }
     
-    _path = [path retain];
+    _path = path;
     
     /* Verify that the path exists */
     NSFileManager *fm = [NSFileManager new];
@@ -100,7 +100,6 @@
         NSString *desc = [NSString stringWithFormat: descFmt, _path];
         plsimulator_populate_nserror(outError, PLSimulatorErrorInvalidBinary, desc, nil);
         
-        [self release];
         return nil;
     }
     
@@ -111,7 +110,6 @@
         NSString *desc = NSLocalizedString(@"Could not mmap() binary.", @"Invalid library path");
         plsimulator_populate_nserror(outError, PLSimulatorErrorInvalidBinary, desc, posixErr);
         
-        [self release];
         return nil;
     }
 
@@ -125,7 +123,6 @@
     if (magic == NULL) {
         NSString *desc = NSLocalizedString(@"Could not read Mach-O magic.", @"Invalid binary");
         plsimulator_populate_nserror(outError, PLSimulatorErrorInvalidBinary, desc, nil);        
-        [self release];
         return nil;
     }
     
@@ -150,7 +147,6 @@
         default: {
             NSString *desc = NSLocalizedString(@"Unknown Mach-O magic value.", @"Invalid binary");
             plsimulator_populate_nserror(outError, PLSimulatorErrorInvalidBinary, desc, nil);        
-            [self release];
             return nil;
         }
     }
@@ -163,7 +159,6 @@
         if (archs == NULL) {
             NSString *desc = NSLocalizedString(@"Could not read Mach-O universal architecture list.", @"Invalid binary");
             plsimulator_populate_nserror(outError, PLSimulatorErrorInvalidBinary, desc, nil);        
-            [self release];
             return nil;
         }
         
@@ -172,7 +167,6 @@
             if (arch == NULL) {
                 NSString *desc = NSLocalizedString(@"Could not read Mach-O universal architecture.", @"Invalid binary");
                 plsimulator_populate_nserror(outError, PLSimulatorErrorInvalidBinary, desc, nil);        
-                [self release];
                 return nil;
             }
             
@@ -183,7 +177,6 @@
             if (arch_input.data == NULL) {
                 NSString *desc = NSLocalizedString(@"Could not read Mach-O universal executable.", @"Invalid binary");
                 plsimulator_populate_nserror(outError, PLSimulatorErrorInvalidBinary, desc, nil);        
-                [self release];
                 return nil;
             }
             
@@ -215,17 +208,11 @@
         [executables addObject: binary];
     }
     
-    _executables = [executables retain];
+    _executables = executables;
 
     return self;
 }
 
-- (void) dealloc {
-    [_path release];
-    [_executables release];
-
-    [super dealloc];
-}
 
 /**
  * Return the executable that best matches the current architecture, or nil if none is found.
@@ -275,7 +262,7 @@
  * @return Returns YES on success, or NO on failure.
  */
 - (BOOL) loadLibraryWithRPaths: (NSArray *) rpaths error: (NSError **) outError {
-    NSFileManager *fm = [[[NSFileManager alloc] init] autorelease];
+    NSFileManager *fm = [[NSFileManager alloc] init];
     
     PLExecutableBinary *exec = [self executableMatchingCurrentArchitecture];
     if (exec == nil) {
@@ -286,7 +273,7 @@
 
     /* Recursively link @rpath-requiring libraries */
     if (rpaths != nil) {
-        for (NSString *dylib in exec.dylibPaths) {
+        for (__strong NSString *dylib in exec.dylibPaths) {
             /* If @rpath is used, search our path space */
             if ([dylib rangeOfString: @"@rpath/"].location != NSNotFound) {
                 /* Find a matching @rpath */

@@ -41,7 +41,18 @@ static BOOL isBundleLoaded = NO;
 #define PLATFORM_SUBSDK_PATH @"Developer/SDKs/"
 
 /* Relative path to the iPhoneSimulatorRemoteClient framework */
-#define REMOTE_CLIENT_FRAMEWORK @"Developer/Library/PrivateFrameworks/iPhoneSimulatorRemoteClient.framework"
+#define REMOTE_CLIENT_FRAMEWORK @"Developer/Library/PrivateFrameworks/DVTiPhoneSimulatorRemoteClient.framework"
+
+/* Load a class from the runtime-loaded iPhoneSimulatorRemoteClient framework */
+#define C(name) NSClassFromString(@"" #name)
+
+@interface DVTPlatform : NSObject
++ (BOOL)loadAllPlatformsReturningError:(id*)arg1;
+@end
+
+/* Constants for private framework paths */
+NSString* const kDVTFoundationRelativePath = @"Contents/SharedFrameworks/DVTFoundation.framework";
+NSString* const kDevToolsFoundationRelativePath = @"Contents/OtherFrameworks/DevToolsFoundation.framework";
 
 /**
  * Manages a Simulator Platform SDK, allows querying of the bundled PLSimulatorSDK meta-data.
@@ -74,9 +85,9 @@ static BOOL isBundleLoaded = NO;
         plsimulator_populate_nserror(outError, PLSimulatorErrorUnknown, @"Unexpected error", nil);
         return nil;
     }
-    
+
     _path = path;
-    _xcodePath = [xcodePath retain];
+    _xcodePath = xcodePath;
 
     /* Verify that the path exists */
     NSFileManager *fm = [NSFileManager new];
@@ -122,12 +133,6 @@ static BOOL isBundleLoaded = NO;
     return self;
 }
 
-- (void) dealloc {
-    [_path release];
-    [_xcodePath release];
-    [_sdks release];
-    [_remoteClient release];
-}
 
 /**
  * Attempt to load Apple's iPhoneSimulatorRemoteClient framework from this platform SDK.
@@ -167,6 +172,9 @@ static BOOL isBundleLoaded = NO;
         }
     }
 
+    /* Developer tools bundles need to be loaded prior to the remote client bundle */
+    [self loadDeveloperToolsBundlesWithError: outError];
+
     /* Determine the path */
     NSString *path = [_path stringByAppendingPathComponent: REMOTE_CLIENT_FRAMEWORK];
     _remoteClient = [NSBundle bundleWithPath: path];
@@ -178,6 +186,25 @@ static BOOL isBundleLoaded = NO;
         return false;
 
     return [ub loadLibraryWithRPaths: rpaths error: outError];
+}
+
+- (void) loadDeveloperToolsBundlesWithError: (NSError **) outError {
+    NSString *dvtFoundationPath = [_xcodePath stringByAppendingPathComponent:kDVTFoundationRelativePath];
+
+    NSBundle *dvtFoundationBundle = [NSBundle bundleWithPath:dvtFoundationPath];
+    if (![dvtFoundationBundle loadAndReturnError: outError]) {
+        return;
+    }
+    NSString *devToolsFoundationPath = [_xcodePath stringByAppendingPathComponent:kDevToolsFoundationRelativePath];
+    NSBundle *devToolsFoundationBundle =
+    [NSBundle bundleWithPath:devToolsFoundationPath];
+    if (![devToolsFoundationBundle loadAndReturnError: outError]) {
+        return;
+    }
+
+    if (![C(DVTPlatform) loadAllPlatformsReturningError: outError]) {
+        return;
+    }
 }
 
 

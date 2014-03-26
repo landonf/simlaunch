@@ -75,7 +75,7 @@ static uint32_t macho_nswap32(uint32_t input) {
  * be parsed.
  */
 + (id) binaryWithPath: (NSString *) path data: (NSData *) data error: (NSError **) outError {
-    return [[[self alloc] initWithPath: path data: data error: outError] autorelease];
+    return [[self alloc] initWithPath: path data: data error: outError];
 }
 
 /**
@@ -92,7 +92,7 @@ static uint32_t macho_nswap32(uint32_t input) {
     if ((self = [super init]) == nil)
         return nil;
     
-    _path = [path retain];
+    _path = path;
     
     /* Configure parser */
     macho_input_t input;
@@ -104,7 +104,6 @@ static uint32_t macho_nswap32(uint32_t input) {
     if (magic == NULL) {
         NSString *desc = NSLocalizedString(@"Could not read Mach-O magic.", @"Invalid binary");
         plsimulator_populate_nserror(outError, PLSimulatorErrorInvalidBinary, desc, nil);        
-        [self release];
         return nil;
     }
     
@@ -128,7 +127,6 @@ static uint32_t macho_nswap32(uint32_t input) {
             if (header == NULL) {
                 NSString *desc = NSLocalizedString(@"Could not read Mach-O header.", @"Invalid binary");
                 plsimulator_populate_nserror(outError, PLSimulatorErrorInvalidBinary, desc, nil);        
-                [self release];
                 return nil;
             }
             break;
@@ -143,7 +141,6 @@ static uint32_t macho_nswap32(uint32_t input) {
             if (header64 == NULL) {
                 NSString *desc = NSLocalizedString(@"Could not read Mach-O header.", @"Invalid binary");
                 plsimulator_populate_nserror(outError, PLSimulatorErrorInvalidBinary, desc, nil);        
-                [self release];
                 return nil;
             }
             
@@ -156,7 +153,6 @@ static uint32_t macho_nswap32(uint32_t input) {
         default: {
             NSString *desc = NSLocalizedString(@"Unknown Mach-O magic value.", @"Invalid binary");
             plsimulator_populate_nserror(outError, PLSimulatorErrorInvalidBinary, desc, nil);        
-            [self release];
             return nil;
         }
     }
@@ -170,17 +166,16 @@ static uint32_t macho_nswap32(uint32_t input) {
     if (cmd == NULL) {
         NSString *desc = NSLocalizedString(@"Could not fetch Mach-O load command.", @"Invalid binary");
         plsimulator_populate_nserror(outError, PLSimulatorErrorInvalidBinary, desc, nil);        
-        [self release];
         return nil;
     }
     uint32_t ncmds = swap32(header->ncmds);
     
     /* Iterate over the load commands */
     NSMutableArray *rpaths = [NSMutableArray array];
-    _rpaths = [rpaths retain];
+    _rpaths = rpaths;
 
     NSMutableArray *dylibs = [NSMutableArray array];
-    _dylibPaths = [dylibs retain];
+    _dylibPaths = dylibs;
     
     for (uint32_t i = 0; i < ncmds; i++) {
         /* Load the full command */
@@ -189,7 +184,6 @@ static uint32_t macho_nswap32(uint32_t input) {
         if (cmd == NULL) {
             NSString *desc = NSLocalizedString(@"Could not read Mach-O load command.", @"Invalid binary");
             plsimulator_populate_nserror(outError, PLSimulatorErrorInvalidBinary, desc, nil);        
-            [self release];
             return nil;
         }
         
@@ -201,7 +195,6 @@ static uint32_t macho_nswap32(uint32_t input) {
                 if (cmdsize < sizeof(struct rpath_command)) {
                     NSString *desc = NSLocalizedString(@"LC_RPATH has an invalid size", @"Invalid binary");
                     plsimulator_populate_nserror(outError, PLSimulatorErrorInvalidBinary, desc, nil);        
-                    [self release];
                     return nil;
                 }
                 
@@ -210,13 +203,12 @@ static uint32_t macho_nswap32(uint32_t input) {
                 if (pathptr == NULL) {
                     NSString *desc = NSLocalizedString(@"Could not read path name from LC_RPATH", @"Invalid binary");
                     plsimulator_populate_nserror(outError, PLSimulatorErrorInvalidBinary, desc, nil);        
-                    [self release];
                     return nil;
                 }
                 
-                NSString *path = [[[NSString alloc] initWithBytes: pathptr
-                                                           length: strnlen(pathptr, pathlen)
-                                                         encoding: NSUTF8StringEncoding] autorelease];
+                NSString *path = [[NSString alloc] initWithBytes: pathptr
+                                                          length: strnlen(pathptr, pathlen)
+                                                        encoding: NSUTF8StringEncoding];
                 [rpaths addObject: path];
                 break;
             }
@@ -228,7 +220,6 @@ static uint32_t macho_nswap32(uint32_t input) {
                 if (cmdsize < sizeof(struct dylib_command)) {
                     NSString *desc = NSLocalizedString(@"LC_LOAD_DYLIB has invalid size", @"Invalid binary");
                     plsimulator_populate_nserror(outError, PLSimulatorErrorInvalidBinary, desc, nil);        
-                    [self release];
                     return nil;
                 }
                 
@@ -237,13 +228,12 @@ static uint32_t macho_nswap32(uint32_t input) {
                 if (nameptr == NULL) {
                     NSString *desc = NSLocalizedString(@"Could not read path name from LC_LOAD_DYLIB", @"Invalid binary");
                     plsimulator_populate_nserror(outError, PLSimulatorErrorInvalidBinary, desc, nil);        
-                    [self release];
                     return nil;
                 }
                 
-                NSString *name = [[[NSString alloc] initWithBytes: nameptr
-                                                           length: strnlen(nameptr, namelen)
-                                                         encoding: NSUTF8StringEncoding] autorelease];
+                NSString *name = [[NSString alloc] initWithBytes: nameptr
+                                                          length: strnlen(nameptr, namelen)
+                                                        encoding: NSUTF8StringEncoding];
                 [dylibs addObject: name];
 
                 break;
@@ -258,7 +248,6 @@ static uint32_t macho_nswap32(uint32_t input) {
         if (cmd == NULL) {
             NSString *desc = NSLocalizedString(@"Could not fetch next Mach-O load command.", @"Invalid binary");
             plsimulator_populate_nserror(outError, PLSimulatorErrorInvalidBinary, desc, nil);        
-            [self release];
             return nil;
         }
     }
@@ -274,7 +263,7 @@ static uint32_t macho_nswap32(uint32_t input) {
     /* Formulate the correct @rpath candidates from the Xcode bundle, if available */
     NSMutableArray *absolutePaths = [NSMutableArray array];
     for (NSString *rpath in _rpaths) {
-        NSMutableArray *pathComponents = [[[rpath pathComponents] mutableCopy] autorelease];
+        NSMutableArray *pathComponents = [[rpath pathComponents] mutableCopy];
         NSMutableArray *result = [NSMutableArray arrayWithCapacity: [pathComponents count]];
         
         /* Replace all special dylib paths */
@@ -317,12 +306,5 @@ static uint32_t macho_nswap32(uint32_t input) {
     return absolutePaths;
 }
 
-- (void) dealloc {
-    [_path release];
-    [_rpaths release];
-    [_dylibPaths release];
-
-    [super dealloc];
-}
 
 @end
