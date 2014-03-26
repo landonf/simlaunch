@@ -120,7 +120,7 @@
     
     
     /* Block to fetch a retained key from the plist */
-    BOOL (^Get) (NSString *, id *, Class cls, BOOL, BOOL) = ^(NSString *key, id *value, Class cls, BOOL required, BOOL retained) {
+    BOOL (^Get) (NSString *, id *, Class cls, BOOL) = ^(NSString *key, id *value, Class cls, BOOL required) {
         *value = [plist objectForKey: key];
 
 
@@ -141,7 +141,7 @@
 
     NSString *displayName = nil;
     /* Try to fetch the application's display name. */
-    if (!Get((id)CFBundleDisplayName, &displayName, [NSString class], NO, YES)) {
+    if (!Get((id)CFBundleDisplayName, &displayName, [NSString class], NO)) {
         _displayName = [[path lastPathComponent] stringByDeletingPathExtension];
         if (_displayName == nil) {
             NSString *desc = NSLocalizedString(@"The application's Info.plist is missing CFBundleDisplayName key and a "
@@ -154,7 +154,7 @@
 
     NSString *canonicalSDKName = nil;
     /* Get the canonical name of the SDK that this app was built with. */
-    if (!Get(SDKNameKey, &canonicalSDKName, [NSString class], YES, YES))
+    if (!Get(SDKNameKey, &canonicalSDKName, [NSString class], YES))
         return nil;
 
     _canonicalSDKName = canonicalSDKName;
@@ -162,7 +162,7 @@
     /* Get the list of supported devices */
     {
         NSArray *devices;
-        if (Get(DevicesKey, &devices, [NSArray class], NO, NO)) {
+        if (Get(DevicesKey, &devices, [NSArray class], NO)) {
             _deviceFamilies = [PLSimulatorUtils deviceFamiliesForDeviceCodes: devices];
         }
         
