@@ -103,6 +103,14 @@ NSString *deviceIpadRetina_64bit = @"iPad Retina (64-bit)";
         [self displayLaunchError: NSLocalizedString(@"A failure occured loading the iPhoneSimulatorRemoteClient private framework.", 
                                                     @"Failed to load private framework alert text")];
     }
+    
+    
+    /* Find and load all Xcode platform SDKs; without this, the iPhoneSimulatorRemoteClient API will be unable to locate
+     * SDK roots via DTiPhoneSimulatorSystemRoot. */
+    if (![C(DVTPlatform) loadAllPlatformsReturningError: &error]) {
+        NSLog(@"Failed to load platform SDKs: %@", error);
+        return;
+    }
 
     /* Create the app specifier */
     appSpec = [C(DTiPhoneSimulatorApplicationSpecifier) specifierWithApplicationPath: _app.path];

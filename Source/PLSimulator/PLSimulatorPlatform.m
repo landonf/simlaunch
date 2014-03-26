@@ -43,17 +43,6 @@ static BOOL isBundleLoaded = NO;
 /* Relative path to the iPhoneSimulatorRemoteClient framework */
 #define REMOTE_CLIENT_FRAMEWORK @"Developer/Library/PrivateFrameworks/DVTiPhoneSimulatorRemoteClient.framework"
 
-/* Load a class from the runtime-loaded iPhoneSimulatorRemoteClient framework */
-#define C(name) NSClassFromString(@"" #name)
-
-@interface DVTPlatform : NSObject
-+ (BOOL)loadAllPlatformsReturningError:(id*)arg1;
-@end
-
-/* Constants for private framework paths */
-NSString* const kDVTFoundationRelativePath = @"Contents/SharedFrameworks/DVTFoundation.framework";
-NSString* const kDevToolsFoundationRelativePath = @"Contents/OtherFrameworks/DevToolsFoundation.framework";
-
 /**
  * Manages a Simulator Platform SDK, allows querying of the bundled PLSimulatorSDK meta-data.
  *
@@ -172,9 +161,6 @@ NSString* const kDevToolsFoundationRelativePath = @"Contents/OtherFrameworks/Dev
         }
     }
 
-    /* Developer tools bundles need to be loaded prior to the remote client bundle */
-    [self loadDeveloperToolsBundlesWithError: outError];
-
     /* Determine the path */
     NSString *path = [_path stringByAppendingPathComponent: REMOTE_CLIENT_FRAMEWORK];
     _remoteClient = [NSBundle bundleWithPath: path];
@@ -187,25 +173,5 @@ NSString* const kDevToolsFoundationRelativePath = @"Contents/OtherFrameworks/Dev
 
     return [ub loadLibraryWithRPaths: rpaths error: outError];
 }
-
-- (void) loadDeveloperToolsBundlesWithError: (NSError **) outError {
-    NSString *dvtFoundationPath = [_xcodePath stringByAppendingPathComponent:kDVTFoundationRelativePath];
-
-    NSBundle *dvtFoundationBundle = [NSBundle bundleWithPath:dvtFoundationPath];
-    if (![dvtFoundationBundle loadAndReturnError: outError]) {
-        return;
-    }
-    NSString *devToolsFoundationPath = [_xcodePath stringByAppendingPathComponent:kDevToolsFoundationRelativePath];
-    NSBundle *devToolsFoundationBundle =
-    [NSBundle bundleWithPath:devToolsFoundationPath];
-    if (![devToolsFoundationBundle loadAndReturnError: outError]) {
-        return;
-    }
-
-    if (![C(DVTPlatform) loadAllPlatformsReturningError: outError]) {
-        return;
-    }
-}
-
 
 @end
