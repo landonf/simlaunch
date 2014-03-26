@@ -137,8 +137,8 @@ enum {
     }
 
     /* Block to fetch a key from the plist */
-    BOOL (^Get) (NSString *, id *, Class cls, BOOL, BOOL);
-    Get = ^(NSString *key, id *value, Class cls, BOOL required, BOOL retained) {
+    BOOL (^Get) (NSString *, id *, Class cls, BOOL);
+    Get = ^(NSString *key, id *value, Class cls, BOOL required) {
         *value = [plist objectForKey: key];
 
         if (*value != nil && (cls == nil || [*value isKindOfClass: cls]))
@@ -157,12 +157,12 @@ enum {
 
     NSString *version = nil;
     /* Fetch required values */
-    if (!Get(VersionKey, &version, [NSString class], YES, YES))
+    if (!Get(VersionKey, &version, [NSString class], YES))
         return nil;
     _version = version;
 
     NSString *canonicalName = nil;
-    if (!Get(CanonicalNameKey, &canonicalName, [NSString class], YES, YES))
+    if (!Get(CanonicalNameKey, &canonicalName, [NSString class], YES))
         return nil;
     _canonicalName = canonicalName;
 
@@ -171,9 +171,9 @@ enum {
         NSArray *devices;
         NSDictionary *defaultProperties;
         
-        if (Get(DevicesKey, &devices, [NSArray class], NO, NO)) {
+        if (Get(DevicesKey, &devices, [NSArray class], NO)) {
             _deviceFamilies = [PLSimulatorUtils deviceFamiliesForDeviceCodes: devices];
-        } else if (Get(DefaultPropertiesKey, &defaultProperties, [NSDictionary class], NO, NO)) {
+        } else if (Get(DefaultPropertiesKey, &defaultProperties, [NSDictionary class], NO)) {
             /* Use the meta-data format introduced in iOS 4.0 */
             devices = [defaultProperties objectForKey: SupportedDeviceFamiliesKey];
             if (devices != nil && [devices isKindOfClass: [NSArray class]]) {
