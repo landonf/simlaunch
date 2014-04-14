@@ -31,7 +31,7 @@
 #import <ScriptingBridge/ScriptingBridge.h>
 
 /* App bundle ID. Used to request that the simulator be brought to the foreground */
-NSString *simulatorPreferencesName = @"com.apple.iphonesimulator";
+#define SIM_APP_BUNDLE_ID @"com.apple.iphonesimulator"
 
 /* Load a class from the runtime-loaded iPhoneSimulatorRemoteClient framework */
 #define C(name) NSClassFromString(@"" #name)
@@ -215,7 +215,7 @@ NSString *simulatorPreferencesName = @"com.apple.iphonesimulator";
         NSLog(@"Did start app %@ successfully, exiting", _app.path);
 
         /* Bring simulator to foreground */
-        [[SBApplication applicationWithBundleIdentifier:simulatorPreferencesName] activate];
+        [[SBApplication applicationWithBundleIdentifier: SIM_APP_BUNDLE_ID] activate];
 
         /* Exit */
         [[NSApplication sharedApplication] terminate: self];
