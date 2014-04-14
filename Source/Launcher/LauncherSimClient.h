@@ -30,6 +30,7 @@
 #import "PLSimulator.h"
 
 #import "iPhoneSimulatorRemoteClient.h"
+#import "SimulatorHost.h"
 
 @interface LauncherSimClient : NSObject <DTiPhoneSimulatorSessionDelegate> {
 @private

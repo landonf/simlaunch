@@ -33,15 +33,6 @@
 /* App bundle ID. Used to request that the simulator be brought to the foreground */
 NSString *simulatorPreferencesName = @"com.apple.iphonesimulator";
 
-NSString *deviceProperty = @"SimulateDevice";
-NSString *deviceIphoneRetina3_5Inch = @"iPhone Retina (3.5-inch)";
-NSString *deviceIphoneRetina4_0Inch = @"iPhone Retina (4-inch)";
-NSString *deviceIphoneRetina4_0Inch_64bit = @"iPhone Retina (4-inch 64-bit)";
-NSString *deviceIphone = @"iPhone";
-NSString *deviceIpad = @"iPad";
-NSString *deviceIpadRetina = @"iPad Retina";
-NSString *deviceIpadRetina_64bit = @"iPad Retina (64-bit)";
-
 /* Load a class from the runtime-loaded iPhoneSimulatorRemoteClient framework */
 #define C(name) NSClassFromString(@"" #name)
 
@@ -98,9 +89,9 @@ NSString *deviceIpadRetina_64bit = @"iPad Retina (64-bit)";
     NSError *error;
     
     /* Load the framework */
-    if (![_platform loadClientFramework: &error]) {
-        NSLog(@"Failed to load iPhoneSimulatorRemoteClient framework: %@", error);
-        [self displayLaunchError: NSLocalizedString(@"A failure occured loading the iPhoneSimulatorRemoteClient private framework.", 
+    if (![_platform loadPrivateFrameworks: &error]) {
+        NSLog(@"Failed to load private Simulator frameworks: %@", error);
+        [self displayLaunchError: NSLocalizedString(@"A failure occured loading the Simulator's private frameworks.",
                                                     @"Failed to load private framework alert text")];
     }
     
@@ -159,25 +150,42 @@ NSString *deviceIpadRetina_64bit = @"iPad Retina (64-bit)";
     [config setSimulatedApplicationLaunchArgs: [NSArray array]];
     [config setSimulatedApplicationLaunchEnvironment: [NSDictionary dictionary]];
 
-    DTiPhoneSimulatorFamily family;
-    /* Use the requested default, if supported. Otherwise, prefer iPad over iPhone, but only if supported */
-    if (sdk != nil && _defaultDeviceFamily != nil && [sdk.deviceFamilies containsObject: _defaultDeviceFamily]) {
-        family = _defaultDeviceFamily.deviceFamilyCode;
-    } else if (sdk != nil &&
-               [_app.deviceFamilies containsObject:[PLSimulatorDeviceFamily ipadFamily]] &&
-               [sdk.deviceFamilies containsObject:[PLSimulatorDeviceFamily ipadFamily]])
+    /* Configure the target device info */
     {
-        family = DTiPhoneSimulatoriPadFamily;
-    } else {
-        family = DTiPhoneSimulatoriPhoneFamily;
-    }
-    
-    [config setLocalizedClientName: @"SimLauncher"];
-    [config setSimulatedDeviceFamily:@(family)];
+        ISHDeviceVersions *deviceVersions = [C(ISHDeviceVersions) sharedInstance];
+        DTiPhoneSimulatorFamily productType;
 
-    NSString *deviceInfoName = [self deviceInfoNameForFamily:family retina:NO isTallDevice:NO];
-    [config setSimulatedDeviceInfoName:deviceInfoName];
-    
+        /*
+         * Determine best available product type. The ISHDeviceVersions product type seems to be based on,
+         * and use the same constant values as, the DTiPhoneSimulatorFamily constants
+         */
+        NSArray *productTypes = [deviceVersions productTypes];
+        if (_defaultDeviceFamily != nil && [productTypes containsObject: @(_defaultDeviceFamily.deviceFamilyCode)]) {
+            productType = _defaultDeviceFamily.deviceFamilyCode;
+        } else {
+            productType = DTiPhoneSimulatoriPhoneFamily;
+        }
+        
+        /*
+         * Map to a device info instance.
+         * TODO: This is where we could properly support 1x, 2x, 32-bit, and 64-bit, but doing so requires that we have a way
+         * to pass these configuration items to the launcher. For now, we hard code the device info selection.
+         */
+        NSString *deviceInfo;
+        switch (productType) {
+            case DTiPhoneSimulatoriPadFamily:
+                deviceInfo = [deviceVersions deviceInfoForProductType: productType displayScale: 1.0 displayHeight: 1024 wordSize: 4];
+                break;
+            case DTiPhoneSimulatoriPhoneFamily:
+                deviceInfo = [deviceVersions deviceInfoForProductType: productType displayScale: 2.0 displayHeight: 568 wordSize: 4];
+                break;
+        }
+
+        [config setSimulatedDeviceInfoName: deviceInfo];
+    }
+
+    [config setLocalizedClientName: @"SimLauncher"];
+
     /* Start the session */
     session = [[C(DTiPhoneSimulatorSession) alloc] init];
     [session setDelegate: self];
@@ -191,32 +199,6 @@ NSString *deviceIpadRetina_64bit = @"iPad Retina (64-bit)";
                                            @"Simulator error alert info");
         [self displayLaunchError: text];
     }
-}
-
-- (NSString *)deviceInfoNameForFamily:(DTiPhoneSimulatorFamily)family retina:(BOOL)retina isTallDevice:(BOOL)isTallDevice {
-    NSString *deviceInfoName;
-    if (retina) {
-        if (family == DTiPhoneSimulatoriPhoneFamily) {
-            deviceInfoName = deviceIpadRetina;
-        }
-        else {
-            if (isTallDevice) {
-                deviceInfoName = deviceIphoneRetina4_0Inch;
-            } else {
-                deviceInfoName = deviceIphoneRetina3_5Inch;
-            }
-        }
-    } else {
-        if (family == DTiPhoneSimulatoriPadFamily) {
-            deviceInfoName = deviceIpad;
-        } else {
-            deviceInfoName = deviceIphone;
-        }
-    }
-    CFPreferencesSetAppValue((__bridge CFStringRef)deviceProperty, (__bridge CFPropertyListRef)deviceInfoName, (__bridge CFStringRef)simulatorPreferencesName);
-    CFPreferencesAppSynchronize((__bridge CFStringRef)simulatorPreferencesName);
-    
-    return deviceInfoName;
 }
 
 

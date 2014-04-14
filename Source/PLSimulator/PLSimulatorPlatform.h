@@ -47,7 +47,7 @@
 
 - (id) initWithPath: (NSString *) path xcodePath: (NSString *) xcodePath error: (NSError **) outError;
 
-- (BOOL) loadClientFramework: (NSError **) outError;
+- (BOOL) loadPrivateFrameworks: (NSError **) outError;
 
 /** The path to the enclosing Xcode.app bundle, or nil if this platform was not found within an application bundle. */
 @property(readonly) NSString *xcodePath;

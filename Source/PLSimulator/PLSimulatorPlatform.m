@@ -31,17 +31,14 @@
 #import "PLSimulator.h"
 #import "PLUniversalBinary.h"
 
-/**
- * Global variable used to track if the iPhoneSimulatorRemoteClient has already been loaded by any instance of this class.
- * The framework must not be loaded multiple times.
- */
-static BOOL isBundleLoaded = NO;
-
 /* Relative path to the set of platform sub-SDKs */
 #define PLATFORM_SUBSDK_PATH @"Developer/SDKs/"
 
 /* Relative path to the iPhoneSimulatorRemoteClient framework */
 #define REMOTE_CLIENT_FRAMEWORK @"Developer/Library/PrivateFrameworks/DVTiPhoneSimulatorRemoteClient.framework"
+
+/* Relative path to the SimulatorHost framework */
+#define SIMULATOR_HOST_FRAMEWORK @"Developer/Library/PrivateFrameworks/SimulatorHost.framework"
 
 /**
  * Manages a Simulator Platform SDK, allows querying of the bundled PLSimulatorSDK meta-data.
@@ -57,6 +54,23 @@ static BOOL isBundleLoaded = NO;
 @synthesize path = _path;
 @synthesize xcodePath = _xcodePath;
 @synthesize sdks = _sdks;
+
+/**
+ * Global variable used to track if a given framework has already been loaded by any instance of this class.
+ * Frameworks must not be loaded multiple times.
+ *
+ * This maps the frameworks' LC_ID_DYLIB name to the framework's NSBundle.
+ */
+static NSMutableDictionary *loadedFrameworks;
+
++ (void) initialize {
+    /* Ignore subclass initialization calls */
+    if ([self class] != [PLSimulatorPlatform class])
+        return;
+
+    /* Initialize our global loaded framework tracking dictionary */
+    loadedFrameworks = [NSMutableDictionary dictionary];
+}
 
 /**
  * Initialize with the provided simulator platform SDK path.
@@ -122,21 +136,16 @@ static BOOL isBundleLoaded = NO;
     return self;
 }
 
-
 /**
- * Attempt to load Apple's iPhoneSimulatorRemoteClient framework from this platform SDK.
+ * @internal
  *
+ * Attempt to load a private framework from this platform SDK.
+ *
+ * @param relativePath The path to the private framework, relative to the platform SDK.
  * @param error If an error occurs, upon return contains an NSError object that describes the problem.
  * @return Returns YES on success, or NO on failure.
- *
- * @warning Only one instance of the iPhoneSimulatorRemoteClient framework may be loaded across the entire lifetime
- * of the process. Attempting to load the framework again will trigger a PLSimulatorException. 
  */
-- (BOOL) loadClientFramework: (NSError **) outError {
-    /* Verify that it is not loaded */
-    if (isBundleLoaded)
-        [NSException raise: PLSimulatorException format: @"Attempted to load the iPhoneSimulatorRemoteClient twice"];
-    
+- (BOOL) loadPrivateFrameworkAtPath: (NSString *) relativePath error: (NSError **) outError {
     /* Attempt to load absolute LC_RPATH values from the Xcode binary corresponding to this platform instance, if
      * available. */
     NSArray *rpaths = nil;
@@ -145,7 +154,7 @@ static BOOL isBundleLoaded = NO;
         if (xcodeBundle != nil) {
             NSError *error;
             PLUniversalBinary *ub = [PLUniversalBinary binaryWithPath: [xcodeBundle executablePath] error: &error];
-
+            
             if (ub != nil) {
                 PLExecutableBinary *xcodeBinary = [ub executableMatchingCurrentArchitecture];
                 if (xcodeBinary != nil) {
@@ -160,18 +169,40 @@ static BOOL isBundleLoaded = NO;
             rpaths = [rpaths arrayByAddingObject: [_xcodePath stringByAppendingPathComponent: @"Contents/OtherFrameworks"]];
         }
     }
-
-    /* Determine the path */
-    NSString *path = [_path stringByAppendingPathComponent: REMOTE_CLIENT_FRAMEWORK];
+    
+    /* Determine the framework path */
+    NSString *path = [_path stringByAppendingPathComponent: relativePath];
     _remoteClient = [NSBundle bundleWithPath: path];
-
+    
     /* Load the bundle */
     NSString *libraryPath = [_remoteClient executablePath];
     PLUniversalBinary *ub = [PLUniversalBinary binaryWithPath: libraryPath error: outError];
     if (ub == nil)
         return false;
-
+    
     return [ub loadLibraryWithRPaths: rpaths error: outError];
+}
+
+/**
+ * Attempt to load the private simulator frameworks from this platform SDK.
+ *
+ * @param error If an error occurs, upon return contains an NSError object that describes the problem.
+ * @return Returns YES on success, or NO on failure.
+ *
+ * @warning Only one instance of the iPhoneSimulatorRemoteClient framework may be loaded across the entire lifetime
+ * of the process. Attempting to load the framework -- or a different version of the framework -- will result in
+ * undefined behavior.ß
+ */
+- (BOOL) loadPrivateFrameworks: (NSError **) outError {
+    /* Load the iPhoneSimulatorRemoteClient framework */
+    if (![self loadPrivateFrameworkAtPath: REMOTE_CLIENT_FRAMEWORK error: outError])
+        return NO;
+
+    /* Load the SimulatorHost framework */
+    if (![self loadPrivateFrameworkAtPath: SIMULATOR_HOST_FRAMEWORK error: outError])
+        return NO;
+
+    return YES;
 }
 
 @end
