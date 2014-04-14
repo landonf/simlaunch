@@ -604,7 +604,6 @@
 				05CC8F831128B67C001912D5 /* Copy Frameworks */,
 				0523F66511269876004FB4EB /* Sources */,
 				0523F66611269876004FB4EB /* Frameworks */,
-				0523F66711269876004FB4EB /* Run Tests */,
 			);
 			buildRules = (
 			);
@@ -643,7 +642,6 @@
 				05CC91571128CA18001912D5 /* Copy Frameworks */,
 				05CC91291128C974001912D5 /* Sources */,
 				05CC912A1128C974001912D5 /* Frameworks */,
-				05CC912B1128C974001912D5 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -775,33 +773,6 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		0523F66711269876004FB4EB /* Run Tests */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Run Tests";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Run the unit tests in this test bundle.\n\n# RunUnitTests sets this, so we need to add our own dependencies, otherwise we have trouble loading\n# secondary framework dependencies.\nexport DYLD_FRAMEWORK_PATH=\"${SOURCE_ROOT}/Dependencies\"\n\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
-		};
-		05CC912B1128C974001912D5 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Run the unit tests in this test bundle.\n\n# RunUnitTests sets this, so we need to add our own dependencies, otherwise we have trouble loading\n# secondary framework dependencies.\nexport DYLD_FRAMEWORK_PATH=\"${SOURCE_ROOT}/Dependencies\"\n\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
-		};
 		05CC92D41128E190001912D5 /* Fix Install Names */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
