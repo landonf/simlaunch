@@ -36,6 +36,17 @@
 #import <mach-o/loader.h>
 #import <mach-o/fat.h>
 
+// Since Snow Leopard does not have strnlen, naive implementation was added.
+#ifndef MAC_OS_X_VERSION_10_7
+size_t strnlen(register const char *s, size_t maxlen)
+{
+    for (size_t i=0; i<maxlen; i++)
+        if (*s == '\0')
+            return i;
+    return maxlen;
+}
+#endif // MAC_OS_X_VERSION_10_7
+
 /**
  * @internal
  *
