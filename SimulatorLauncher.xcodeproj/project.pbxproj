@@ -799,7 +799,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "# Set the destroot\nDESTROOT=\"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME} ${CURRENT_PROJECT_VERSION}\"\nmkdir -p \"${DESTROOT}\"\n\n# Populate the destroot\ntar -C \"${BUILD_DIR}/${CONFIGURATION}\" -cf - \"Simulator Bundler.app\" | tar -C \"${DESTROOT}\" -xf -\ncp \"${SOURCE_ROOT}/README.txt\" \"${DESTROOT}\"\n\n# Create the disk image\nrm -f \"${DESTROOT}.dmg\"\nhdiutil create -srcfolder \"${DESTROOT}\" \"${DESTROOT}.dmg\"";
+			shellScript = "# Set the destroot\nDESTROOT=\"${BUILT_PRODUCTS_DIR}/${PRODUCT_NAME} ${CURRENT_PROJECT_VERSION}\"\nmkdir -p \"${DESTROOT}\"\n\n# Populate the destroot\ntar -C \"${BUILD_DIR}/${CONFIGURATION}\" -cf - \"Simulator Bundler.app\" | tar -C \"${DESTROOT}\" -xf -\ncp \"${SOURCE_ROOT}/README.md\" \"${DESTROOT}\"\n\n# Create the disk image\nrm -f \"${DESTROOT}.dmg\"\nhdiutil create -srcfolder \"${DESTROOT}\" \"${DESTROOT}.dmg\"";
 		};
 /* End PBXShellScriptBuildPhase section */
 
