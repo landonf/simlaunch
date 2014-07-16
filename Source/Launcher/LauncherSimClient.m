@@ -125,6 +125,18 @@
         }
     }
 
+    /* Use the SDK in command line argument if specified */
+    NSArray *arguments = [[NSProcessInfo processInfo] arguments];
+    if ([arguments count] > 1) {
+        NSString *sdkArg = (NSString *)[arguments objectAtIndex:1];
+        for (PLSimulatorSDK *anSDK in _platform.sdks) {
+            if ([anSDK.canonicalName isEqual: sdkArg]) {
+                sdk = anSDK;
+                break;
+            }
+        }
+    }
+
     /* Load the SDK root */
     if (sdk != nil) {
         sdkRoot = [C(DTiPhoneSimulatorSystemRoot) rootWithSDKVersion: sdk.version];
